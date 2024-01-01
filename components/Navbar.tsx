@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <div className="w-full bg-white/70 h-20 shadow-sm sticky top-0 backdrop-blur-2xl transition-colors z-10 ">
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 lg:px-0 h-full">
-        <Logo title="Blogger" className="text-black" />
+        <Logo title="DevsHurdle" className="text-[#66b839]" />
         <div className="hidden md:inline-flex items-center gap-7 text-gray-900 hover:text-black duration-200">
           {navigationData.map((item, index) => (
             <Link
