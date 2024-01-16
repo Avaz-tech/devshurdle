@@ -13,7 +13,7 @@ const BlogContent = ({ posts }: Props) => {
       {posts.map((post) => (
         <Link
           key={post._id}
-          href={{
+          href={{ 
             pathname: `/post/${post?.slug?.current}`,
             query: { slug: post?.slug?.current },
           }}
@@ -36,7 +36,7 @@ const BlogContent = ({ posts }: Props) => {
               <div className="flex flex-col gap-5">
                 {/* ------------------------------------ */}
                 <div className="flex items-center gap-2 ">
-                  {post?.categories.map((item) => (
+                  {post?.categories?.map((item) => (
                     <p
                       key={item._id}
                       className="text-xs uppercase text-green-600 font-semibold"
