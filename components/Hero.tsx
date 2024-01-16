@@ -1,5 +1,6 @@
 import Image from "next/image";
 import banner from "@/images/banner.jpg";
+import logo from "@/images/logo-no-background.svg";
 
 const Hero = () => {
   return (
@@ -11,11 +12,15 @@ const Hero = () => {
       />
       <div className="absolute top-0 w-full h-full bg-black/30 text-gray-100 flex flex-col items-center justify-center">
         <h2 className="text-7xl lg:text-[150px] font-bold text-[#66b839]">
-          DevsHurdle
+          <Image
+            src={logo}
+            alt="logo"
+            className="w-full max-h-[170px] object-contain"
+          />
         </h2>
-        <p className="text-xl md:text-2xl lg:text-5xl font-semibold text-[#f9006b]">
+        {/* <p className="text-xl md:text-2xl lg:text-5xl font-semibold text-[#f9006b]">
           Where Obstacles Meet Solutions
-        </p>
+        </p> */}
       </div>
     </div>
   );
