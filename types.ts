@@ -55,5 +55,5 @@ interface Span {
 
 interface Category extends Base {
   description: string;
-  title: JsxElement;
+  title: string;
 }
