@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/images/logo-no-background.svg";
+import logo from "@/images/brandIcon.png";
 interface Props {
   title?: string;
   className?: string;
@@ -9,12 +9,14 @@ interface Props {
 const Logo = ({ title, className }: Props) => {
   return (
     <div>
-      <Link href={"/"}>
+      <Link className="flex items-center justify-between gap-3" href={"/"}>
         <Image
           src={logo}
           alt="banner image"
-          className="w-full max-h-[40px] object-contain"
+          className="w-full max-h-[50px] object-contain"
         />
+        <h1 className="text-2xl text-white">DevsHurdle</h1>
+
         {/* <h1 className={`text-3xl font-extrabold ${className}`}>
           {title || "DevsHurdle"}
         </h1> */}
