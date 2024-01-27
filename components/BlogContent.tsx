@@ -9,11 +9,11 @@ interface Props {
 
 const BlogContent = ({ posts }: Props) => {
   return (
-    <Container className="bg-gray-100 py-20 px-10 flex flex-col gap-10">
+    <Container className="bg-mainBgColor py-20 px-10 flex flex-col gap-10">
       {posts.map((post) => (
         <Link
           key={post._id}
-          href={{ 
+          href={{
             pathname: `/post/${post?.slug?.current}`,
             query: { slug: post?.slug?.current },
           }}

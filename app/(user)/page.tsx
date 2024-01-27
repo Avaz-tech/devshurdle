@@ -17,7 +17,7 @@ export default async function Home() {
   const post = await client.fetch(query);
   console.log(post);
   return (
-    <main>
+    <main className="h-full">
       <Hero />
       <BlogContent posts={post} />
     </main>
