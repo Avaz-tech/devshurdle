@@ -17,15 +17,15 @@ const Hero = () => {
         className="w-full max-h-screen object-contain "
       /> */}
       <div className="absolute top-0 w-full h-full  text-gray-100 flex flex-col items-center justify-center">
-        <h2
-          className={`${myFont.className}  text-7xl lg:text-[150px] font-bold text-mainColor`}
-        >
+        <h2 className={`${myFont.className} flex items-center text-center  text-7xl lg:text-[150px] font-bold text-mainColor`}>
           {/* <Image
             src={logo}
             alt="logo"
             className="w-full max-h-[170px] object-contain"
           /> */}
-          DevsHurdle
+          {/* Fi */}***
+          <span className="text-gray-500">#</span>
+          {/* ABug */}****
         </h2>
         {/* <p className="text-xl md:text-xl lg:text-5xl font-semibold text-[#f9006b]">
           Where Obstacles Meet Solutions

@@ -63,7 +63,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
             className="object-cover w-full"
           />
         </div>
-        <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4">
+        <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4 text-white">
           <Image
             src={urlForImage(post?.author?.image).url()}
             width={200}
@@ -74,7 +74,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
           <p className="text-3xl text-[#5442ae] font-semibold">
             {post?.author?.name}
           </p>
-          <p className="text-center tracking-wide text-sm">
+          <p className="text-center tracking-wide text-white text-sm">
             {post?.author?.description}
           </p>
           {/* Need to put social media icons/links in necesssary */}
@@ -117,7 +117,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="text-[#ffffff] font-sans">
         <PortableText value={post?.body} components={RichText} />
       </div>
     </Container>

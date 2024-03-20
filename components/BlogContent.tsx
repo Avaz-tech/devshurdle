@@ -18,7 +18,7 @@ const BlogContent = ({ posts }: Props) => {
             query: { slug: post?.slug?.current },
           }}
         >
-          <div className="flex flex-col md:flex-row gap-10 bg-white rounded-md  rounded-tl-md rounded-br-md hover:shadow-md duration-200">
+          <div className="flex flex-col md:flex-row gap-10 bg-white rounded-md text-white  rounded-tl-md rounded-br-md hover:shadow-md duration-200">
             <div className="w-full md:w-3/5 group overflow-hidden rounded-tl-md rounded-bl-md relative">
               <Image
                 src={urlForImage(post.mainImage).url()}
