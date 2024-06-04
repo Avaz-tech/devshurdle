@@ -23,9 +23,9 @@ const Hero = () => {
             alt="logo"
             className="w-full max-h-[170px] object-contain"
           /> */}
-          {/* Fi */}***
-          <span className="text-gray-500">#</span>
-          {/* ABug */}****
+          DEVS
+          {/* <span className="text-gray-500">S</span> */}
+          HURDLE
         </h2>
         {/* <p className="text-xl md:text-xl lg:text-5xl font-semibold text-[#f9006b]">
           Where Obstacles Meet Solutions

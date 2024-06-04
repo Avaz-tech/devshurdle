@@ -10,13 +10,11 @@ import { BsFacebook } from "react-icons/bs";
 const Footer = () => {
   return (
     <>
-      <Container className="p-10 bg-mainBgColor text-gray-100 flex items-center justify-between max-w-full">
+      <Container className="p-10 bg-mainBgColor text-gray-100 flex flex-col gap-4 items-center justify-between max-w-full">
         {/* <Logo title="Bloggers" className="text-white" /> */}
         <div></div>
         <div className="text-gray-300 hidden md:inline-flex items-center gap-7">
-          <Link
-            href={"https://www.youtube.com/channel/UCOaXidGX7-BzHwsZFJZ1oqg"}
-          >
+          <Link href={"https://www.youtube.com/channel/UCOaXidGX7-BzHwsZFJZ1oqg"}>
             <BsYoutube className="text-2xl hover:text-red-500 duration-200" />
           </Link>
           <Link href={"https://avaz-tech.github.io/my-portfolio/"}>
@@ -31,10 +29,7 @@ const Footer = () => {
         </div>
         <p className="text-sm text-gray-300">
           © All rights reserved
-          <Link
-            href={"https://avaz-tech.github.io/my-portfolio/"}
-            className="hover:text-white font-semibold duration-200"
-          >
+          <Link href={"https://avaz-tech.github.io/my-portfolio/"} className="hover:text-white font-semibold duration-200">
             @devshurdle
           </Link>
         </p>

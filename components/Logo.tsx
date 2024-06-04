@@ -21,7 +21,7 @@ const Logo = ({ title, className }: Props) => {
           alt="banner image"
           className="w-full max-h-[50px] object-contain"
         /> */}
-        <h1 className={`${myFont.className} text-3xl brand-name text-mainColor tracking-[-13px]`}>FB</h1>
+        <h1 className={`${myFont.className} text-3xl brand-name text-mainColor tracking-[-5px]`}>Dh</h1>
 
         {/* <h1 className={`text-3xl font-extrabold ${className}`}>
           {title || "DevsHurdle"}
