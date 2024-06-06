@@ -9,7 +9,7 @@ interface Props {
 
 const BlogContent = ({ posts }: Props) => {
   return (
-    <Container className="bg-mainBgColor py-20 px-10 flex flex-col gap-10">
+    <Container className=" py-20 px-10 flex flex-col gap-10">
       {posts.map((post) => (
         <Link
           key={post._id}
@@ -18,7 +18,7 @@ const BlogContent = ({ posts }: Props) => {
             query: { slug: post?.slug?.current },
           }}
         >
-          <div className="flex flex-col md:flex-row gap-10 bg-white rounded-md text-white  rounded-tl-md rounded-br-md hover:shadow-md duration-200">
+          <div className="flex flex-col md:flex-row gap-10 rounded-md text-white  rounded-tl-md rounded-br-md shadow-md duration-200">
             <div className="w-full md:w-3/5 group overflow-hidden rounded-tl-md rounded-bl-md relative">
               <Image
                 src={urlForImage(post.mainImage).url()}
@@ -37,18 +37,13 @@ const BlogContent = ({ posts }: Props) => {
                 {/* ------------------------------------ */}
                 <div className="flex items-center gap-2 ">
                   {post?.categories?.map((item) => (
-                    <p
-                      key={item._id}
-                      className="text-xs uppercase text-green-600 font-semibold"
-                    >
+                    <p key={item._id} className="text-xs uppercase text-green-600 font-semibold">
                       {item?.title}
                     </p>
                   ))}
                 </div>
                 {/* ------------------------------------ */}
-                <h2 className="text-2xl font-semibold hover:text-orange-600 duration-200 cursor-pointer">
-                  {post?.title}
-                </h2>
+                <h2 className="text-2xl font-semibold hover:text-orange-600 duration-200 cursor-pointer">{post?.title}</h2>
                 {/* ------------------------------------ */}
                 <p className="text-gray-500">{post?.description}</p>
                 {/* ------------------------------------ */}

@@ -10,7 +10,7 @@ import { BsFacebook } from "react-icons/bs";
 const Footer = () => {
   return (
     <>
-      <Container className="p-10 bg-mainBgColor text-gray-100 flex flex-col gap-4 items-center justify-between max-w-full">
+      <Container className="p-10 text-gray-100 flex flex-col gap-4 items-center justify-between max-w-full">
         {/* <Logo title="Bloggers" className="text-white" /> */}
         <div></div>
         <div className="text-gray-300 hidden md:inline-flex items-center gap-7">

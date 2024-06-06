@@ -9,7 +9,7 @@ const myFont = localFont({ src: "../fonts/meedori_regular.ttf" });
 const Hero = () => {
   return (
     <div className="w-full max-h-screen relative">
-      <div className="h-[90vh] bg-mainBgColor"></div>
+      <div className="h-[90vh]"></div>
       {/* <div></div> */}
       {/* <Image
         src={banner}
