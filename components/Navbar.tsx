@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <div className="w-full h-20 sticky top-0 backdrop-blur-2xl transition-colors z-10 border-b border-primary ">
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4 h-full">
+      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-10 h-full">
         <Logo title="DH" className="" />
         <div className="hidden md:inline-flex items-center gap-7 duration-200">
           {navigationData.map((item, index) => (
