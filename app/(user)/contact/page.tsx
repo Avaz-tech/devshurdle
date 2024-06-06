@@ -51,7 +51,7 @@ const ContactPage = () => {
   // Jsx return
   return (
     <Container className="h-[79vh]  flex justify-center items-center max-w-full ">
-      <div className="w-full max-w-[600px] h-full max-h-[560px] p-8 bg-mainBgColor rounded-lg shadow-md border border-mainColor">
+      <div className="w-full max-w-[600px] h-full max-h-[560px] p-8 rounded-lg shadow-md border border-mainColor">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
