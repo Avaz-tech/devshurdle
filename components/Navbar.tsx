@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "./Logo";
 import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
+import { ModeToggle } from "./ModeToggle";
 
 export default function Navbar() {
   const navigationData = [
@@ -17,16 +18,13 @@ export default function Navbar() {
         <Logo title="DH" className="" />
         <div className="hidden md:inline-flex items-center gap-7 text-gray-900 hover:text-black duration-200">
           {navigationData.map((item, index) => (
-            <Link
-              key={index}
-              href={item?.href}
-              className="text-sm uppercase font-semibold relative group overflow-hidden "
-            >
+            <Link key={index} href={item?.href} className="text-sm uppercase font-semibold relative group overflow-hidden ">
               {item?.title}
               <span className="w-full h-[1px] bg-mainColor absolute inline-block left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
             </Link>
           ))}
         </div>
+        <ModeToggle />
         <div className="md:hidden">
           <FiMenu className="text-2xl" />
         </div>
