@@ -6,15 +6,7 @@ import { useForm } from "react-hook-form";
 import Container from "@components/Container";
 //================================================================================================================
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -51,12 +43,9 @@ const ContactPage = () => {
   // Jsx return
   return (
     <Container className="h-[79vh]  flex justify-center items-center max-w-full ">
-      <div className="w-full max-w-[600px] h-full max-h-[560px] p-8 rounded-lg shadow-md border border-mainColor">
+      <div className="w-full max-w-[600px] h-full max-h-[560px] p-8 bg-card rounded-lg shadow-md border ">
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 text-mainColor"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
             {/* ----------------------- Usename Input ---------------- */}
 
             <FormField
@@ -65,7 +54,7 @@ const ContactPage = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Username</FormLabel>
-                  <FormControl className="border-mainColor">
+                  <FormControl className="">
                     <Input type="string" placeholder="Username" {...field} />
                   </FormControl>
                   <FormMessage />
@@ -81,7 +70,7 @@ const ContactPage = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
-                  <FormControl className="border-mainColor">
+                  <FormControl className="">
                     <Input type="email" placeholder="Email" {...field} />
                   </FormControl>
                   <FormMessage />
@@ -97,12 +86,8 @@ const ContactPage = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Message</FormLabel>
-                  <FormControl className="border-mainColor">
-                    <Textarea
-                      className="min-h-[180px] "
-                      placeholder="Type you message here"
-                      {...field}
-                    />
+                  <FormControl className="">
+                    <Textarea className="min-h-[180px] " placeholder="Type you message here" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -110,10 +95,7 @@ const ContactPage = () => {
             />
             {/* ----------------------- Submit Button ---------------- */}
 
-            <Button
-              className="w-full bg-mainColor hover:opacity-80 hover:bg-mainColor"
-              type="submit"
-            >
+            <Button className="w-full" type="submit">
               Submit
             </Button>
 
