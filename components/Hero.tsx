@@ -16,8 +16,8 @@ const Hero = () => {
         alt="banner image"
         className="w-full max-h-screen object-contain "
       /> */}
-      <div className="absolute top-0 w-full h-full  text-gray-100 flex flex-col items-center justify-center">
-        <h2 className={`${myFont.className} flex items-center text-center  text-7xl lg:text-[150px] font-bold text-mainColor`}>
+      <div className="absolute top-0 w-full h-full flex flex-col items-center justify-center">
+        <h2 className={`${myFont.className} flex items-center text-center  text-[9.5vw] font-bold text-primary`}>
           {/* <Image
             src={logo}
             alt="logo"
