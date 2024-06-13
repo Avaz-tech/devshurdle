@@ -18,7 +18,7 @@ const BlogContent = ({ posts }: Props) => {
             query: { slug: post?.slug?.current },
           }}
         >
-          <div className="flex flex-col md:flex-row gap-10 rounded-md text-white  rounded-tl-md rounded-br-md shadow-md duration-200">
+          <div className="flex flex-col md:flex-row gap-10 rounded-md rounded-tl-md rounded-br-md shadow-md duration-200">
             <div className="w-full md:w-3/5 group overflow-hidden rounded-tl-md rounded-bl-md relative">
               <Image
                 src={urlForImage(post.mainImage).url()}
@@ -28,7 +28,7 @@ const BlogContent = ({ posts }: Props) => {
                 className="w-full max-h-[500px] object-cover group-hover:scale-105 duration-500 rounded-tl-md rounded-bl-md"
               />
               <div className="absolute top-0 left-0 bg-black/20 w-full h-full group-hover:hidden duration-200" />
-              <div className="absolute hidden group-hover:inline-flex bottom-0 left-0 w-full bg-opacity-20 bg-black backdrop-blur-lg rounded drop-shadow-lg text-white p-5 justify-center duration-200">
+              <div className="absolute hidden group-hover:inline-flex bottom-0 left-0 w-full bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg text-white p-5 justify-center duration-200">
                 <p className="text-lg font-semibold">Click to Read</p>
               </div>
             </div>

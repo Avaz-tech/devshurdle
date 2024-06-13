@@ -5,13 +5,7 @@ import Container from "@components/Container";
 import Image from "next/image";
 import { urlForImage } from "@sanity/lib/image";
 import Link from "next/link";
-import {
-  FaFacebookF,
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { PortableText } from "@portabletext/react";
 import { RichText } from "@components/RichText";
 //================================================================================================================
@@ -55,15 +49,9 @@ const SlugPage = async ({ params: { slug } }: Props) => {
     <Container className="mb-10 ">
       <div className="flex items-center mb-10">
         <div className="w-full md:w-2/3">
-          <Image
-            src={urlForImage(post?.mainImage).url()}
-            width={500}
-            height={500}
-            alt="main image"
-            className="object-cover w-full"
-          />
+          <Image src={urlForImage(post?.mainImage).url()} width={500} height={500} alt="main image" className="object-cover w-full" />
         </div>
-        <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4 text-white">
+        <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4  ">
           <Image
             src={urlForImage(post?.author?.image).url()}
             width={200}
@@ -71,45 +59,41 @@ const SlugPage = async ({ params: { slug } }: Props) => {
             alt="author image"
             className="w-32 h-32 rounded-full object-cover"
           />
-          <p className="text-3xl text-[#5442ae] font-semibold">
-            {post?.author?.name}
-          </p>
-          <p className="text-center tracking-wide text-white text-sm">
-            {post?.author?.description}
-          </p>
+          <p className="text-3xl text-[#5442ae] font-semibold">{post?.author?.name}</p>
+          <p className="text-center tracking-wide text-sm">{post?.author?.description}</p>
           {/* Need to put social media icons/links in necesssary */}
           <div className="flex items-center gap-3">
             <Link
               href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-gray-600 text-white text-xl rounded-full flex
+              className="w-10 h-10 bg-gray-600   text-xl rounded-full flex
              justify-center items-center hover:bg-[#5442ae] duration-200"
             >
               <FaGithub />
             </Link>
             <Link
               href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-[#bc1888] text-white text-xl rounded-full flex
+              className="w-10 h-10 bg-[#bc1888]   text-xl rounded-full flex
              justify-center items-center hover:bg-[#5442ae] duration-200"
             >
               <FaInstagram />
             </Link>
             <Link
               href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-blue-500 text-white text-xl rounded-full flex
+              className="w-10 h-10 bg-blue-500   text-xl rounded-full flex
              justify-center items-center hover:bg-[#5442ae] duration-200"
             >
               <FaFacebookF />
             </Link>
             <Link
               href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-red-500 text-white text-xl rounded-full flex
+              className="w-10 h-10 bg-red-500   text-xl rounded-full flex
               justify-center items-center hover:bg-[#5442ae] duration-200"
             >
               <FaYoutube />
             </Link>
             <Link
               href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-cyan-600 text-white text-xl rounded-full flex
+              className="w-10 h-10 bg-cyan-600   text-xl rounded-full flex
              justify-center items-center hover:bg-[#5442ae] duration-200"
             >
               <FaLinkedin />
@@ -117,7 +101,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
           </div>
         </div>
       </div>
-      <div className="text-[#ffffff] font-sans">
+      <div className=" font-sans">
         <PortableText value={post?.body} components={RichText} />
       </div>
     </Container>
