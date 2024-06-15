@@ -7,7 +7,8 @@ import { ModeToggle } from "./ModeToggle";
 export default function Navbar() {
   const navigationData = [
     { title: "Home", href: "/" },
-    { title: "Features", href: "/features" },
+    { title: "Blog", href: "/blog" },
+    // { title: "Proj", href: "/blog" },
     { title: "About me", href: "/about" },
     { title: "Contact", href: "/contact" },
   ];
