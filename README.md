@@ -1,3 +1,5 @@
+![home page](images/example.png)
+
 ## Live at: -> https://devshurdle.vercel.app/
 ## Getting Started
 
