@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ConfigProvider, theme } from "antd";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +17,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Navbar />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        <ConfigProvider
+          theme={{
+            algorithm: theme.darkAlgorithm,
+            token: {},
+          }}
+        >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <Navbar />
+            {children}
+            <Footer />
+          </ThemeProvider>
+        </ConfigProvider>
       </body>
     </html>
   );
