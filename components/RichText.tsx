@@ -9,7 +9,7 @@ export const RichText = {
     image: ({ value }: any) => {
       return (
         <div className="flex justify-center items-center">
-          <Image src={urlForImage(value).url()} alt="Post image" width={700} height={700} className="object-contain p-6" />
+          <Image src={urlForImage(value).url()} alt="Post image" width={700} height={700} priority={true} className="object-contain p-6" />
         </div>
       );
     },

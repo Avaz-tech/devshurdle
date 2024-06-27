@@ -49,7 +49,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
     <Container className="mb-10 ">
       <div className="flex items-center mb-10">
         <div className="w-full md:w-2/3">
-          <Image src={urlForImage(post?.mainImage).url()} width={500} height={500} alt="main image" className="object-cover w-full" />
+          <Image src={urlForImage(post?.mainImage).url()} width={500} height={500} alt="main image" priority={true} className="object-cover w-full" />
         </div>
         <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4  ">
           <Image
@@ -58,6 +58,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
             height={200}
             alt="author image"
             className="w-32 h-32 rounded-full object-cover"
+            priority={true}
           />
           <p className="text-3xl text-[#5442ae] font-semibold">{post?.author?.name}</p>
           <p className="text-center tracking-wide text-sm">{post?.author?.description}</p>
@@ -102,7 +103,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
         </div>
       </div>
       <div className=" font-sans">
-        <PortableText value={post?.body} components={RichText} />
+        <PortableText value={post?.body}  components={RichText} />
       </div>
     </Container>
   );

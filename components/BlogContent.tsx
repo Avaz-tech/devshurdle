@@ -26,6 +26,7 @@ const BlogContent = ({ posts }: Props) => {
                 height={500}
                 alt="blog post image"
                 className="w-full max-h-[500px] object-cover group-hover:scale-105 duration-500 rounded-tl-md rounded-bl-md"
+                priority={true}
               />
               <div className="absolute top-0 left-0 bg-black/20 w-full h-full group-hover:hidden duration-200" />
               <div className="absolute hidden group-hover:inline-flex bottom-0 left-0 w-full bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg text-white p-5 justify-center duration-200">
@@ -63,6 +64,7 @@ const BlogContent = ({ posts }: Props) => {
                     height={200}
                     alt="author image"
                     className="rounded-full object-cover w-10 h-10"
+                    priority={true}
                   />
                   <p className="text-sm font-medium">{post?.author?.name}</p>
                 </div>
