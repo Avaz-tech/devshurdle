@@ -51,10 +51,14 @@ export default defineType({
     // as a block type.
     defineArrayMember({
       type: "image",
-      options: {
-        hotspot: true,
-        metadata: ["palette", "lqip", "blurhash", "exif", "location"],
-      },
+      options: { hotspot: true },
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative Text",
+        },
+      ],
     }),
     // Adding code block type
     defineArrayMember({
