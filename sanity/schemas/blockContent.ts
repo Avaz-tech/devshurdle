@@ -53,13 +53,7 @@ export default defineType({
       type: "image",
       options: {
         hotspot: true,
-        fields: [
-          {
-            name: "alt",
-            type: "string",
-            title: "Alternative Text",
-          },
-        ],
+        metadata: ["palette", "lqip", "blurhash", "exif", "location"],
       },
     }),
     // Adding code block type
