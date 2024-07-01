@@ -79,6 +79,11 @@ export default defineType({
     defineArrayMember({
       type: "code",
       title: "Code Block",
+      
+      options: {
+        language: "typescript",
+        withFilename: true,
+      },
     }),
   ],
 });

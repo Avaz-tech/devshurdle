@@ -1,6 +1,9 @@
 import { urlForImage } from "@sanity/lib/image";
 import Image from "next/image";
 import Link from "next/link";
+import HighlightCode from "./HighlightCode";
+
+
 
 export const RichText = {
   //================================================================================================================
@@ -13,11 +16,11 @@ export const RichText = {
         </div>
       );
     },
-    code: ({ value }: any) => {
+    code: ({value }: any) => {
       return (
-        <pre className="bg-black text-white p-4 rounded-md overflow-auto">
-          <code>{value.code}</code>
-        </pre>
+       <pre className="rounded-md my-4 overflow-hidden"><code className="rounded-md overflow-auto">
+        <HighlightCode content={value.code} /></code></pre>
+         
       );
     },
   },
