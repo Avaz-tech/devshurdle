@@ -11,19 +11,14 @@ import "highlight.js/styles/night-owl.css";
 hljs.registerLanguage("typescript", typescript);
 
 const HighlightCode = ({ content }: any) => {
-  console.log(content);
   useEffect(() => {
     hljs.highlightAll();
   }, []);
 
   return (
-    <div>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: content,
-        }}
-      />
-    </div>
+    <pre className="rounded-md my-4 overflow-hidden">
+      <code className="rounded-md overflow-auto">{content}</code>
+    </pre>
   );
 };
 

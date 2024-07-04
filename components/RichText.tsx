@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import HighlightCode from "./HighlightCode";
 
-
-
 export const RichText = {
   //================================================================================================================
 
@@ -16,12 +14,8 @@ export const RichText = {
         </div>
       );
     },
-    code: ({value }: any) => {
-      return (
-       <pre className="rounded-md my-4 overflow-hidden"><code className="rounded-md overflow-auto">
-        <HighlightCode content={value.code} /></code></pre>
-         
-      );
+    code: ({ value }: any) => {
+      return <HighlightCode content={value.code} />;
     },
   },
   //================================================================================================================
