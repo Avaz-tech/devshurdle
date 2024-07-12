@@ -56,6 +56,7 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
+        "custom-card": "rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px",
         "custom-light": "0 2px 4px rgba(0, 0, 0, 0.1)",
         "custom-medium": "rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
         "custom-dark": "0 8px 16px rgba(0, 0, 0, 0.2)",
