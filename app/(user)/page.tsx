@@ -1,5 +1,6 @@
 import BlogContent from "@components/BlogContent";
 import Hero from "@components/Hero";
+import SearchPanel from "@components/SearchPanel";
 import { client } from "@sanity/lib/client";
 import { groq } from "next-sanity";
 
@@ -18,7 +19,8 @@ export default async function Home() {
   console.log(post);
   return (
     <main className="h-full">
-      <Hero />
+      {/* <Hero /> */}
+      <SearchPanel />
       <BlogContent posts={post} />
     </main>
   );
