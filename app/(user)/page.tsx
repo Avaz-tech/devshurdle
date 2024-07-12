@@ -18,7 +18,7 @@ export default async function Home() {
   const post = await client.fetch(query);
   console.log(post);
   return (
-    <main className="h-full">
+    <main className="h-full flex justify-center items-center flex-col mx-4">
       {/* <Hero /> */}
       <SearchPanel />
       <BlogContent posts={post} />

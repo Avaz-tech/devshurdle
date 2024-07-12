@@ -42,7 +42,7 @@ const ContactPage = () => {
   //================================================================================================================
   // Jsx return
   return (
-    <Container className="h-[79vh]  flex justify-center items-center max-w-full ">
+    <Container className="h-full mt-40 flex justify-center items-center max-w-full mx-4 lg:mx-auto">
       <div className="w-full max-w-[600px] h-full max-h-[560px] p-8 bg-card rounded-lg shadow-md border ">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">

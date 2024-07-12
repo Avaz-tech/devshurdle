@@ -46,9 +46,9 @@ const SlugPage = async ({ params: { slug } }: Props) => {
   //================================================================================================================
 
   return (
-    <Container className="mb-10 ">
+    <Container className="mb-10 mt-40 w-auto mx-4 xl:mx-auto max-w-screen-xl">
       <div className="flex items-center mb-10">
-        <div className="w-full md:w-2/3">
+        <div className="w-full ">
           <Image src={urlForImage(post?.mainImage).url()} width={500} height={500} alt="main image" priority={true} className="object-cover w-full" />
         </div>
         <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4  ">

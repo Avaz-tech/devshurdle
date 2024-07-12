@@ -40,7 +40,7 @@ export default function Navbar() {
          fixed top-0 max-w-none
       } `}
     >
-      <div className="max-w-screen-xl mx-auto flex items-center justify-between px-10 h-full">
+      <div className="max-w-screen-xl flex items-center justify-between mx-4 xl:mx-auto h-full">
         <Logo title="DH" className="" />
         <div className="hidden md:inline-flex items-center gap-7 duration-200">
           {navigationData.map((item, index) => (
