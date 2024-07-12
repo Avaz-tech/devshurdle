@@ -5,9 +5,10 @@ import Logo from "./Logo";
 import Link from "next/link";
 import { FiMenu } from "react-icons/fi";
 import { ModeToggle } from "./ModeToggle";
+// import Search from "./SearchBox";
 
 export default function Navbar() {
-  const [pageIsScrolled, setPagesIsScrolled] = useState(false);
+  // const [pageIsScrolled, setPagesIsScrolled] = useState(false);
 
   const navigationData = [
     { title: "Home", href: "/" },
@@ -16,27 +17,27 @@ export default function Navbar() {
     { title: "Contact", href: "/contact" },
   ];
 
-  useEffect(() => {
-    window.addEventListener("scroll", handlePageScroll);
-    return () => {
-      window.removeEventListener("scroll", handlePageScroll);
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handlePageScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handlePageScroll);
+  //   };
+  // }, []);
 
-  const handlePageScroll = () => {
-    const scrollLimit = 40;
-    const actualScroll = document.documentElement.scrollTop;
-    if (actualScroll >= scrollLimit) {
-      setPagesIsScrolled(true);
-    } else {
-      setPagesIsScrolled(false);
-    }
-  };
+  // const handlePageScroll = () => {
+  //   const scrollLimit = 40;
+  //   const actualScroll = document.documentElement.scrollTop;
+  //   if (actualScroll >= scrollLimit) {
+  //     setPagesIsScrolled(true);
+  //   } else {
+  //     setPagesIsScrolled(false);
+  //   }
+  // };
 
   return (
-    <div
-      className={`w-full h-20 max-w-[70%] shadow-custom-medium rounded-[35px] backdrop-blur-2xl transition-colors z-10 border-b border-primary ${
-        pageIsScrolled ? "fixed top-0 max-w-none rounded-none" : "absolute top-10 "
+  <div
+      className={`w-full h-20 shadow-custom-medium backdrop-blur-2xl transition-colors z-10 border-b border-primary 
+         fixed top-0 max-w-none
       } `}
     >
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-10 h-full">
@@ -49,9 +50,9 @@ export default function Navbar() {
             </Link>
           ))}
         </div>
-        <ModeToggle />
-        <div className="md:hidden">
-          <FiMenu className="text-2xl" />
+          <ModeToggle />
+          <div className="md:hidden">
+            <FiMenu className="text-2xl" />
         </div>
       </div>
     </div>
