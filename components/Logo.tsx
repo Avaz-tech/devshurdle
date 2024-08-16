@@ -5,7 +5,7 @@ import Link from "next/link";
 import localFont from "next/font/local";
 
 // Font files can be colocated inside of `pages`
-const myFont = localFont({ src: "../fonts/meedori_bold.ttf" });
+const myFont = localFont({ src: "../public/assets/fonts/meedori_bold.ttf" });
 
 interface Props {
   title?: string;
