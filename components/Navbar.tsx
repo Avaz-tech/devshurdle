@@ -17,41 +17,25 @@ export default function Navbar() {
     { title: "Contact", href: "/contact" },
   ];
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handlePageScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handlePageScroll);
-  //   };
-  // }, []);
-
-  // const handlePageScroll = () => {
-  //   const scrollLimit = 40;
-  //   const actualScroll = document.documentElement.scrollTop;
-  //   if (actualScroll >= scrollLimit) {
-  //     setPagesIsScrolled(true);
-  //   } else {
-  //     setPagesIsScrolled(false);
-  //   }
-  // };
-
+  
   return (
     <div
-      className={`w-full h-20 shadow-custom-medium backdrop-blur-2xl transition-colors z-10 border-b border-primary 
-         fixed top-0 max-w-none
+      className={`w-full h-20 shadow-custom-medium backdrop-blur-2xl transition-colors z-[1001] border-b border-primary 
+         fixed top-0 max-w-none xs:h-[100vh]
       } `}
     >
-      <div className="max-w-screen-xl flex items-center justify-between mx-4 xl:mx-auto h-full">
+      <div className="max-w-screen-xl flex items-center justify-between mx-4 xl:mx-auto h-full text-[#01112c]">
         <Logo title="DH" className="" />
         <div className="hidden md:inline-flex items-center gap-7 duration-200">
           {navigationData.map((item, index) => (
-            <Link key={index} href={item?.href} className="text-sm font-semibold relative group overflow-hidden ">
+            <Link key={index} href={item?.href} className="text-sm relative group overflow-hidden">
               {item?.title}
               <span className="w-full h-[1px] bg-primary absolute inline-block left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
             </Link>
           ))}
         </div>
         <div className="flex gap-4 items-center ">
-          <Link href="/signIn" className="text-sm font-semibold relative group overflow-hidden">
+          <Link href="/signIn" className="text-sm relative group overflow-hidden">
             Sign in
             <span className="w-full h-[1px] bg-primary absolute inline-block left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
           </Link>
