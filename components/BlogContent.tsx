@@ -1,16 +1,16 @@
+"use client";
 import { Post } from "@types";
 import Container from "./../components/Container";
 import Link from "next/link";
 import Image from "next/image";
 import { urlForImage } from "@sanity/lib/image";
-interface Props {
-  posts: Post[];
-}
-
-const BlogContent = ({ posts }: Props) => {
+import { useSearchContext } from "@app/Context/SearchContext";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode } from "react";
+const BlogContent = () => {
+  const {filteredItems} = useSearchContext();
   return (
     <Container className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      {posts.map((post) => (
+      {filteredItems.map((post: Post) => (
         <Link
           key={post._id}
           href={{
@@ -37,7 +37,7 @@ const BlogContent = ({ posts }: Props) => {
               <div className="flex flex-col gap-5">
                 {/* ------------------------------------ */}
                 <div className="flex items-center gap-2 ">
-                  {post?.categories?.map((item) => (
+                  {post?.categories?.map((item: { _id: Key | null | undefined; title: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | PromiseLikeOfReactNode | Iterable<ReactNode> | null | undefined; }) => (
                     <p key={item._id} className="text-xs uppercase text-green-600 border rounded-full py-2 px-3 font-semibold">
                       {item?.title}
                     </p>

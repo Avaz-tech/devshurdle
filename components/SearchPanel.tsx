@@ -2,7 +2,6 @@
 import SearchBox from "./SearchBox";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-
 const filterOptions = [
   {
     label: "Latest",
@@ -26,11 +25,11 @@ const filterOptions = [
     value: "common",
   },
 ];
-const SearchPanel = () => {
+
+const SearchPanel: React.FC = () => {
   return (
     <div className="h-full pt-40 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-center gap-3 w-full max-w-screen-xl">
-      <SearchBox  className="max-w-[400px]"  items={[]}/>
-      
+      <SearchBox  className="max-w-[400px]"/> 
       <div className="">
         <ToggleGroup className="flex flex-wrap justify-center gap-3" type="multiple" variant="outline">
           {filterOptions.map((option, index) => (
