@@ -28,7 +28,7 @@ const filterOptions = [
 
 const SearchPanel: React.FC = () => {
   return (
-    <div className="h-full pt-40 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-center gap-3 w-full max-w-screen-xl">
+    <div className="h-full pt-40 flex flex-col md:flex-row justify-center md:justify-between items-center gap-3 w-full max-w-screen-xl">
       <SearchBox  className="max-w-[400px]"/> 
       <div className="">
         <ToggleGroup className="flex flex-wrap justify-center gap-3" type="multiple" variant="outline">
