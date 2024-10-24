@@ -1,8 +1,6 @@
 "use client";
 import SearchBox from "./SearchBox";
-import { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-
 
 const filterOptions = [
   {
@@ -28,17 +26,10 @@ const filterOptions = [
   },
 ];
 
-const SearchPanel = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-
-    // console.log("Searching for:", query);
-  };
+const SearchPanel: React.FC = () => {
   return (
     <div className="h-full pt-40 flex flex-col md:flex-row justify-center gap-4 md:justify-between items-center gap-3 w-full max-w-screen-xl">
-      <SearchBox onSearch={handleSearch} className="max-w-[400px]" />
+      <SearchBox  className="max-w-[400px]"/> 
       <div className="">
         <ToggleGroup className="flex flex-wrap justify-center gap-3" type="multiple" variant="outline">
           {filterOptions.map((option, index) => (
