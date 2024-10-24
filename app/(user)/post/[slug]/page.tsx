@@ -48,61 +48,40 @@ const SlugPage = async ({ params: { slug } }: Props) => {
     <Container className="mb-10 mt-40 w-auto mx-4 xl:mx-auto max-w-screen-xl">
       <div className="flex items-center mb-10">
         <div className="w-full ">
-          <Image src={urlForImage(post?.mainImage).url()} width={500} height={500} alt="main image" priority={true} className="object-cover w-full" />
+          {post?.mainImage ? (
+            <Image
+              src={urlForImage(post.mainImage).url()}
+              width={500}
+              height={500}
+              alt="main image"
+              priority={true}
+              className="object-cover w-full"
+            />
+          ) : (
+            <p>No main image available</p>
+          )}
         </div>
-        <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4  ">
-          <Image
-            src={urlForImage(post?.author?.image).url()}
-            width={200}
-            height={200}
-            alt="author image"
-            className="w-32 h-32 rounded-full object-cover"
-            priority={true}
-          />
+        <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4">
+          {post?.author?.image ? (
+            <Image
+              src={urlForImage(post.author.image).url()}
+              width={200}
+              height={200}
+              alt="author image"
+              className="w-32 h-32 rounded-full object-cover"
+              priority={true}
+            />
+          ) : (
+            <p>No author image available</p>
+          )}
           <p className="text-3xl text-[#5442ae] font-semibold">{post?.author?.name}</p>
           <p className="text-center tracking-wide text-sm">{post?.author?.description}</p>
-          {/* Need to put social media icons/links in necesssary */}
-          <div className="flex items-center gap-3">
-            <Link
-              href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-gray-600   text-xl rounded-full flex
-             justify-center items-center hover:bg-[#5442ae] duration-200"
-            >
-              <FaGithub />
-            </Link>
-            <Link
-              href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-[#bc1888]   text-xl rounded-full flex
-             justify-center items-center hover:bg-[#5442ae] duration-200"
-            >
-              <FaInstagram />
-            </Link>
-            <Link
-              href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-blue-500   text-xl rounded-full flex
-             justify-center items-center hover:bg-[#5442ae] duration-200"
-            >
-              <FaFacebookF />
-            </Link>
-            <Link
-              href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-red-500   text-xl rounded-full flex
-              justify-center items-center hover:bg-[#5442ae] duration-200"
-            >
-              <FaYoutube />
-            </Link>
-            <Link
-              href={"htts://www.instagram.com"}
-              className="w-10 h-10 bg-cyan-600   text-xl rounded-full flex
-             justify-center items-center hover:bg-[#5442ae] duration-200"
-            >
-              <FaLinkedin />
-            </Link>
-          </div>
+          {/* Social Media Links */}
+          <div className="flex items-center gap-3">{/* Links */}</div>
         </div>
       </div>
-      <div >
-        <PortableText value={post?.body}  components={RichText} />
+      <div>
+        <PortableText value={post?.body} components={RichText} />
       </div>
     </Container>
   );
