@@ -6,7 +6,11 @@ import Image from "next/image";
 import { urlForImage } from "@sanity/lib/image";
 import { useSearchContext } from "@app/Context/SearchContext";
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode } from "react";
-const BlogContent = () => {
+
+interface BlogContentProps {
+  posts: Post[];
+}
+const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
   const {filteredItems} = useSearchContext();
   return (
     <Container className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

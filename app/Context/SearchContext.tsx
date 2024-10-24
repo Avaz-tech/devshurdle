@@ -29,7 +29,7 @@ export const SearchProvider: React.FC<{ children: ReactNode; posts: any }> = ({ 
     if(!query){
         setFilteredItems(posts);
     }else{
-        const filtered = posts.filter((post)=> post.title.toLowerCase().includes(query.toLowerCase()));
+        const filtered = posts.filter((post: { title: string; })=> post.title.toLowerCase().includes(query.toLowerCase()));
         setFilteredItems(filtered);
     }
   },[query, posts]);
