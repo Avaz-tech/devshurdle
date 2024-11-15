@@ -16,7 +16,7 @@ interface SearchBoxProps {
 // Functional component for the search box
 const SearchBox: React.FC<SearchBoxProps> = ({ className}) => {
   // State to hold the filtered items
-  const {query, setQuery, filteredItems} = useSearchContext();
+  const {query, setQuery} = useSearchContext();
   const handleInputChange = (e:any) => {
     setQuery(e.target.value.toLowerCase());
   };
