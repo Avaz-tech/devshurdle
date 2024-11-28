@@ -26,8 +26,8 @@ export const useSearchContext = () => useContext(SearchContext);
 export const SearchProvider: React.FC<{ children: ReactNode; posts: any[] }> = ({ children, posts }) => {
   const [query, setQuery] = useState<string>(""); // State to manage the search query
   const [filteredItems, setFilteredItems] = useState<any[]>(posts); // State to manage filtered items
-  const [originalItems] = useState<any[]>(posts); // Store original posts
-  
+  // const [originalItems] = useState<any[]>(posts); // Note: no need for separate state here
+
   useEffect(() => {
     if (!query) {
       setFilteredItems(posts); // If no query, show all posts
@@ -46,7 +46,7 @@ export const SearchProvider: React.FC<{ children: ReactNode; posts: any[] }> = (
         setQuery,
         filteredItems,
         setFilteredItems,
-        originalItems, // Provide the original posts to context
+        originalItems: posts, // Here just provide posts
       }}
     >
       {children}
