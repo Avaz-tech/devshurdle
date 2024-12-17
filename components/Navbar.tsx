@@ -20,11 +20,11 @@ export default function Navbar() {
   
   return (
     <div
-      className={`w-full h-20 shadow-custom-medium backdrop-blur-2xl transition-colors z-[10] border-b border-primary 
+      className={`w-full h-20 shadow-custom-medium backdrop-blur-3xl transition-colors z-[10] border-b border-primary 
          fixed top-0 max-w-none xs:h-[100vh]
       } `}
     >
-      <div className="max-w-screen-xl flex items-center justify-between mx-4 xl:mx-auto h-full ">
+      <div className="max-w-screen-xl flex items-center justify-between mx-4 xl:mx-auto h-full font-medium">
         <Logo title="DH" className="" />
         <div className="hidden md:inline-flex items-center gap-7 duration-200">
           {navigationData.map((item, index) => (
