@@ -22,7 +22,7 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "var(--background)",
+        background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
@@ -65,7 +65,7 @@ const config = {
         "custom-card": "rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px",
         "custom-light": "0 2px 4px rgba(0, 0, 0, 0.1)",
         "custom-medium": "rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em",
-        "custom-dark": "rgba(0, 0, 0, 0.15) 0px 2px 8px;",
+        "custom-dark": "rgba(0, 0, 0, 0.15) 0px 2px 8px",
       },
       keyframes: {
         "accordion-down": {

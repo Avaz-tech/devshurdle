@@ -27,7 +27,7 @@
   }
 
   .dark {
-    --background: #162737;
+    --background: 210, 43%, 15%;
     --foreground: 0 0% 95%;
     --card: 24 9.8% 10%;
     --card-foreground: 0 0% 95%;
@@ -58,4 +58,3 @@
     font-family: "Inter Variable", sans-serif;
   }
 }
-
