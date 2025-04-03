@@ -14,7 +14,7 @@ interface Post {
 }
 const filterOptions = [
   { label: "Browser", value: "browser" },
-  { label: "Style", value: "style" },
+  { label: "Design", value: "design" },
   { label: "Config", value: "config" },
   { label: "Type", value: "type" },
   { label: "Performance", value: "performance" },
