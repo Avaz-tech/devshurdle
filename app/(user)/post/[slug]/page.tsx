@@ -4,8 +4,6 @@ import { groq } from "next-sanity";
 import Container from "@components/Container";
 import Image from "next/image";
 import { urlForImage } from "@sanity/lib/image";
-import Link from "next/link";
-import { FaFacebookF, FaGithub, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { PortableText } from "@portabletext/react";
 import { RichText } from "@components/RichText";
 //================================================================================================================
