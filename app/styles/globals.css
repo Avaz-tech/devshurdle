@@ -1,7 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+@font-face {
+  font-family: "GintoNord";
+  src: url("/assets/fonts/ginto/ABCGintoNormal-Regular.otf") format("opentype");
+  font-weight: 400; /* Regular */
+}
+
+@font-face {
+  font-family: "GintoNord";
+  src: url("/assets/fonts/ginto/ABCGintoNormal-Medium.otf") format("opentype");
+  font-weight: 500; /* Medium */
+}
+
+@font-face {
+  font-family: "GintoNord";
+  src: url("/assets/fonts/ginto/ABCGintoNormal-Bold.otf") format("opentype");
+  font-weight: 700; /* Bold */
+}
+
+@font-face {
+  font-family: "GintoNord";
+  src: url("/assets/fonts/ginto/ABCGintoNormal-Light.otf") format("opentype");
+  font-weight: 300; /* Light */
+}
+
+@font-face {
+  font-family: "GintoNord";
+  src: url("/assets/fonts/ginto/ABCGintoNormal-Thin.otf") format("opentype");
+  font-weight: 100; /* Thin */
+}
+
+@font-face {
+  font-family: "GintoNord";
+  src: url("/assets/fonts/ginto/ABCGintoNormal-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -24,6 +61,7 @@
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
+    --font-ginto: "GintoNord", sans-serif;
   }
 
   .dark {
@@ -54,7 +92,8 @@
     @apply border-border;
   }
   body {
-    font-family: "Roboto", sans-serif;
+    font-family: var(--font-ginto);
+    -webkit-font-smoothing: antialiased;
     @apply bg-background text-foreground;
   }
 }
