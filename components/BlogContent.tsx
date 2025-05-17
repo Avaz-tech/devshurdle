@@ -66,7 +66,7 @@ const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
                       ))}
                     </div>
 
-                    <p className="text-sm flex gap-2 items-center text-[#6b6b6bdd] cursor-auto">
+                    <p className="text-sm flex gap-2 items-center cursor-auto">
                       <FaCalendarDay className="text-mainColor" size={18} />
                       {new Date(_createdAt).toLocaleDateString("en-US", {
                         day: "numeric",
@@ -91,11 +91,11 @@ const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
                   <div className="flex gap-3 ">
                     <div className="flex items-center gap-2">
                       <FaRegComments size={22} />
-                      <span className="text-[#6B6B6B]">12</span>
+                      <span>12</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <GrView size={18} />
-                      <span className="text-[#6B6B6B]">50</span>
+                      <span>50</span>
                     </div>
                   </div>
                 </div>

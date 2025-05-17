@@ -62,6 +62,9 @@
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
     --font-ginto: "GintoNord", sans-serif;
+    --code-bg: #50e74d3d;
+    --code-border: #3750184d;
+    --code-text: #09090b;
   }
 
   .dark {
@@ -84,6 +87,9 @@
     --border: 0, 0%, 50%, 0.26;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
+    --code-bg: #4e742121;
+    --code-border: #3750184d;
+    --code-text: #4bed2ed4;
   }
 }
 
