@@ -28,6 +28,7 @@ export default defineType({
         decorators: [
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
+          { title: "Code", value: "code" },
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -45,7 +46,7 @@ export default defineType({
           },
         ],
       },
-    }),
+    } as const),
     // You can add additional types here. Note that you can't use
     // primitive types such as 'string' and 'number' in the same array
     // as a block type.
@@ -59,7 +60,7 @@ export default defineType({
           title: "Alternative Text",
         },
       ],
-    }),
+    } as const),
     // Adding code block type
     defineArrayMember({
       type: "code",

@@ -62,6 +62,9 @@ export const RichText = {
         </Link>
       );
     },
+    code: ({ children }: any) => {
+      return <code className="bg-[#fee5ce80] border border-[#e3cbbc] text-sm px-0.5 py-[1px] rounded">{children}</code>;
+    },
   },
   //================================================================================================================
 };
