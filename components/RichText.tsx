@@ -16,7 +16,7 @@ export const RichText = {
             width={700}
             height={700}
             priority={true}
-            className="object-contain"
+            className="object-contain py-2"
           />
         </div>
       );
@@ -28,7 +28,7 @@ export const RichText = {
   //================================================================================================================
 
   list: {
-    bullet: ({ children }: any) => <ul className="ml-10 py-5 list-disc space-y-5 leading-[1.7em] ">{children}</ul>,
+    bullet: ({ children }: any) => <ul className="ml-4 py-2 list-disc space-y-3">{children}</ul>,
   },
   //================================================================================================================
 
@@ -38,16 +38,14 @@ export const RichText = {
   //================================================================================================================
 
   block: {
-    h1: ({ children }: any) => <h1 className="text-4xl py-8 font-bold">{children}</h1>,
-    h2: ({ children }: any) => <h2 className="text-3xl py-6 font-bold">{children}</h2>,
-    h3: ({ children }: any) => <h3 className="text-2xl py-4 font-bold">{children}</h3>,
-    h4: ({ children }: any) => <h4 className="text-xl py-2 font-bold">{children}</h4>,
+    h1: ({ children }: any) => <h1 className="text-4xl pt-8 pb-4 font-bold">{children}</h1>,
+    h2: ({ children }: any) => <h2 className="text-3xl pt-6 pb-2 font-bold">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-2xl pt-4 font-bold">{children}</h3>,
+    h4: ({ children }: any) => <h4 className="text-xl pt-2 font-bold">{children}</h4>,
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-mainColor border-l-4 pl-5 py-5 my-5 text-base leading-[1.7em]">
-        {children}
-      </blockquote>
+      <blockquote className="border-l-mainColor border-l-4 pl-5 py-5 my-5 text-base ">{children}</blockquote>
     ),
-    normal: ({ children }: any) => <p className="py-[3px] leading-[1.7em]">{children}</p>,
+    normal: ({ children }: any) => <p className="py-[3px]">{children}</p>,
   },
   //================================================================================================================
 
