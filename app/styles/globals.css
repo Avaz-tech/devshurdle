@@ -39,6 +39,11 @@
   font-style: italic;
 }
 
+@font-face {
+  font-family: "Cascadia Code";
+  src: url("/assets/fonts/cascadia-code/CascadiaCode.ttf") format("truetype");
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -65,6 +70,7 @@
     --code-bg: #50e74d3d;
     --code-border: #3750184d;
     --code-text: #09090b;
+    --code-font: "Cascadia Code", sans-serif;
   }
 
   .dark {
@@ -88,8 +94,7 @@
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
     --code-bg: #4e742121;
-    --code-border: #3750184d;
-    --code-text: #4bed2ed4;
+    --code-text: #22c55e;
   }
 }
 
@@ -101,5 +106,10 @@
     font-family: var(--font-ginto);
     -webkit-font-smoothing: antialiased;
     @apply bg-background text-foreground;
+  }
+  pre,
+  code {
+    font-family: var(--code-font);
+    font-weight: normal;
   }
 }
