@@ -38,14 +38,42 @@ const SlugPage = async ({ params: { slug } }: Props) => {
     author->
   }`;
   //================================================================================================================
-
   const post: Post = await client.fetch(query, { slug });
+
+  const postDate = new Date(post?._createdAt).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "short",
+    year: "2-digit",
+  });
   //================================================================================================================
 
   return (
-    <Container className="mb-10 mt-40 w-auto mx-4 xl:mx-auto max-w-screen-xl">
-      <div className="flex items-center mb-10">
-        <div className="w-full ">
+    <Container className="mb-10 mt-40 w-auto mx-4 xl:mx-auto">
+      <div className="flex flex-col items-start mb-10">
+        <h2 className="text-3xl py-2 md:text-[40px] font-bold">{post?.title}</h2>
+        {/* -------------- post main image --------------- */}
+        <div className="w-1/5 hidden md:w-full md:inline-flex flex-row items-center gap-5 p-4">
+          {post?.author?.image ? (
+            <Image
+              src={urlForImage(post.author.image).url()}
+              width={200}
+              height={200}
+              alt="author image"
+              className="w-16 h-16 rounded-full object-cover"
+              priority={true}
+            />
+          ) : (
+            <p>No author image available</p>
+          )}
+          <div className="flex flex-col w-full">
+            <p className=" text-mainColor font-semibold">By: {post?.author?.name}</p>
+            <p className="tracking-wide text-sm">Posted on {postDate}</p>
+          </div>
+          {/* Social Media Links */}
+          <div className="flex items-center gap-3">{/* Links */}</div>
+        </div>
+        {/* --------------author info--------------- */}
+        <div className="w-full">
           {post?.mainImage ? (
             <Image
               src={urlForImage(post.mainImage).url()}
@@ -58,24 +86,6 @@ const SlugPage = async ({ params: { slug } }: Props) => {
           ) : (
             <p>No main image available</p>
           )}
-        </div>
-        <div className="w-1/3 hidden md:inline-flex flex-col items-center gap-5 px-4">
-          {post?.author?.image ? (
-            <Image
-              src={urlForImage(post.author.image).url()}
-              width={200}
-              height={200}
-              alt="author image"
-              className="w-32 h-32 rounded-full object-cover"
-              priority={true}
-            />
-          ) : (
-            <p>No author image available</p>
-          )}
-          <p className="text-3xl text-[#5442ae] font-semibold">{post?.author?.name}</p>
-          <p className="text-center tracking-wide text-sm">{post?.author?.description}</p>
-          {/* Social Media Links */}
-          <div className="flex items-center gap-3">{/* Links */}</div>
         </div>
       </div>
       <div>
