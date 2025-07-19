@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { client } from "@sanity/lib/client";
 import { Post } from "@types";
 import { groq } from "next-sanity";
@@ -28,6 +29,41 @@ export const generateStaticParams = async () => {
   return slugRoutes?.map((slug) => ({
     slug,
   }));
+};
+//================================================================================================================
+// add meta datas
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const query = groq`*[_type == 'post' && slug.current == $slug][0]{
+    title,
+    description,
+    mainImage,
+    "imageUrl": mainImage.asset->url
+  }`;
+
+  const post = await client.fetch(query, { slug: params.slug });
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The blog post could not be found.",
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.description || `Read the post titled "${post.title}"`,
+    openGraph: {
+      title: post.title,
+      description: post.description || `Read the post titled "${post.title}"`,
+      images: [
+        {
+          url: post.imageUrl || "/images/devshurdle_landing.png",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
 };
 //================================================================================================================
 
