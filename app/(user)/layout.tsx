@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ConfigProvider, theme } from "antd";
+import { AntdThemeProvider } from "@/components/AntdThemeProvider";
 
 export const metadata: Metadata = {
   title: "DevsHurdle",
@@ -17,18 +17,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="google-site-verification" content="oEf46UbtX65sh2HN8xyR0Z2M5rqkaU1gxBHwkkW1jrg" />
       </head>
       <body>
-        <ConfigProvider
-          theme={{
-            algorithm: theme.darkAlgorithm,
-            token: {},
-          }}
-        >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <AntdThemeProvider>
             <Navbar />
             {children}
             <Footer />
-          </ThemeProvider>
-        </ConfigProvider>
+          </AntdThemeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

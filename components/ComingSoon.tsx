@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import Container from "./Container";
 import { Button } from "@/components/ui/button";
 import { HiMiniArrowUpRight } from "react-icons/hi2";
 import { LuSparkles } from "react-icons/lu";
@@ -24,8 +23,8 @@ const ComingSoon: React.FC<ComingSoonProps> = ({
   backButtonHref = "/",
 }) => {
   return (
-    <Container className="min-h-screen flex items-center justify-center py-20 mt-20">
-      <div className="w-full max-w-2xl mx-auto text-center px-4">
+    <div className="min-h-screen flex items-center justify-center py-20 px-4 pt-20">
+      <div className="w-full max-w-2xl mx-auto text-center">
         {/* Icon/Illustration */}
         <div className="mb-8 flex justify-center">
           <div className="relative">
@@ -83,7 +82,7 @@ const ComingSoon: React.FC<ComingSoonProps> = ({
           </p>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
