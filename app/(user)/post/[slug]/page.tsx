@@ -60,6 +60,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
           url: post.imageUrl || "/images/devshurdle_landing.png",
           width: 1200,
           height: 630,
+          alt: post.title,
         },
       ],
     },
@@ -86,7 +87,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
   return (
     <Container className="mb-10 mt-40 w-auto mx-4 xl:mx-auto">
       <div className="flex flex-col items-start mb-10">
-        <h2 className="text-3xl py-2 md:text-[40px] font-bold">{post?.title}</h2>
+        <h2 className="text-3xl py-2 md:text-[40px] font-bold text-foreground">{post?.title}</h2>
         {/* -------------- post main image --------------- */}
         <div className="w-1/5 hidden md:w-full md:inline-flex flex-row items-center gap-5 p-4">
           {post?.author?.image ? (
@@ -99,11 +100,11 @@ const SlugPage = async ({ params: { slug } }: Props) => {
               priority={true}
             />
           ) : (
-            <p>No author image available</p>
+            <p className="text-muted-foreground">No author image available</p>
           )}
           <div className="flex flex-col w-full">
             <p className=" text-mainColor font-semibold">By: {post?.author?.name}</p>
-            <p className="tracking-wide text-sm">Posted on {postDate}</p>
+            <p className="tracking-wide text-sm text-muted-foreground">Posted on {postDate}</p>
           </div>
           {/* Social Media Links */}
           <div className="flex items-center gap-3">{/* Links */}</div>
@@ -120,7 +121,7 @@ const SlugPage = async ({ params: { slug } }: Props) => {
               className="object-cover w-full"
             />
           ) : (
-            <p>No main image available</p>
+            <p className="text-muted-foreground">No main image available</p>
           )}
         </div>
       </div>
