@@ -1,37 +1,31 @@
-import Image from "next/image";
-import banner from "@/images/banner.jpg";
-import logo from "@/images/logo-no-background.svg";
 import localFont from "next/font/local";
+import Link from "next/link";
 
-// Font files can be colocated inside of `pages`
-const myFont = localFont({ src: "../fonts/meedori_regular.ttf" });
-
-const Hero = () => {
+const Hero: React.FC = () => {
   return (
-    <div className="w-full max-h-screen relative">
-      <div className="h-[90vh]"></div>
-      {/* <div></div> */}
-      {/* <Image
-        src={banner}
-        alt="banner image"
-        className="w-full max-h-screen object-contain "
-      /> */}
-      <div className="absolute top-0 w-full h-full flex flex-col items-center justify-center">
-        <h2 className={`${myFont.className} flex items-center text-center  text-[9.5vw] font-bold text-primary`}>
-          {/* <Image
-            src={logo}
-            alt="logo"
-            className="w-full max-h-[170px] object-contain"
-          /> */}
-          DEVS
-          {/* <span className="text-gray-500">S</span> */}
-          HURDLE
-        </h2>
-        {/* <p className="text-xl md:text-xl lg:text-5xl font-semibold text-[#f9006b]">
-          Where Obstacles Meet Solutions
-        </p> */}
+    <section className="relative w-full max-w-screen-xl bg-gradient-to-r from-mainColor to-gray-900 text-white py-20 px-4 min-h-[60vh] flex items-center">
+      <div className="w-full mx-auto text-center">
+        <h1 className={`text-4xl md:text-6xl font-bold mb-4 tracking-tight`}>DevsHurdle: Conquer Coding Challenges</h1>
+        <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+          Stop wasting time re-solving bugs and errors. DevsHurdle is your personal hub for practical, project-specific
+          coding solutions. Find, save, and share fixes faster than ever.
+        </p>
+        <div className="flex justify-center gap-4">
+          <Link
+            href="/posts"
+            className="bg-mainColor hover:bg-[#19a264c6] text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+          >
+            Browse Solutions
+          </Link>
+          <Link
+            href="/search"
+            className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
+          >
+            Search Fixes
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
