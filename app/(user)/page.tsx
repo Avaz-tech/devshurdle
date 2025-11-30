@@ -114,7 +114,7 @@ export default async function Home() {
         <section className="py-12 w-full max-w-screen-xl mx-auto">
           <h2 className="text-3xl font-bold mb-6 text-center text-foreground">About DevsHurdle</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I'm a developer who's been there—spending hours debugging the same issues. DevsHurdle is my personal
+            I&apos;m a developer who&apos;s been there—spending hours debugging the same issues. DevsHurdle is my personal
             collection of practical, project-specific solutions to coding problems, built to save you time and
             frustration.
           </p>
