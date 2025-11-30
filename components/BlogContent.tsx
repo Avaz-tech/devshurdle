@@ -60,13 +60,13 @@ const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
                     <div className="flex gap-2 items-center">
                       <FaTags className="text-mainColor" size={18} />
                       {categories?.map((category: Category) => (
-                        <p key={category._id} className="text-sm text-[#6b6b6bdd] cursor-auto">
+                        <p key={category._id} className="text-sm text-muted-foreground cursor-auto">
                           {category.title}
                         </p>
                       ))}
                     </div>
 
-                    <p className="text-sm flex gap-2 items-center cursor-auto">
+                    <p className="text-sm flex gap-2 items-center cursor-auto text-muted-foreground">
                       <FaCalendarDay className="text-mainColor" size={18} />
                       {new Date(_createdAt).toLocaleDateString("en-US", {
                         day: "numeric",
@@ -77,18 +77,18 @@ const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-xl font-semibold hover:text-mainColor duration-200 cursor-pointer">{title}</h2>
+                  <h2 className="text-xl font-semibold text-foreground hover:text-mainColor duration-200 cursor-pointer">{title}</h2>
                 </div>
               </div>
 
               {/* Card Bottom part */}
               <div className="bg-[rgba(163,162,163,0.1)] rounded-b-2xl cursor-auto">
                 <div className="px-4 py-5 flex items-center justify-between">
-                  <div className="flex items-center justify-between gap-2 cursor-pointer hover:text-mainColor ">
+                  <div className="flex items-center justify-between gap-2 cursor-pointer hover:text-mainColor text-foreground">
                     Read More
                     <HiMiniArrowUpRight size={18} />
                   </div>
-                  <div className="flex gap-3 ">
+                  <div className="flex gap-3 text-muted-foreground">
                     <div className="flex items-center gap-2">
                       <FaRegComments size={22} />
                       <span>12</span>

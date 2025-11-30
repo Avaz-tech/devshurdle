@@ -28,24 +28,24 @@ export const RichText = {
   //================================================================================================================
 
   list: {
-    bullet: ({ children }: any) => <ul className="ml-4 py-2 list-disc space-y-3">{children}</ul>,
+    bullet: ({ children }: any) => <ul className="ml-4 py-2 list-disc space-y-3 text-foreground">{children}</ul>,
   },
   //================================================================================================================
 
   number: {
-    bullet: ({ children }: any) => <ol className="mt-lg list-decimal">{children}</ol>,
+    bullet: ({ children }: any) => <ol className="mt-lg list-decimal text-foreground">{children}</ol>,
   },
   //================================================================================================================
 
   block: {
-    h1: ({ children }: any) => <h1 className="text-4xl pt-8 pb-4 font-bold">{children}</h1>,
-    h2: ({ children }: any) => <h2 className="text-3xl pt-6 pb-2 font-bold">{children}</h2>,
-    h3: ({ children }: any) => <h3 className="text-2xl pt-4 font-bold">{children}</h3>,
-    h4: ({ children }: any) => <h4 className="text-xl pt-2 font-bold">{children}</h4>,
+    h1: ({ children }: any) => <h1 className="text-4xl pt-8 pb-4 font-bold text-foreground">{children}</h1>,
+    h2: ({ children }: any) => <h2 className="text-3xl pt-6 pb-2 font-bold text-foreground">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="text-2xl pt-4 font-bold text-foreground">{children}</h3>,
+    h4: ({ children }: any) => <h4 className="text-xl pt-2 font-bold text-foreground">{children}</h4>,
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-mainColor border-l-4 pl-5 py-5 my-5 text-base ">{children}</blockquote>
+      <blockquote className="border-l-mainColor border-l-4 pl-5 py-5 my-5 text-base text-foreground">{children}</blockquote>
     ),
-    normal: ({ children }: any) => <p className="py-[3px]">{children}</p>,
+    normal: ({ children }: any) => <p className="py-[3px] text-foreground">{children}</p>,
   },
   //================================================================================================================
 
@@ -53,7 +53,7 @@ export const RichText = {
     link: ({ children, value }: any) => {
       const rel = !value.href.startsWith("/") ? "noreferrer noopener" : undefined;
       return (
-        <Link href={value.href} rel={rel} className="underline">
+        <Link href={value.href} rel={rel} className="underline text-primary hover:text-primary/80">
           {children}
         </Link>
       );

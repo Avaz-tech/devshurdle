@@ -28,21 +28,21 @@ export default function Navbar() {
         <Logo title="DH" className="" />
         <div className="hidden md:inline-flex items-center gap-7 duration-200">
           {navigationData.map((item, index) => (
-            <Link key={index} href={item?.href} className="text-sm relative group overflow-hidden">
+            <Link key={index} href={item?.href} className="text-sm relative group overflow-hidden text-foreground">
               {item?.title}
               <span className="w-full h-[1px] bg-primary absolute inline-block left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
             </Link>
           ))}
         </div>
         <div className="flex gap-4 items-center ">
-          <Link href="/signIn" className="text-sm relative group overflow-hidden">
+          <Link href="/signIn" className="text-sm relative group overflow-hidden text-foreground">
             Sign in
             <span className="w-full h-[1px] bg-primary absolute inline-block left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
           </Link>
-          <span className="text-gray-300 opacity-70">|</span>
+          <span className="text-muted-foreground opacity-70">|</span>
           <ModeToggle />
           <div className="md:hidden">
-            <FiMenu className="text-2xl" />
+            <FiMenu className="text-2xl text-foreground" />
           </div>
         </div>
       </div>

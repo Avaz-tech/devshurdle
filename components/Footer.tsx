@@ -88,9 +88,9 @@ const Footer = () => {
         {/* other related links */}
         {links.map((section, sectionIndex) => (
           <div key={sectionIndex} className="flex flex-col gap-2">
-            <h6 className="font-semibold mb-3">{section.title}</h6>
+            <h6 className="font-semibold mb-3 text-foreground">{section.title}</h6>
             {section.items.map((item, itemIndex) => (
-              <Link key={itemIndex} href={item.href} className="hover:text-mainColor duration-200">
+              <Link key={itemIndex} href={item.href} className="hover:text-mainColor duration-200 text-muted-foreground">
                 {item.text}
               </Link>
             ))}
@@ -100,15 +100,15 @@ const Footer = () => {
 
       <div className="flex flex-col md:flex-row  justify-between w-full gap-10 border-t py-5">
         {/* social links */}
-        <div className="text-black inline-flex flex-row items-center gap-7">
+        <div className="text-foreground inline-flex flex-row items-center gap-7">
           {socialLinks.map((link, index) => (
-            <Link key={index} href={link.href} className="p-3 bg-gray-200 rounded-full duration-200 hover:bg-mainColor">
+            <Link key={index} href={link.href} className="p-3 bg-secondary rounded-full duration-200 hover:bg-mainColor text-secondary-foreground">
               {link.icon}
             </Link>
           ))}
         </div>
 
-        <p className="text-md text-gray-70">
+        <p className="text-md text-muted-foreground">
           © All rights reserved
           <Link
             href="https://avaz-new-portfolio.vercel.app/"
