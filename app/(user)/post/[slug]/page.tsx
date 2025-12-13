@@ -33,6 +33,7 @@ export const generateStaticParams = async () => {
 //================================================================================================================
 // add meta datas
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const { slug } = await params;
   const query = groq`*[_type == 'post' && slug.current == $slug][0]{
     title,
     description,
@@ -40,7 +41,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     "imageUrl": mainImage.asset->url
   }`;
 
-  const post = await client.fetch(query, { slug: params.slug });
+  const post = await client.fetch(query, { slug: slug });
 
   if (!post) {
     return {
@@ -68,7 +69,9 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 };
 //================================================================================================================
 
-const SlugPage = async ({ params: { slug } }: Props) => {
+const SlugPage = async ({ params }: Props) => {
+  const { slug } = await params;
+
   const query = groq`*[_type == 'post' && slug.current == $slug][0]{
     ...,
     body,
