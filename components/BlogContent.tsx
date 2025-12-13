@@ -26,7 +26,7 @@ const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
   const { filteredItems } = useSearchContext();
 
   return (
-    <Container className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       {filteredItems.map((post) => {
         const { _id, mainImage, categories, _createdAt, title, slug } = post;
 
@@ -77,7 +77,9 @@ const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-xl font-semibold text-foreground hover:text-mainColor duration-200 cursor-pointer">{title}</h2>
+                  <h2 className="text-xl font-semibold text-foreground hover:text-mainColor duration-200 cursor-pointer">
+                    {title}
+                  </h2>
                 </div>
               </div>
 
