@@ -55,8 +55,8 @@ export default function ContactPage() {
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Get In Touch</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Have a question, suggestion, or need help? We'd love to hear from you. Reach out and let's build something
-              amazing together.
+              Have a question, suggestion, or need help? We&apos;d love to hear from you. Reach out and let&apos;s build
+              something amazing together.
             </p>
           </div>
         </Container>
@@ -69,10 +69,10 @@ export default function ContactPage() {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-6">Let's Start a Conversation</h2>
+                <h2 className="text-3xl font-bold text-foreground mb-6">Let&apos;s Start a Conversation</h2>
                 <p className="text-muted-foreground mb-8">
-                  Whether you're looking for coding solutions, want to contribute to the platform, or just want to say
-                  hello, we're here to help. Don't hesitate to reach out!
+                  Whether you&apos;re looking for coding solutions, want to contribute to the platform, or just want to
+                  say hello, we&apos;re here to help. Don&apos;t hesitate to reach out!
                 </p>
               </div>
 
@@ -150,7 +150,9 @@ export default function ContactPage() {
 
               {submitStatus === "success" && (
                 <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-green-800 font-medium">Thank you for your message! We'll get back to you soon.</p>
+                  <p className="text-green-800 font-medium">
+                    Thank you for your message! We&apos;ll get back to you soon.
+                  </p>
                 </div>
               )}
 
@@ -246,8 +248,8 @@ export default function ContactPage() {
             <div className="bg-card rounded-lg p-6 border border-border">
               <h3 className="font-semibold text-foreground mb-2">Can I request specific coding solutions?</h3>
               <p className="text-muted-foreground text-sm">
-                Absolutely! We're always looking for new challenges. Submit your request through our contact form and
-                we'll consider adding it to our collection.
+                Absolutely! We&apos;re always looking for new challenges. Submit your request through our contact form
+                and we&apos;ll consider adding it to our collection.
               </p>
             </div>
 
