@@ -1,61 +1,249 @@
 "use client";
-import { useState, useEffect } from "react";
-import "./../../styles/login.css";
+import { useState } from "react";
+import Container from "@components/Container";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import Link from "next/link";
 
-const LoginPage: React.FC = () => {
-  const [isActive, setIsActive] = useState(false);
+export default function SignInPage() {
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  useEffect(() => {
-    const container = document.getElementById("container");
-    if (isActive) {
-      container?.classList.add("active");
-    } else {
-      container?.classList.remove("active");
-    }
-  }, [isActive]);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    // Handle authentication logic here
+  };
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="container border mx-3" id="container">
-        <div className="form-container sign-up">
-          <form className="bg-background">
-            <h1 className="my-3">Create Account</h1>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button>Sign Up</button>
-          </form>
-        </div>
-        <div className="form-container sign-in">
-          <form>
-            <h1 className="my-3">Sign In</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="#">Forget Your Password?</a>
-            <button>Sign In</button>
-          </form>
-        </div>
-        <div className="toggle-container">
-          <div className="toggle">
-            <div className="toggle-panel toggle-left">
-              <h1>Welcome Back!</h1>
-              <p>Enter your personal details to use all of site features</p>
-              <button onClick={() => setIsActive(false)} id="login">
-                Sign In
-              </button>
-            </div>
-            <div className="toggle-panel toggle-right">
-              <h1>Hello, Friend!</h1>
-              <p>Register with your personal details to use all of site features</p>
-              <button onClick={() => setIsActive(true)} id="register">
-                Sign Up
-              </button>
+    <main className="flex justify-center items-center flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pt-24 pb-16 px-4">
+        <Container className="mx-auto">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              {isSignUp ? "Join DevsHurdle" : "Welcome Back"}
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              {isSignUp
+                ? "Create your account to access personalized solutions and save your favorite coding resources."
+                : "Sign in to access your personalized dashboard and continue your coding journey."}
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      {/* Auth Form Section */}
+      <section className="w-full py-16 px-4">
+        <Container className="mx-auto">
+          <div className="max-w-md mx-auto">
+            <div className="bg-card rounded-xl border border-border p-8 shadow-lg">
+              {/* Toggle Buttons */}
+              <div className="flex rounded-lg bg-muted p-1 mb-8">
+                <button
+                  onClick={() => setIsSignUp(false)}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
+                    !isSignUp
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => setIsSignUp(true)}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
+                    isSignUp ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Sign Up
+                </button>
+              </div>
+
+              {/* Social Auth Buttons */}
+              <div className="space-y-3 mb-6">
+                <button className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all">
+                  <FaGoogle className="text-red-500" />
+                  <span className="text-foreground font-medium">Continue with Google</span>
+                </button>
+                <button className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all">
+                  <FaGithub className="text-foreground" />
+                  <span className="text-foreground font-medium">Continue with GitHub</span>
+                </button>
+              </div>
+
+              {/* Divider */}
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-card text-muted-foreground">Or continue with email</span>
+                </div>
+              </div>
+
+              {/* Auth Form */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {isSignUp && (
+                  <div>
+                    <Label htmlFor="name" className="text-foreground font-medium">
+                      Full Name
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Enter your full name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="mt-1"
+                      required
+                    />
+                  </div>
+                )}
+
+                <div>
+                  <Label htmlFor="email" className="text-foreground font-medium">
+                    Email Address
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="mt-1"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="password" className="text-foreground font-medium">
+                    Password
+                  </Label>
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="mt-1"
+                    required
+                  />
+                </div>
+
+                {isSignUp && (
+                  <div>
+                    <Label htmlFor="confirmPassword" className="text-foreground font-medium">
+                      Confirm Password
+                    </Label>
+                    <Input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type="password"
+                      placeholder="Confirm your password"
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange}
+                      className="mt-1"
+                      required
+                    />
+                  </div>
+                )}
+
+                {!isSignUp && (
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-center">
+                      <input type="checkbox" className="rounded border-border" />
+                      <span className="ml-2 text-sm text-muted-foreground">Remember me</span>
+                    </label>
+                    <Link
+                      href="/forgot-password"
+                      className="text-sm text-mainColor hover:text-mainColor/80 font-medium"
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
+                )}
+
+                <Button
+                  type="submit"
+                  className="w-full bg-mainColor hover:bg-mainColor/90 text-white font-semibold py-3"
+                >
+                  {isSignUp ? "Create Account" : "Sign In"}
+                </Button>
+              </form>
+
+              {/* Terms and Privacy */}
+              {isSignUp && (
+                <p className="text-xs text-muted-foreground text-center mt-4">
+                  By creating an account, you agree to our{" "}
+                  <Link href="/terms" className="text-mainColor hover:underline">
+                    Terms of Service
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/privacy" className="text-mainColor hover:underline">
+                    Privacy Policy
+                  </Link>
+                </p>
+              )}
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+        </Container>
+      </section>
 
-export default LoginPage;
+      {/* Features Section */}
+      <section className="w-full py-16 px-4 bg-card/50">
+        <Container className="mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Why Choose DevsHurdle?</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Join thousands of developers who trust DevsHurdle for their coding solutions
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🚀</span>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Quick Solutions</h3>
+              <p className="text-muted-foreground">Find practical coding solutions in seconds, not hours</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">🎯</span>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Real-World Problems</h3>
+              <p className="text-muted-foreground">Solutions built from actual development challenges</p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl">📚</span>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-2">Well-Documented</h3>
+              <p className="text-muted-foreground">Clear explanations and code examples for every solution</p>
+            </div>
+          </div>
+        </Container>
+      </section>
+    </main>
+  );
+}
