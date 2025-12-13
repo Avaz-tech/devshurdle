@@ -9,58 +9,92 @@ export const RichText = {
   types: {
     image: ({ value }: any) => {
       return (
-        <div className="flex justify-start items-center">
+        <figure className="my-8 flex justify-center">
           <Image
             src={urlForImage(value).url()}
-            alt="Post image"
-            width={700}
-            height={700}
-            priority={true}
-            className="object-contain py-2"
+            alt={value.alt || "Post image"}
+            width={800}
+            height={600}
+            priority={false}
+            className="rounded-lg shadow-lg max-w-full h-auto object-cover border border-border"
           />
-        </div>
+        </figure>
       );
     },
     code: ({ value }: any) => {
-      return <HighlightCode content={value.code} language={value.language && value.language} />;
+      return (
+        <div className="my-6">
+          <HighlightCode content={value.code} language={value.language || "javascript"} />
+        </div>
+      );
     },
   },
   //================================================================================================================
 
   list: {
-    bullet: ({ children }: any) => <ul className="ml-4 py-2 list-disc space-y-3 text-foreground">{children}</ul>,
+    bullet: ({ children }: any) => (
+      <ul className="ml-6 my-6 space-y-3 text-foreground list-disc marker:text-mainColor">{children}</ul>
+    ),
+  },
+  //================================================================================================================
+
+  listItem: {
+    bullet: ({ children }: any) => <li className="text-base leading-relaxed">{children}</li>,
   },
   //================================================================================================================
 
   number: {
-    bullet: ({ children }: any) => <ol className="mt-lg list-decimal text-foreground">{children}</ol>,
+    bullet: ({ children }: any) => (
+      <ol className="ml-6 my-6 space-y-3 text-foreground list-decimal marker:text-mainColor">{children}</ol>
+    ),
   },
   //================================================================================================================
 
   block: {
-    h1: ({ children }: any) => <h1 className="text-4xl pt-8 pb-4 font-bold text-foreground">{children}</h1>,
-    h2: ({ children }: any) => <h2 className="text-3xl pt-6 pb-2 font-bold text-foreground">{children}</h2>,
-    h3: ({ children }: any) => <h3 className="text-2xl pt-4 font-bold text-foreground">{children}</h3>,
-    h4: ({ children }: any) => <h4 className="text-xl pt-2 font-bold text-foreground">{children}</h4>,
-    blockquote: ({ children }: any) => (
-      <blockquote className="border-l-mainColor border-l-4 pl-5 py-5 my-5 text-base text-foreground">{children}</blockquote>
+    h1: ({ children }: any) => (
+      <h1 className="text-4xl md:text-5xl font-bold text-foreground mt-12 mb-6 leading-tight">{children}</h1>
     ),
-    normal: ({ children }: any) => <p className="py-[3px] text-foreground">{children}</p>,
+    h2: ({ children }: any) => (
+      <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-10 mb-5 leading-tight border-l-4 border-l-mainColor pl-4">
+        {children}
+      </h2>
+    ),
+    h3: ({ children }: any) => (
+      <h3 className="text-2xl md:text-3xl font-bold text-foreground mt-8 mb-4 leading-tight">{children}</h3>
+    ),
+    h4: ({ children }: any) => (
+      <h4 className="text-xl md:text-2xl font-bold text-foreground mt-6 mb-3 leading-tight">{children}</h4>
+    ),
+    blockquote: ({ children }: any) => (
+      <blockquote className="border-l-4 border-l-mainColor bg-mainColor/5 pl-6 py-4 pr-4 my-8 rounded-r-lg italic text-foreground/90">
+        {children}
+      </blockquote>
+    ),
+    normal: ({ children }: any) => (
+      <p className="text-base md:text-lg leading-relaxed text-foreground my-4">{children}</p>
+    ),
   },
   //================================================================================================================
 
   marks: {
     link: ({ children, value }: any) => {
-      const rel = !value.href.startsWith("/") ? "noreferrer noopener" : undefined;
+      const rel = !value.href?.startsWith("/") ? "noreferrer noopener" : undefined;
       return (
-        <Link href={value.href} rel={rel} className="underline text-primary hover:text-primary/80">
+        <Link
+          href={value.href}
+          rel={rel}
+          target={!value.href?.startsWith("/") ? "_blank" : undefined}
+          className="text-mainColor hover:text-mainColor/80 font-semibold underline decoration-mainColor/30 hover:decoration-mainColor/60 transition-all duration-200"
+        >
           {children}
         </Link>
       );
     },
+    em: ({ children }: any) => <em className="italic text-foreground">{children}</em>,
+    strong: ({ children }: any) => <strong className="font-bold text-foreground">{children}</strong>,
     code: ({ children }: any) => {
       return (
-        <code className="bg-[var(--code-bg)] border border-[var(--code-border)] text-[var(--code-text)] text-sm px-0.5 py-[1px] rounded">
+        <code className="bg-mainColor/15 text-mainColor font-semibold px-2.5 py-1 rounded-md text-sm font-mono inline-block">
           {children}
         </code>
       );
