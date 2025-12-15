@@ -2,73 +2,63 @@
 import SearchBox from "./SearchBox";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useSearchContext } from "@app/Context/SearchContext";
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 
 interface Category {
   title: string;
-  description: string;
+  _id: string;
 }
-
-interface Post {
-  categories: Category[];
-}
-const filterOptions = [
-  { label: "Browser", value: "browser" },
-  { label: "Design", value: "design" },
-  { label: "Config", value: "config" },
-  { label: "Type", value: "type" },
-  { label: "Performance", value: "performance" },
-  { label: "API", value: "api" },
-];
 
 const SearchPanel: React.FC = () => {
-  const { setFilteredItems, originalItems } = useSearchContext();
-  const [activeFilters, setActiveFilters] = useState<string[]>([]); // Track active filters
+  const { filters, setFilters, originalItems } = useSearchContext();
 
-  console.log("Oringinal Items:", originalItems);
-
-  useEffect(() => {
-    if (activeFilters.length === 0) {
-      // If no filters are active, show all posts
-      setFilteredItems(originalItems);
-    } else {
-      // If filters are active, filter posts based on selected filters
-      const filteredP = originalItems.filter((_post: Post) => {
-        return _post.categories?.some((category) =>
-          activeFilters.some((filter) => category.title?.toLowerCase().includes(filter.toLowerCase())),
-        );
+  // Dynamically derive filter options from actual posts categories
+  const filterOptions = useMemo(() => {
+    const categories = new Map<string, Category>();
+    originalItems.forEach((post) => {
+      post.categories?.forEach((category) => {
+        if (category.title && !categories.has(category.title)) {
+          categories.set(category.title, category);
+        }
       });
-      setFilteredItems(filteredP);
-    }
-  }, [activeFilters, originalItems, setFilteredItems]);
+    });
+    return Array.from(categories.values()).map((cat) => ({
+      label: cat.title,
+      value: cat.title,
+    }));
+  }, [originalItems]);
 
-  const handleToggle = (value: string) => {
-    // Toggle filter on/off
-    setActiveFilters(
-      (prevFilters) =>
-        prevFilters.includes(value)
-          ? prevFilters.filter((filter) => filter !== value) // Remove filter
-          : [...prevFilters, value], // Add filter
-    );
+  const handleSearch = (query: string) => {
+    setFilters({
+      ...filters,
+      query,
+    });
   };
 
   return (
     <div className="h-full flex flex-col md:flex-row justify-center md:justify-between items-center gap-3 w-full max-w-screen-xl">
-      <SearchBox className="max-w-[400px]" />
-      <div>
-        <ToggleGroup className="flex flex-wrap justify-center gap-3" type="multiple" variant="outline">
-          {filterOptions.map((option, index) => (
-            <ToggleGroupItem
-              key={index}
-              value={option.value}
-              aria-label={`Filter ${option.value} issues`}
-              onClick={() => handleToggle(option.value)} // Toggle filter onClick
-            >
-              {option.label}
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
-      </div>
+      <SearchBox className="max-w-[400px]" onSearch={handleSearch} />
+      {filterOptions.length > 0 && (
+        <div>
+          <ToggleGroup
+            className="flex flex-wrap justify-center gap-3"
+            type="multiple"
+            variant="outline"
+            value={filters.categories}
+            onValueChange={(value) => setFilters({ ...filters, categories: value })}
+          >
+            {filterOptions.map((option) => (
+              <ToggleGroupItem
+                key={option.value}
+                value={option.value}
+                aria-label={`Filter by ${option.label}`}
+              >
+                {option.label}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        </div>
+      )}
     </div>
   );
 };

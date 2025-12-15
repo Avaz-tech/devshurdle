@@ -1,55 +1,80 @@
 "use client";
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { Post } from "@types";
 
-// Define the interface for the context
-interface SearchContextProps {
+// Define the interface for search filters
+interface SearchFilters {
   query: string;
-  setQuery: (query: string) => void;
-  filteredItems: any[]; // Adjust `any` based on your post structure
-  setFilteredItems: (items: any[]) => void;
-  originalItems: any[]; // Add this to store the original posts
+  categories: string[];
+}
+
+// Define the context props with proper typing
+interface SearchContextProps {
+  filters: SearchFilters;
+  setFilters: (filters: SearchFilters) => void;
+  filteredItems: Post[];
+  originalItems: Post[];
 }
 
 // Create the search context with default values
-const SearchContext = createContext<SearchContextProps>({
-  query: "",
-  setQuery: () => {},
-  filteredItems: [],
-  setFilteredItems: () => {},
-  originalItems: [], // Initialize with an empty array
-});
+const SearchContext = createContext<SearchContextProps | undefined>(undefined);
 
-// Custom hook to use the search context
-export const useSearchContext = () => useContext(SearchContext);
+// Custom hook to use the search context with error handling
+export const useSearchContext = () => {
+  const context = useContext(SearchContext);
+  if (!context) {
+    throw new Error("useSearchContext must be used within SearchProvider");
+  }
+  return context;
+};
 
-// Provider component
-export const SearchProvider: React.FC<{ children: ReactNode; posts: any[] }> = ({ children, posts }) => {
-  const [query, setQuery] = useState<string>(""); // State to manage the search query
-  const [filteredItems, setFilteredItems] = useState<any[]>(posts); // State to manage filtered items
-  // const [originalItems] = useState<any[]>(posts); // Note: no need for separate state here
+// Provider component with proper type safety
+interface SearchProviderProps {
+  children: ReactNode;
+  posts: Post[];
+}
 
+export const SearchProvider: React.FC<SearchProviderProps> = ({ children, posts }) => {
+  const [filters, setFilters] = useState<SearchFilters>({
+    query: "",
+    categories: [],
+  });
+  const [filteredItems, setFilteredItems] = useState<Post[]>(posts);
+
+  // Combined effect for both text search and category filtering
   useEffect(() => {
-    if (!query) {
-      setFilteredItems(posts); // If no query, show all posts
-    } else {
-      const filtered = posts.filter((post: { title: string }) =>
-        post.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredItems(filtered);
-    }
-  }, [query, posts]);
+    let result = posts;
 
-  return (
-    <SearchContext.Provider
-      value={{
-        query,
-        setQuery,
-        filteredItems,
-        setFilteredItems,
-        originalItems: posts, // Here just provide posts
-      }}
-    >
-      {children}
-    </SearchContext.Provider>
-  );
+    // Apply text search filter
+    if (filters.query) {
+      result = result.filter(
+        (post) =>
+          post.title.toLowerCase().includes(filters.query.toLowerCase()) ||
+          post.description?.toLowerCase().includes(filters.query.toLowerCase())
+      );
+    }
+
+    // Apply category filter
+    if (filters.categories.length > 0) {
+      result = result.filter((post) =>
+        post.categories?.some((category) =>
+          filters.categories.some(
+            (selectedCategory) =>
+              category.title?.toLowerCase() === selectedCategory.toLowerCase()
+          )
+        )
+      );
+    }
+
+    setFilteredItems(result);
+  }, [filters, posts]);
+
+  const value: SearchContextProps = {
+    filters,
+    setFilters,
+    filteredItems,
+    originalItems: posts,
+  };
+
+  return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>;
 };
