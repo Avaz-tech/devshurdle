@@ -1,11 +1,17 @@
 // Input validation and sanitization utilities
-import DOMPurify from "isomorphic-dompurify";
+// Server-side validation only - no browser bundle overhead
 
 /**
- * Sanitizes HTML content to prevent XSS attacks
+ * Sanitizes text input by removing potentially dangerous characters
+ * Server-side only - safe for XSS prevention without heavy library
  */
 export const sanitizeInput = (input: string): string => {
-  return DOMPurify.sanitize(input, { ALLOWED_TAGS: [] });
+  return input
+    .trim()
+    .replace(/[<>]/g, "") // Remove angle brackets
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
 };
 
 /**

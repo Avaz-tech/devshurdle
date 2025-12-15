@@ -1,3 +1,4 @@
+import "server-only";
 import { EmailTemplate } from "../../../components/EmailTemplate";
 import { Resend } from "resend";
 import { validateContactForm, sanitizeContactForm } from "../../../lib/validation";

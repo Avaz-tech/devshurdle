@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       {
@@ -8,6 +11,7 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+    formats: ["image/avif", "image/webp"],
   },
 };
 
