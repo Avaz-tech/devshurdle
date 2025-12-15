@@ -45,8 +45,12 @@ export default async function BlogPage() {
         </section>
 
         {/* Search & Filter Section */}
-        <section className="w-full py-16 px-4">
+        <section className="w-full py-12 px-4 bg-gradient-to-b from-mainColor/10 to-transparent border-b border-border">
           <Container className="mx-auto">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-foreground mb-2">Find What You Need</h2>
+              <p className="text-muted-foreground">Search all {posts.length} solutions or browse by category</p>
+            </div>
             <SearchPanel />
           </Container>
         </section>

@@ -1,5 +1,5 @@
-import { Input } from "./ui/input"; // Import your custom Input component
-import { LuSearch } from "react-icons/lu"; // Import the search icon
+import { Input } from "./ui/input";
+import { LuSearch } from "react-icons/lu";
 import { useSearchContext } from "@app/Context/SearchContext";
 
 interface SearchBoxProps {
@@ -16,15 +16,18 @@ const SearchBox: React.FC<SearchBoxProps> = ({ className, onSearch }) => {
   };
 
   return (
-    <div className={`w-full ${className} relative`}>
+    <div className={`w-full ${className} relative group`}>
       <Input
-        className="rounded-full p-5"
+        className="w-full rounded-lg pl-5 pr-12 py-3 bg-card border border-border focus:border-mainColor focus:ring-2 focus:ring-mainColor/20 transition-all placeholder:text-muted-foreground"
         type="search"
-        placeholder="Search blogs"
+        placeholder="Search by keywords, title..."
         value={filters.query}
         onChange={(e) => handleChange(e.target.value)}
       />
-      <LuSearch size="18px" className="absolute top-3 right-4" />
+      <LuSearch
+        size={20}
+        className="absolute top-1/2 -translate-y-1/2 right-4 text-muted-foreground group-focus-within:text-mainColor transition-colors pointer-events-none"
+      />
     </div>
   );
 };

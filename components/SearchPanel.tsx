@@ -1,8 +1,8 @@
 "use client";
 import SearchBox from "./SearchBox";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useSearchContext } from "@app/Context/SearchContext";
 import { useMemo } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface Category {
   title: string;
@@ -35,28 +35,67 @@ const SearchPanel: React.FC = () => {
     });
   };
 
+  const toggleCategory = (value: string) => {
+    setFilters({
+      ...filters,
+      categories: filters.categories.includes(value)
+        ? filters.categories.filter((cat) => cat !== value)
+        : [...filters.categories, value],
+    });
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      query: "",
+      categories: [],
+    });
+  };
+
+  const hasActiveFilters = filters.query || filters.categories.length > 0;
+
   return (
-    <div className="h-full flex flex-col md:flex-row justify-center md:justify-between items-center gap-3 w-full max-w-screen-xl">
-      <SearchBox className="max-w-[400px]" onSearch={handleSearch} />
+    <div className="w-full">
+      {/* Search Box - Full Width */}
+      <div className="mb-6">
+        <SearchBox className="w-full" onSearch={handleSearch} />
+      </div>
+
+      {/* Filter Categories Section */}
       {filterOptions.length > 0 && (
-        <div>
-          <ToggleGroup
-            className="flex flex-wrap justify-center gap-3"
-            type="multiple"
-            variant="outline"
-            value={filters.categories}
-            onValueChange={(value) => setFilters({ ...filters, categories: value })}
-          >
-            {filterOptions.map((option) => (
-              <ToggleGroupItem
-                key={option.value}
-                value={option.value}
-                aria-label={`Filter by ${option.label}`}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-foreground uppercase tracking-wide">Filter by Category</h3>
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
               >
-                {option.label}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
+                <AiOutlineClose size={14} />
+                Clear all
+              </button>
+            )}
+          </div>
+
+          {/* Category Pills */}
+          <div className="flex flex-wrap gap-2">
+            {filterOptions.map((option) => {
+              const isActive = filters.categories.includes(option.value);
+              return (
+                <button
+                  key={option.value}
+                  onClick={() => toggleCategory(option.value)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                    isActive
+                      ? "bg-mainColor text-white shadow-md shadow-mainColor/30 hover:shadow-lg hover:shadow-mainColor/40"
+                      : "bg-card border border-border text-foreground hover:border-mainColor/50 hover:bg-mainColor/5"
+                  }`}
+                  aria-label={`Filter by ${option.label}`}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>

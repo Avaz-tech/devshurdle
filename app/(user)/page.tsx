@@ -39,9 +39,13 @@ export default async function Home() {
         {/* Hero Section */}
         <Hero />
 
-        {/* Search Section */}
-        <section className="w-full py-8 px-4">
+        {/* Integrated Search + Filter Section */}
+        <section className="w-full py-12 px-4 bg-gradient-to-b from-mainColor/10 to-transparent border-b border-border">
           <div className="max-w-screen-xl mx-auto">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-foreground mb-2">Find Solutions Fast</h2>
+              <p className="text-muted-foreground">Search by keywords or filter by category</p>
+            </div>
             <SearchPanel />
           </div>
         </section>
