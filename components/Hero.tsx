@@ -12,16 +12,10 @@ const Hero: React.FC = () => {
         </p>
         <div className="flex justify-center gap-4">
           <Link
-            href="/posts"
+            href="/blog"
             className="bg-mainColor hover:bg-[#19a264c6] text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
           >
             Browse Solutions
-          </Link>
-          <Link
-            href="/search"
-            className="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition duration-300"
-          >
-            Search Fixes
           </Link>
         </div>
       </div>
