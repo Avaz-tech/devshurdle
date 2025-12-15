@@ -5,19 +5,32 @@ devs-hurdle/
 ├── app/
 │   ├── (admin)/
 │   │   └── studio/
-│   │       └── [[...index]]/page.tsx
+│   │       ├── [[...index]]/
+│   │       │   └── page.tsx
 │   │       └── layout.tsx
 │   ├── (user)/
-│   │   ├── about/page.tsx
-│   │   ├── blog/page.tsx
-│   │   ├── contact/page.tsx
+│   │   ├── about/
+│   │   │   └── page.tsx
+│   │   ├── blog/
+│   │   │   └── page.tsx
+│   │   ├── contact/
+│   │   │   └── page.tsx
+│   │   ├── post/
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx
+│   │   ├── signIn/
+│   │   │   └── page.tsx
 │   │   ├── layout.tsx
 │   │   ├── not-found.tsx
-│   │   ├── page.tsx
-│   │   ├── post/[slug]/page.tsx
-│   │   └── signIn/page.tsx
-│   ├── Context/SearchContext.tsx
-│   ├── api/send/route.ts
+│   │   └── page.tsx
+│   ├── api/
+│   │   ├── auth/
+│   │   │   └── [...nextauth]/
+│   │   │       └── route.ts
+│   │   └── send/
+│   │       └── route.ts
+│   ├── Context/
+│   │   └── SearchContext.tsx
 │   └── styles/
 │       ├── globals.css
 │       └── login.css
@@ -48,6 +61,43 @@ devs-hurdle/
 │       ├── textarea.tsx
 │       ├── toggle-group.tsx
 │       └── toggle.tsx
+├── lib/
+│   ├── client.ts
+│   ├── image.ts
+│   ├── prisma.ts
+│   ├── utils.ts
+│   └── validation.ts
+├── public/
+│   └── assets/
+│       ├── fonts/
+│       │   ├── cascadia-code/
+│       │   └── ginto/
+│       ├── icons/
+│       └── images/
+├── sanity/
+│   ├── env.ts
+│   ├── schema.ts
+│   └── lib/
+│       ├── client.ts
+│       └── image.ts
+├── sanity/
+│   └── schemas/
+│       ├── author.ts
+│       ├── blockContent.ts
+│       ├── category.ts
+│       └── post.ts
+├── ARCHITECTURE_IMPROVEMENTS.md
+├── components.json
+├── next-env.d.ts
+├── next.config.js
+├── package.json
+├── postcss.config.js
+├── README.md
+├── sanity.cli.ts
+├── sanity.config.ts
+├── tailwind.config.ts
+├── tsconfig.json
+└── types.ts
 ```
 
 ---
