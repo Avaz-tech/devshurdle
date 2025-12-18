@@ -3,7 +3,7 @@ import SearchPanel from "@components/SearchPanel";
 import BlogContent from "@components/BlogContent";
 import { client } from "@sanity/lib/client";
 import { groq } from "next-sanity";
-import { SearchProvider } from "@app/Context/SearchContext";
+import { SearchProvider } from "@app/context/SearchContext";
 import Link from "next/link";
 import { Post } from "./../../types";
 

@@ -4,7 +4,7 @@ import { Post } from "@types";
 import BlogContent from "@components/BlogContent";
 import Container from "@components/Container";
 import SearchPanel from "@components/SearchPanel";
-import { SearchProvider } from "@app/Context/SearchContext";
+import { SearchProvider } from "@app/context/SearchContext";
 import Link from "next/link";
 
 export const metadata = {

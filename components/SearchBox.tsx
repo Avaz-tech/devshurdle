@@ -1,6 +1,6 @@
 import { Input } from "./ui/input";
 import { LuSearch } from "react-icons/lu";
-import { useSearchContext } from "@app/Context/SearchContext";
+import { useSearchContext } from "@app/context/SearchContext";
 
 interface SearchBoxProps {
   className?: string;

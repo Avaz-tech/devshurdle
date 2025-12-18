@@ -1,6 +1,6 @@
 "use client";
 import SearchBox from "./SearchBox";
-import { useSearchContext } from "@app/Context/SearchContext";
+import { useSearchContext } from "@app/context/SearchContext";
 import { useMemo } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 

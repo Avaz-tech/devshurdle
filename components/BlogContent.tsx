@@ -5,7 +5,7 @@ import Container from "./../components/Container";
 import Link from "next/link";
 import Image from "next/image";
 import { urlForImage } from "@sanity/lib/image";
-import { useSearchContext } from "@app/Context/SearchContext";
+import { useSearchContext } from "@app/context/SearchContext";
 import { HiMiniArrowUpRight } from "react-icons/hi2";
 import { GrView } from "react-icons/gr";
 import { FaRegComments } from "react-icons/fa6";
