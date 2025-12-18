@@ -1,7 +1,8 @@
 "use client";
+import { useMemo } from "react";
 import SearchBox from "./SearchBox";
 import { useSearchContext } from "@app/context/SearchContext";
-import { useMemo } from "react";
+
 import { AiOutlineClose } from "react-icons/ai";
 
 interface Category {

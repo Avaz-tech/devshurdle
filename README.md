@@ -346,7 +346,7 @@ const safeMessage = sanitize(message);
 │   ├── utils.ts            # Existing
 │   ├── validation.ts       # New - form validation
 │   └── sanitize.ts         # New - HTML sanitization
-├── context/                # Move from app/Context
+├── context/                # Move from app/context
 │   └── SearchContext.tsx
 └── types/
     └── index.ts            # Move from types.ts

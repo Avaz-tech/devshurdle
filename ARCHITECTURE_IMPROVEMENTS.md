@@ -14,7 +14,7 @@ This document details the comprehensive architectural refactoring completed on t
 - Added type-safe filtering logic that leverages the Post interface
 
 **Files Modified:**
-- `app/Context/SearchContext.tsx` - Complete type safety implementation
+- `app/context/SearchContext.tsx` - Complete type safety implementation
 - `components/SearchPanel.tsx` - Type-safe category filtering
 - `types.ts` - Proper Post interface definition
 
@@ -38,7 +38,7 @@ This document details the comprehensive architectural refactoring completed on t
 - Both operations work together instead of resetting each other
 
 **Files Modified:**
-- `app/Context/SearchContext.tsx` - Merged search/filter logic
+- `app/context/SearchContext.tsx` - Merged search/filter logic
 
 **Before:**
 ```typescript
@@ -239,7 +239,7 @@ export async function POST(req: Request) {
 - **lib/validation.ts** - Input sanitization and form validation utilities
 
 ### Modified:
-- **app/Context/SearchContext.tsx** - Merged search/filter logic, proper typing
+- **app/context/SearchContext.tsx** - Merged search/filter logic, proper typing
 - **components/SearchPanel.tsx** - Dynamic categories, fixed ToggleGroup integration
 - **components/SearchBox.tsx** - Updated to use unified context
 - **app/api/send/route.ts** - Enhanced validation and error handling
@@ -341,7 +341,7 @@ export async function POST(req: Request) {
 ### Using the Unified SearchContext:
 
 ```typescript
-import { useSearchContext } from "@app/Context/SearchContext";
+import { useSearchContext } from "@app/context/SearchContext";
 
 export default function MyComponent() {
   const { filters, setFilters, filteredItems, originalItems } = useSearchContext();
