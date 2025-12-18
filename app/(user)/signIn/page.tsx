@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
+import { login, signup } from "./actions";
 
 export default function SignInPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -26,6 +27,8 @@ export default function SignInPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
+    isSignUp ? signup(formData) : login(formData)
+    // login(formData)
     // Handle authentication logic here
   };
 
@@ -145,6 +148,7 @@ export default function SignInPage() {
                     onChange={handleInputChange}
                     className="mt-1"
                     required
+                    autoComplete='true'
                   />
                 </div>
 
@@ -162,6 +166,8 @@ export default function SignInPage() {
                       onChange={handleInputChange}
                       className="mt-1"
                       required
+                      autoComplete='true'
+
                     />
                   </div>
                 )}
