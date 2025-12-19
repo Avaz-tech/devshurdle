@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
-import { login, signup } from "./actions";
+import { login, signinWithGithub, signinWithGoogle, signup } from "./actions";
 
 export default function SignInPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -27,7 +27,7 @@ export default function SignInPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    isSignUp ? signup(formData) : login(formData)
+    isSignUp ? signup(formData) : login(formData);
     // login(formData)
     // Handle authentication logic here
   };
@@ -79,11 +79,17 @@ export default function SignInPage() {
 
               {/* Social Auth Buttons */}
               <div className="space-y-3 mb-6">
-                <button className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all">
+                <button
+                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all"
+                  onClick={signinWithGoogle}
+                >
                   <FaGoogle className="text-red-500" />
                   <span className="text-foreground font-medium">Continue with Google</span>
                 </button>
-                <button className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all">
+                <button
+                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all"
+                  onClick={signinWithGithub}
+                >
                   <FaGithub className="text-foreground" />
                   <span className="text-foreground font-medium">Continue with GitHub</span>
                 </button>
@@ -148,7 +154,7 @@ export default function SignInPage() {
                     onChange={handleInputChange}
                     className="mt-1"
                     required
-                    autoComplete='true'
+                    autoComplete="true"
                   />
                 </div>
 
@@ -166,8 +172,7 @@ export default function SignInPage() {
                       onChange={handleInputChange}
                       className="mt-1"
                       required
-                      autoComplete='true'
-
+                      autoComplete="true"
                     />
                   </div>
                 )}
