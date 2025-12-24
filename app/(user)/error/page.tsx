@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import Container from '@components/Container'
-import Link from 'next/link'
-import { FaExclamationTriangle, FaHome, FaSearch, FaRedo } from 'react-icons/fa'
+import Container from "@components/Container";
+import Link from "next/link";
+import { FaExclamationTriangle, FaHome, FaSearch, FaRedo } from "react-icons/fa";
 
 export default function ErrorPage() {
   return (
@@ -14,9 +14,7 @@ export default function ErrorPage() {
             <div className="inline-flex items-center justify-center w-20 h-20 bg-red-500/10 rounded-full mb-6">
               <FaExclamationTriangle className="text-4xl text-red-500" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Oops! Something Went Wrong
-            </h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Oops! Something Went Wrong</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               We encountered an unexpected error. Don't worry, it's not your fault!
             </p>
@@ -31,9 +29,10 @@ export default function ErrorPage() {
             <div className="bg-card rounded-xl border border-border p-8 shadow-lg mb-6">
               <h2 className="text-2xl font-bold text-foreground mb-4">What happened?</h2>
               <p className="text-muted-foreground mb-6">
-                An unexpected error occurred while processing your request. Our team has been notified and is working to fix the issue.
+                An unexpected error occurred while processing your request. Our team has been notified and is working to
+                fix the issue.
               </p>
-              
+
               <div className="bg-muted/50 rounded-lg p-4 mb-6">
                 <p className="text-sm text-muted-foreground">
                   <strong className="text-foreground">Error Code:</strong> 500 - Internal Server Error
@@ -102,9 +101,7 @@ export default function ErrorPage() {
                 <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-mainColor transition-colors">
                   Browse Solutions
                 </h3>
-                <p className="text-muted-foreground text-sm">
-                  Explore our library of coding solutions and tutorials
-                </p>
+                <p className="text-muted-foreground text-sm">Explore our library of coding solutions and tutorials</p>
               </Link>
 
               <Link
@@ -117,9 +114,7 @@ export default function ErrorPage() {
                 <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-mainColor transition-colors">
                   Latest Articles
                 </h3>
-                <p className="text-muted-foreground text-sm">
-                  Read the newest posts and coding tips
-                </p>
+                <p className="text-muted-foreground text-sm">Read the newest posts and coding tips</p>
               </Link>
 
               <Link
@@ -132,9 +127,7 @@ export default function ErrorPage() {
                 <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-mainColor transition-colors">
                   Homepage
                 </h3>
-                <p className="text-muted-foreground text-sm">
-                  Return to the main page and start fresh
-                </p>
+                <p className="text-muted-foreground text-sm">Return to the main page and start fresh</p>
               </Link>
             </div>
           </div>
@@ -159,5 +152,5 @@ export default function ErrorPage() {
         </Container>
       </section>
     </main>
-  )
+  );
 }

@@ -9,9 +9,11 @@ import { usePathname } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 import { useMemo } from "react";
 
-export default function NavbarClient({ user }: { user: User | null }) {
+export default function NavbarClient({ user, userRole }: { user: User | null; userRole: string }) {
   const pathname = usePathname();
   const isAuthPage = useMemo(() => pathname.startsWith("/sign"), [pathname]);
+  const isAdmin = userRole === "admin";
+  // console.log("userRole===", userRole);
 
   const navigationData = [
     { title: "Home", href: "/" },
@@ -38,12 +40,21 @@ export default function NavbarClient({ user }: { user: User | null }) {
           ))}
         </div>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center justtify-center">
           {user && (
-            <Link href="/account" className="text-sm relative group overflow-hidden">
-              Account
-              <span className="w-full h-[1px] bg-primary absolute left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
-            </Link>
+            <div className="flex item-center justify-between gap-3">
+              {isAdmin && (
+                <Link href="/studio" className="text-sm relative group overflow-hidden">
+                  Studio
+                  <span className="w-full h-[1px] bg-primary absolute left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
+                </Link>
+              )}
+
+              <Link href="/account" className="text-sm relative group overflow-hidden">
+                Account
+                <span className="w-full h-[1px] bg-primary absolute left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-200" />
+              </Link>
+            </div>
           )}
 
           {!isAuthPage && <AuthButton user={user} />}

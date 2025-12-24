@@ -7,5 +7,12 @@ export async function getUser() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return user;
+  let userRole = null;
+  if (user) {
+    const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
+
+    userRole = profile?.role;
+  }
+
+  return { user, userRole };
 }

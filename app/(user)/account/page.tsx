@@ -4,7 +4,7 @@ import { getUser } from "@lib/auth/get-user";
 import { redirect } from "next/navigation";
 
 export default async function Account() {
-  const user = await getUser();
+  const { user } = await getUser();
 
   if (!user) {
     redirect("/signIn");
