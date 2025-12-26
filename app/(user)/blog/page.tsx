@@ -6,6 +6,7 @@ import Container from "@components/Container";
 import SearchPanel from "@components/SearchPanel";
 import { SearchProvider } from "@app/context/SearchContext";
 import Link from "next/link";
+import Breadcrumb from "@components/Breadcrumb";
 
 export const metadata = {
   title: "Blog - DevsHurdle",
@@ -25,9 +26,14 @@ export default async function BlogPage() {
 
   return (
     <SearchProvider posts={posts}>
-      <main className="flex justify-center items-center flex-col">
+      <main className="flex justify-center items-center flex-col pt-24">
+        {/* Breadcrumb Navigation */}
+        <Container className="mx-auto mb-6 px-4">
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Blog" }]} />
+        </Container>
+
         {/* Hero Section */}
-        <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pt-24 pb-16 px-4">
+        <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-16 px-4">
           <Container className="mx-auto">
             <div className="text-center">
               <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">

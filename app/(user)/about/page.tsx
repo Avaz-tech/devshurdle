@@ -1,6 +1,7 @@
 import Container from "@components/Container";
 import { FaGithub, FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Link from "next/link";
+import Breadcrumb from "@components/Breadcrumb";
 
 export const metadata = {
   title: "About - DevsHurdle",
@@ -41,9 +42,14 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="flex justify-center items-center flex-col">
+    <main className="flex justify-center items-center flex-col pt-24">
+      {/* Breadcrumb Navigation */}
+      <Container className="mx-auto mb-6 px-4">
+        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "About" }]} />
+      </Container>
+
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pt-32 pb-16 px-4">
+      <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-16 px-4">
         <Container className="mx-auto">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">About DevsHurdle</h1>

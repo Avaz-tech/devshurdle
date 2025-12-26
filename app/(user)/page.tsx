@@ -6,6 +6,8 @@ import { groq } from "next-sanity";
 import { SearchProvider } from "@app/context/SearchContext";
 import Link from "next/link";
 import { Post } from "./../../types";
+import Breadcrumb from "@components/Breadcrumb";
+import Container from "@components/Container";
 
 // GROQ query for posts
 const postsQuery = groq`*[_type == "post"]{
@@ -35,7 +37,14 @@ export default async function Home() {
 
   return (
     <SearchProvider posts={posts}>
-      <main className="flex justify-center items-center flex-col">
+      <main className="flex justify-center items-center flex-col pt-24">
+        {/* Breadcrumb Navigation */}
+        <Container className="mx-4 xl:mx-auto mb-6">
+          <div className="max-w-screen-xl mx-auto">
+            <Breadcrumb items={[{ label: "Home" }]} />
+          </div>
+        </Container>
+
         {/* Hero Section */}
         <Hero />
 
@@ -72,14 +81,14 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Search Section - Moved right before results with scroll anchor */}
+        {/* Search Section - Made more prominent */}
         <section
           id="search-section"
-          className="w-full py-12 px-4 border-y border-border sticky top-0 z-10  bg-background"
+          className="w-full py-16 px-4 bg-gradient-to-b from-card to-background border-y border-border"
         >
           <div className="max-w-screen-xl mx-auto">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-foreground mb-2">Find Your Solution</h2>
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-2">Find Your Solution</h2>
               <p className="text-muted-foreground">Search by keywords or filter by category</p>
             </div>
             <SearchPanel />
@@ -87,26 +96,30 @@ export default async function Home() {
         </section>
 
         {/* Blog Content - All Posts with result indicator */}
-        <section id="results-section" className="w-full py-12 px-4">
+        <section id="results-section" className="w-full py-16 px-4">
           <div className="max-w-screen-xl mx-auto">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-2">All Solutions</h2>
+              <p className="text-muted-foreground">Browse our complete collection of coding solutions</p>
+            </div>
             <BlogContent posts={posts} />
           </div>
         </section>
 
         {/* Categories Section - Moved below results */}
         {uniqueCategories.length > 0 && (
-          <section className="w-full py-12 px-4 bg-card/50">
+          <section className="w-full py-16 px-4 bg-card/30">
             <div className="max-w-screen-xl mx-auto">
-              <div className="mb-8">
+              <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-foreground mb-2">Browse by Category</h2>
                 <p className="text-muted-foreground">Explore solutions organized by topic</p>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap justify-center gap-3">
                 {uniqueCategories.map((category) => (
                   <Link
                     key={category._id}
                     href={`/blog?category=${category.title.toLowerCase()}`}
-                    className="px-5 py-2.5 bg-card border border-border rounded-full hover:border-mainColor hover:bg-mainColor/5 text-foreground font-medium transition-all duration-200 text-sm"
+                    className="px-6 py-3 bg-card border border-border rounded-full hover:border-mainColor hover:bg-mainColor/5 text-foreground font-medium transition-all duration-200 text-sm hover:shadow-md"
                   >
                     {category.title}
                   </Link>
@@ -117,33 +130,39 @@ export default async function Home() {
         )}
 
         {/* About Section */}
-        <section className="w-full py-12 px-4">
+        <section className="w-full py-16 px-4">
           <div className="max-w-screen-xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl font-bold text-foreground mb-4">About DevsHurdle</h2>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                   I&apos;m a developer who&apos;s been there—spending hours debugging the same issues. DevsHurdle is my
                   personal collection of practical, project-specific solutions to coding problems.
                 </p>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed mb-6">
                   Built to save you time and frustration, every solution here is tested, documented, and ready to use.
                 </p>
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-2 text-mainColor hover:text-mainColor/80 font-semibold transition-colors"
+                >
+                  Learn More →
+                </Link>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-6 bg-card rounded-lg border border-border">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="p-6 bg-card rounded-lg border border-border text-center">
                   <p className="text-3xl font-bold text-mainColor mb-2">{posts.length}+</p>
                   <p className="text-foreground font-semibold">Solutions</p>
                 </div>
-                <div className="p-6 bg-card rounded-lg border border-border">
+                <div className="p-6 bg-card rounded-lg border border-border text-center">
                   <p className="text-3xl font-bold text-mainColor mb-2">{uniqueCategories.length}</p>
                   <p className="text-foreground font-semibold">Categories</p>
                 </div>
-                <div className="p-6 bg-card rounded-lg border border-border">
+                <div className="p-6 bg-card rounded-lg border border-border text-center">
                   <p className="text-3xl font-bold text-mainColor mb-2">100%</p>
                   <p className="text-foreground font-semibold">Practical</p>
                 </div>
-                <div className="p-6 bg-card rounded-lg border border-border">
+                <div className="p-6 bg-card rounded-lg border border-border text-center">
                   <p className="text-3xl font-bold text-mainColor mb-2">Open</p>
                   <p className="text-foreground font-semibold">Source</p>
                 </div>
@@ -153,17 +172,17 @@ export default async function Home() {
         </section>
 
         {/* Newsletter Section */}
-        <section className="w-full py-12 px-4 bg-gradient-to-r from-mainColor to-mainColor/80 text-white">
+        <section className="w-full py-16 px-4 bg-gradient-to-r from-mainColor/5 to-mainColor/10 border-t border-border">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Stay in the Loop</h2>
-            <p className="text-white/90 mb-6">Get the latest solutions and tips delivered to your inbox every week</p>
-            <div className="flex gap-2 flex-col sm:flex-row">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Stay Updated</h2>
+            <p className="text-muted-foreground mb-8">Get notified when new solutions are added</p>
+            <div className="flex gap-2 flex-col sm:flex-row max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-white/20"
+                className="flex-1 px-4 py-3 rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-mainColor/20 border border-border"
               />
-              <button className="px-8 py-3 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg transition-all duration-200 border border-white/30">
+              <button className="px-6 py-3 bg-mainColor hover:bg-mainColor/90 text-white font-semibold rounded-lg transition-all duration-200">
                 Subscribe
               </button>
             </div>
