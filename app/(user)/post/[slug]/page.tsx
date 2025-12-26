@@ -182,6 +182,7 @@ const SlugPage = async ({ params }: Props) => {
                       height={40}
                       alt={post.author.name || "Author"}
                       className="w-10 h-10 rounded-full object-cover border-2 border-mainColor/20"
+                      style={{ width: "auto", height: "auto" }}
                       priority={true}
                     />
                   ) : (
@@ -229,6 +230,7 @@ const SlugPage = async ({ params }: Props) => {
                   alt={post.title}
                   priority={true}
                   className="w-full h-auto rounded-xl object-cover shadow-lg border border-border"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </figure>
             )}
@@ -272,6 +274,7 @@ const SlugPage = async ({ params }: Props) => {
                         height={80}
                         alt={post.author.name || "Author"}
                         className="w-20 h-20 rounded-full object-cover flex-shrink-0 border-2 border-mainColor/20"
+                        style={{ width: "auto", height: "auto" }}
                       />
                     )}
                     <div className="flex-1">

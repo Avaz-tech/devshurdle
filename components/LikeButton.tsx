@@ -23,10 +23,12 @@ export default function LikeButton({
   const [likes, setLikes] = useState(initialLikes);
   const [liked, setLiked] = useState(initialLiked);
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
   useEffect(() => {
+    setMounted(true);
     // Fetch current like status
     const fetchLikes = async () => {
       try {
@@ -98,6 +100,22 @@ export default function LikeButton({
     lg: 22,
   };
 
+  if (!mounted) {
+    // Return a placeholder that matches the initial state to avoid hydration mismatch
+    return (
+      <button
+        disabled
+        className="flex items-center gap-2 text-muted-foreground opacity-50 cursor-not-allowed"
+        aria-label="Loading..."
+      >
+        <FaRegHeart size={iconSizes[size]} className="fill-current" />
+        {showCount && (
+          <span className={sizeClasses[size]} suppressHydrationWarning>{initialLikes}</span>
+        )}
+      </button>
+    );
+  }
+
   return (
     <button
       onClick={handleLike}
@@ -115,7 +133,7 @@ export default function LikeButton({
         <FaRegHeart size={iconSizes[size]} className="fill-current" />
       )}
       {showCount && (
-        <span className={sizeClasses[size]}>{likes}</span>
+        <span className={sizeClasses[size]} suppressHydrationWarning>{likes}</span>
       )}
     </button>
   );

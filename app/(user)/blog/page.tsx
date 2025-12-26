@@ -7,22 +7,47 @@ import SearchPanel from "@components/SearchPanel";
 import { SearchProvider } from "@app/context/SearchContext";
 import Link from "next/link";
 import Breadcrumb from "@components/Breadcrumb";
+import Pagination from "@components/Pagination";
 
 export const metadata = {
   title: "Blog - DevsHurdle",
   description: "Browse all our coding solutions and tutorials",
 };
 
-export const revalidate = 30;
+// Make this page dynamic so searchParams (e.g. ?page=2) affect the data
+export const dynamic = "force-dynamic";
 
-const postsQuery = groq`*[_type == "post"]{
+const PAGE_SIZE = 9;
+
+const paginatedPostsQuery = groq`*[_type == "post"] | order(_createdAt desc) [$offset...$end]{
   ...,
   author ->,
   categories[] ->
-} | order(_createdAt desc)`;
+}`;
 
-export default async function BlogPage() {
-  const posts: Post[] = await client.fetch(postsQuery);
+const totalCountQuery = groq`count(*[_type == "post"])`;
+
+interface BlogPageProps {
+  searchParams?: Promise<{
+    page?: string;
+  }>;
+}
+
+export default async function BlogPage(props: BlogPageProps) {
+  const resolvedSearchParams = (props.searchParams ? await props.searchParams : {}) as {
+    page?: string;
+  };
+
+  const currentPage = Math.max(1, Number(resolvedSearchParams.page ?? "1") || 1);
+
+  const totalPosts: number = await client.fetch(totalCountQuery);
+  const totalPages = Math.max(1, Math.ceil(totalPosts / PAGE_SIZE));
+
+  const safePage = Math.min(currentPage, totalPages);
+  const offset = (safePage - 1) * PAGE_SIZE;
+  const end = offset + PAGE_SIZE;
+
+  const posts: Post[] = await client.fetch(paginatedPostsQuery, { offset, end });
 
   return (
     <SearchProvider posts={posts}>
@@ -44,7 +69,7 @@ export default async function BlogPage() {
                 answers to your development challenges using our search and filtering tools.
               </p>
               <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">{posts.length}</span> total solutions available
+                <span className="font-semibold text-foreground">{totalPosts}</span> total solutions available
               </p>
             </div>
           </Container>
@@ -55,7 +80,7 @@ export default async function BlogPage() {
           <Container className="mx-auto">
             <div className="mb-8">
               <h2 className="text-2xl font-bold text-foreground mb-2">Find What You Need</h2>
-              <p className="text-muted-foreground">Search all {posts.length} solutions or browse by category</p>
+              <p className="text-muted-foreground">Search all {totalPosts} solutions or browse by category</p>
             </div>
             <SearchPanel />
           </Container>
@@ -66,10 +91,11 @@ export default async function BlogPage() {
           <Container className="mx-auto">
             {posts.length > 0 ? (
               <>
-                <p className="text-sm text-muted-foreground mb-8 uppercase tracking-wide font-semibold">
-                  {posts.length} Articles Available
+                <p className="text-sm text-muted-foreground mb-4 uppercase tracking-wide font-semibold">
+                  Showing page {safePage} of {totalPages} ({totalPosts} articles)
                 </p>
                 <BlogContent posts={posts} />
+                <Pagination currentPage={safePage} totalPages={totalPages} />
               </>
             ) : (
               <div className="text-center py-20">

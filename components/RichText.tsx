@@ -17,6 +17,7 @@ export const RichText = {
             height={600}
             priority={false}
             className="w-full h-auto rounded-xl shadow-lg object-cover border border-border"
+            style={{ width: "auto", height: "auto" }}
           />
           {value.alt && (
             <figcaption className="mt-3 text-sm text-center text-muted-foreground italic">{value.alt}</figcaption>

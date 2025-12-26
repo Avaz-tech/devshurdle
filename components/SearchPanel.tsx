@@ -21,6 +21,7 @@ interface Category {
 const SearchPanel: React.FC = () => {
   const { filters, setFilters, originalItems, filteredItems, isLoading } = useSearchContext();
   const [showFilters, setShowFilters] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Dynamically derive filter options from actual posts categories
   const filterOptions = useMemo(() => {
@@ -72,9 +73,14 @@ const SearchPanel: React.FC = () => {
 
   const hasActiveFilters = filters.query || filters.categories.length > 0;
 
+  // Set mounted state after hydration
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Auto-scroll to results when search is active
   useEffect(() => {
-    if (hasActiveFilters) {
+    if (hasActiveFilters && mounted) {
       setTimeout(() => {
         const resultsSection = document.getElementById("results-section");
         if (resultsSection) {
@@ -84,7 +90,7 @@ const SearchPanel: React.FC = () => {
         }
       }, 100);
     }
-  }, [filters.query, filters.categories.length, hasActiveFilters]);
+  }, [filters.query, filters.categories.length, hasActiveFilters, mounted]);
 
   return (
     <div className="w-full space-y-4">
@@ -96,57 +102,75 @@ const SearchPanel: React.FC = () => {
         </div>
 
         {/* Filter Dropdown Button - Same height as search */}
-        <DropdownMenu open={showFilters} onOpenChange={setShowFilters}>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="h-11 px-4 border-border hover:border-mainColor/50 hover:bg-mainColor/5 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
-              type="button"
-            >
-              <FiFilter className="w-4 h-4" />
-              <span className="text-sm font-medium">Categories</span>
-              {filters.categories.length > 0 && (
-                <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-semibold rounded-full bg-mainColor text-white">
-                  {filters.categories.length}
-                </span>
-              )}
-              <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${showFilters ? "rotate-180" : ""}`} />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-64 max-h-[400px] overflow-y-auto">
-            <div className="p-2">
-              <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-                Filter by Category
-              </div>
-              <DropdownMenuSeparator className="my-2" />
-              {filterOptions.length === 0 ? (
-                <div className="px-2 py-4 text-sm text-muted-foreground text-center">No categories available</div>
-              ) : (
-                <div className="space-y-1">
-                  {filterOptions.map((option) => {
-                    const isActive = filters.categories.includes(option.value);
-                    return (
-                      <DropdownMenuItem
-                        key={option.value}
-                        onClick={() => toggleCategory(option.value)}
-                        className="cursor-pointer focus:bg-mainColor/10"
-                      >
-                        <div className="flex items-center justify-between w-full">
-                          <span className={`text-sm ${isActive ? "font-semibold text-mainColor" : "text-foreground"}`}>
-                            {option.label}
-                          </span>
-                          {isActive && (
-                            <div className="w-2 h-2 rounded-full bg-mainColor"></div>
-                          )}
-                        </div>
-                      </DropdownMenuItem>
-                    );
-                  })}
+        {mounted ? (
+          <DropdownMenu open={showFilters} onOpenChange={setShowFilters}>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="h-11 px-4 border-border hover:border-mainColor/50 hover:bg-mainColor/5 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
+                type="button"
+              >
+                <FiFilter className="w-4 h-4" />
+                <span className="text-sm font-medium">Categories</span>
+                {filters.categories.length > 0 && (
+                  <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-semibold rounded-full bg-mainColor text-white">
+                    {filters.categories.length}
+                  </span>
+                )}
+                <FiChevronDown className={`w-4 h-4 transition-transform duration-200 ${showFilters ? "rotate-180" : ""}`} />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-64 max-h-[400px] overflow-y-auto">
+              <div className="p-2">
+                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                  Filter by Category
                 </div>
-              )}
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                <DropdownMenuSeparator className="my-2" />
+                {filterOptions.length === 0 ? (
+                  <div className="px-2 py-4 text-sm text-muted-foreground text-center">No categories available</div>
+                ) : (
+                  <div className="space-y-1">
+                    {filterOptions.map((option) => {
+                      const isActive = filters.categories.includes(option.value);
+                      return (
+                        <DropdownMenuItem
+                          key={option.value}
+                          onClick={() => toggleCategory(option.value)}
+                          className="cursor-pointer focus:bg-mainColor/10"
+                        >
+                          <div className="flex items-center justify-between w-full">
+                            <span className={`text-sm ${isActive ? "font-semibold text-mainColor" : "text-foreground"}`}>
+                              {option.label}
+                            </span>
+                            {isActive && (
+                              <div className="w-2 h-2 rounded-full bg-mainColor"></div>
+                            )}
+                          </div>
+                        </DropdownMenuItem>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Button
+            variant="outline"
+            className="h-11 px-4 border-border hover:border-mainColor/50 hover:bg-mainColor/5 transition-all duration-200 flex items-center gap-2 whitespace-nowrap"
+            type="button"
+            disabled
+          >
+            <FiFilter className="w-4 h-4" />
+            <span className="text-sm font-medium">Categories</span>
+            {filters.categories.length > 0 && (
+              <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-semibold rounded-full bg-mainColor text-white">
+                {filters.categories.length}
+              </span>
+            )}
+            <FiChevronDown className="w-4 h-4" />
+          </Button>
+        )}
 
         {/* Clear Button - Only show when filters are active */}
         {hasActiveFilters && (

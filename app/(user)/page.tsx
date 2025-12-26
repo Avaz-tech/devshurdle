@@ -95,14 +95,24 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Blog Content - All Posts with result indicator */}
+        {/* Blog Content - Recent posts with result indicator */}
         <section id="results-section" className="w-full py-16 px-4">
           <div className="max-w-screen-xl mx-auto">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-foreground mb-2">All Solutions</h2>
-              <p className="text-muted-foreground">Browse our complete collection of coding solutions</p>
+            <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h2 className="text-3xl font-bold text-foreground mb-2">Latest Solutions</h2>
+                <p className="text-muted-foreground">
+                  Showing the most recent posts. Visit the blog page to explore all solutions.
+                </p>
+              </div>
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-mainColor hover:text-mainColor/80 font-semibold text-sm"
+              >
+                View all posts →
+              </Link>
             </div>
-            <BlogContent posts={posts} />
+            <BlogContent posts={posts} limit={6} />
           </div>
         </section>
 

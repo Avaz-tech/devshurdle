@@ -9,6 +9,7 @@ import { HiMiniArrowUpRight } from "react-icons/hi2";
 import { GrView } from "react-icons/gr";
 import { FaTags } from "react-icons/fa6";
 import { FaCalendarDay } from "react-icons/fa";
+import { formatDateUtcShort } from "@/lib/date";
 import LikeButton from "./LikeButton";
 
 interface Category {
@@ -23,8 +24,10 @@ interface PostCardProps {
 export default function PostCard({ post }: PostCardProps) {
   const { _id, mainImage, categories, _createdAt, title, slug } = post;
   const [views, setViews] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     // Fetch view count
     const fetchViews = async () => {
       try {
@@ -54,10 +57,10 @@ export default function PostCard({ post }: PostCardProps) {
       >
         <Image
           src={urlForImage(mainImage).url()}
-          width={400}
-          height={200}
+          fill
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-105 duration-500"
+          className="object-cover group-hover:scale-105 duration-500"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={true}
         />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
@@ -77,11 +80,7 @@ export default function PostCard({ post }: PostCardProps) {
 
           <p className="text-sm flex gap-2 items-center text-muted-foreground">
             <FaCalendarDay className="text-mainColor" size={16} />
-            {new Date(_createdAt).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "short",
-              year: "2-digit",
-            })}
+            <span>{formatDateUtcShort(_createdAt)}</span>
           </p>
         </div>
 
@@ -113,11 +112,13 @@ export default function PostCard({ post }: PostCardProps) {
           <div className="flex gap-4 text-muted-foreground text-sm items-center">
             <div className="flex items-center gap-1">
               <GrView size={16} />
-              <span>{views !== null ? views : "..."}</span>
+              <span suppressHydrationWarning>{mounted && views !== null ? views : "..."}</span>
             </div>
-            <div onClick={(e) => e.preventDefault()} onMouseDown={(e) => e.stopPropagation()}>
-              <LikeButton postSlug={slug?.current || ""} size="sm" />
-            </div>
+            {mounted && (
+              <div onClick={(e) => e.preventDefault()} onMouseDown={(e) => e.stopPropagation()}>
+                <LikeButton postSlug={slug?.current || ""} size="sm" />
+              </div>
+            )}
           </div>
         </div>
       </div>
