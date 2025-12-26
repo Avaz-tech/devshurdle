@@ -1,8 +1,7 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import SearchBox from "./SearchBox";
 import { useSearchContext } from "@app/context/SearchContext";
-
 import { AiOutlineClose } from "react-icons/ai";
 
 interface Category {
@@ -11,7 +10,7 @@ interface Category {
 }
 
 const SearchPanel: React.FC = () => {
-  const { filters, setFilters, originalItems } = useSearchContext();
+  const { filters, setFilters, originalItems, filteredItems } = useSearchContext();
 
   // Dynamically derive filter options from actual posts categories
   const filterOptions = useMemo(() => {
@@ -54,27 +53,52 @@ const SearchPanel: React.FC = () => {
 
   const hasActiveFilters = filters.query || filters.categories.length > 0;
 
+  // Auto-scroll to results when search is active
+  useEffect(() => {
+    if (hasActiveFilters) {
+      // Small delay to let the filter take effect
+      // setTimeout(() => {
+      //   const resultsSection = document.getElementById("results-section");
+      //   if (resultsSection) {
+      //     const yOffset = -50; // Offset for sticky header
+      //     const y = resultsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      //     window.scrollTo({ top: y, behavior: "smooth" });
+      //   }
+      // }, 100);
+    }
+  }, [filters.query, filters.categories.length, hasActiveFilters]);
+
   return (
-    <div className="w-full">
+    <div className="w-full ">
       {/* Search Box - Full Width */}
       <div className="mb-6">
         <SearchBox className="w-full" onSearch={handleSearch} />
       </div>
+
+      {/* Active Search Indicator */}
+      {hasActiveFilters && (
+        <div className="mb-4 p-3 bg-mainColor/10 border border-mainColor/30 rounded-lg flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-foreground">
+              {filteredItems.length} {filteredItems.length === 1 ? "result" : "results"} found
+            </span>
+            {filters.query && <span className="text-sm text-muted-foreground">for &quot;{filters.query}&quot;</span>}
+          </div>
+          <button
+            onClick={clearFilters}
+            className="text-sm text-mainColor hover:text-mainColor/80 font-medium flex items-center gap-1"
+          >
+            <AiOutlineClose size={14} />
+            Clear
+          </button>
+        </div>
+      )}
 
       {/* Filter Categories Section */}
       {filterOptions.length > 0 && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wide">Filter by Category</h3>
-            {hasActiveFilters && (
-              <button
-                onClick={clearFilters}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
-              >
-                <AiOutlineClose size={14} />
-                Clear all
-              </button>
-            )}
           </div>
 
           {/* Category Pills */}

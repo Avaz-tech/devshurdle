@@ -39,23 +39,12 @@ export default async function Home() {
         {/* Hero Section */}
         <Hero />
 
-        {/* Integrated Search + Filter Section */}
-        <section className="w-full py-12 px-4 bg-gradient-to-b from-mainColor/10 to-transparent border-b border-border">
+        {/* Featured Posts Section - Moved up and made more compact */}
+        <section className="w-full py-12 px-4 bg-gradient-to-b from-mainColor/5 to-transparent">
           <div className="max-w-screen-xl mx-auto">
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-foreground mb-2">Find Solutions Fast</h2>
-              <p className="text-muted-foreground">Search by keywords or filter by category</p>
-            </div>
-            <SearchPanel />
-          </div>
-        </section>
-
-        {/* Featured Posts Section */}
-        <section className="w-full py-16 px-4 bg-gradient-to-br from-mainColor/5 to-transparent">
-          <div className="max-w-screen-xl mx-auto">
-            <div className="mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-3">Featured Solutions</h2>
-              <p className="text-muted-foreground text-lg">Handpicked solutions to common coding challenges</p>
+              <h2 className="text-3xl font-bold text-foreground mb-2">Featured Solutions</h2>
+              <p className="text-muted-foreground">Handpicked solutions to common coding challenges</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {featuredPosts.map((post) => (
@@ -66,7 +55,7 @@ export default async function Home() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-mainColor/0 to-mainColor/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="relative z-10">
-                    <h3 className="text-xl font-semibold text-card-foreground mb-3 group-hover:text-mainColor transition-colors">
+                    <h3 className="text-xl font-semibold text-card-foreground mb-3 group-hover:text-mainColor transition-colors line-clamp-2">
                       {post.title}
                     </h3>
                     <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
@@ -83,13 +72,34 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Categories Section */}
+        {/* Search Section - Moved right before results with scroll anchor */}
+        <section
+          id="search-section"
+          className="w-full py-12 px-4 border-y border-border sticky top-0 z-10  bg-background"
+        >
+          <div className="max-w-screen-xl mx-auto">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-foreground mb-2">Find Your Solution</h2>
+              <p className="text-muted-foreground">Search by keywords or filter by category</p>
+            </div>
+            <SearchPanel />
+          </div>
+        </section>
+
+        {/* Blog Content - All Posts with result indicator */}
+        <section id="results-section" className="w-full py-12 px-4">
+          <div className="max-w-screen-xl mx-auto">
+            <BlogContent posts={posts} />
+          </div>
+        </section>
+
+        {/* Categories Section - Moved below results */}
         {uniqueCategories.length > 0 && (
-          <section className="w-full py-16 px-4">
+          <section className="w-full py-12 px-4 bg-card/50">
             <div className="max-w-screen-xl mx-auto">
-              <div className="mb-12">
-                <h2 className="text-4xl font-bold text-foreground mb-3">Browse by Category</h2>
-                <p className="text-muted-foreground text-lg">Explore solutions organized by topic</p>
+              <div className="mb-8">
+                <h2 className="text-3xl font-bold text-foreground mb-2">Browse by Category</h2>
+                <p className="text-muted-foreground">Explore solutions organized by topic</p>
               </div>
               <div className="flex flex-wrap gap-3">
                 {uniqueCategories.map((category) => (
@@ -106,61 +116,34 @@ export default async function Home() {
           </section>
         )}
 
-        {/* CTA Section */}
-        <section className="w-full py-16 px-4 bg-gradient-to-r from-mainColor/10 to-mainColor/5">
-          <div className="max-w-screen-xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Need a Specific Solution?</h2>
-            <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-              Search through our collection of practical coding fixes and tutorials
-            </p>
-            <Link
-              href="/blog"
-              className="inline-block px-8 py-3 bg-mainColor hover:bg-mainColor/90 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg"
-            >
-              Explore All Solutions
-            </Link>
-          </div>
-        </section>
-
-        {/* Blog Content - All Posts */}
-        <section className="w-full py-16 px-4">
-          <div className="max-w-screen-xl mx-auto">
-            <div className="mb-12">
-              <h2 className="text-4xl font-bold text-foreground mb-3">Latest Articles</h2>
-              <p className="text-muted-foreground text-lg">Stay updated with the newest solutions and tips</p>
-            </div>
-            <BlogContent posts={posts} />
-          </div>
-        </section>
-
         {/* About Section */}
-        <section className="w-full py-16 px-4 bg-card/50">
+        <section className="w-full py-12 px-4">
           <div className="max-w-screen-xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-4xl font-bold text-foreground mb-6">About DevsHurdle</h2>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-4">
+                <h2 className="text-3xl font-bold text-foreground mb-4">About DevsHurdle</h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">
                   I&apos;m a developer who&apos;s been there—spending hours debugging the same issues. DevsHurdle is my
                   personal collection of practical, project-specific solutions to coding problems.
                 </p>
-                <p className="text-muted-foreground text-lg leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   Built to save you time and frustration, every solution here is tested, documented, and ready to use.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-6 bg-background rounded-lg border border-border">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-6 bg-card rounded-lg border border-border">
                   <p className="text-3xl font-bold text-mainColor mb-2">{posts.length}+</p>
                   <p className="text-foreground font-semibold">Solutions</p>
                 </div>
-                <div className="p-6 bg-background rounded-lg border border-border">
+                <div className="p-6 bg-card rounded-lg border border-border">
                   <p className="text-3xl font-bold text-mainColor mb-2">{uniqueCategories.length}</p>
                   <p className="text-foreground font-semibold">Categories</p>
                 </div>
-                <div className="p-6 bg-background rounded-lg border border-border">
+                <div className="p-6 bg-card rounded-lg border border-border">
                   <p className="text-3xl font-bold text-mainColor mb-2">100%</p>
                   <p className="text-foreground font-semibold">Practical</p>
                 </div>
-                <div className="p-6 bg-background rounded-lg border border-border">
+                <div className="p-6 bg-card rounded-lg border border-border">
                   <p className="text-3xl font-bold text-mainColor mb-2">Open</p>
                   <p className="text-foreground font-semibold">Source</p>
                 </div>
@@ -170,12 +153,10 @@ export default async function Home() {
         </section>
 
         {/* Newsletter Section */}
-        <section className="w-full py-16 px-4 bg-gradient-to-r from-mainColor to-mainColor/80 text-white">
+        <section className="w-full py-12 px-4 bg-gradient-to-r from-mainColor to-mainColor/80 text-white">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay in the Loop</h2>
-            <p className="text-white/90 text-lg mb-8">
-              Get the latest solutions and tips delivered to your inbox every week
-            </p>
+            <h2 className="text-3xl font-bold mb-4">Stay in the Loop</h2>
+            <p className="text-white/90 mb-6">Get the latest solutions and tips delivered to your inbox every week</p>
             <div className="flex gap-2 flex-col sm:flex-row">
               <input
                 type="email"

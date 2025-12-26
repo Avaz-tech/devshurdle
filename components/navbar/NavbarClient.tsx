@@ -24,7 +24,7 @@ export default function NavbarClient({ user, userRole }: { user: User | null; us
 
   return (
     <div
-      className={`w-full h-20 shadow-custom-medium backdrop-blur-3xl transition-colors z-[10] border-b border-primary 
+      className={`w-full h-20 shadow-custom-medium backdrop-blur-3xl transition-colors z-[50] border-b border-primary bg-background
         fixed top-0 max-w-none xs:h-[100vh]
       `}
     >
