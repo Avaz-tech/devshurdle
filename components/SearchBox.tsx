@@ -18,15 +18,15 @@ const SearchBox: React.FC<SearchBoxProps> = ({ className, onSearch }) => {
   return (
     <div className={`w-full ${className} relative group`}>
       <Input
-        className="w-full rounded-lg pl-5 pr-12 py-3 bg-card border border-border focus:border-mainColor focus:ring-2 focus:ring-mainColor/20 transition-all placeholder:text-muted-foreground"
+        className="w-full h-11 rounded-lg pl-11 pr-4 bg-card border border-border focus:border-mainColor focus:ring-2 focus:ring-mainColor/20 transition-all placeholder:text-muted-foreground text-foreground"
         type="search"
-        placeholder="Search by keywords, title..."
+        placeholder="Search solutions, keywords, titles..."
         value={filters.query}
         onChange={(e) => handleChange(e.target.value)}
       />
       <LuSearch
-        size={20}
-        className="absolute top-1/2 -translate-y-1/2 right-4 text-muted-foreground group-focus-within:text-mainColor transition-colors pointer-events-none"
+        size={18}
+        className="absolute top-1/2 -translate-y-1/2 left-4 text-muted-foreground group-focus-within:text-mainColor transition-colors pointer-events-none"
       />
     </div>
   );

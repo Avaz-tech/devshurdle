@@ -14,6 +14,7 @@ interface SearchContextProps {
   setFilters: (filters: SearchFilters) => void;
   filteredItems: Post[];
   originalItems: Post[];
+  isLoading: boolean;
 }
 
 // Create the search context with default values
@@ -40,9 +41,11 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children, posts 
     categories: [],
   });
   const [filteredItems, setFilteredItems] = useState<Post[]>(posts);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Combined effect for both text search and category filtering
   useEffect(() => {
+    setIsLoading(true);
     let result = posts;
 
     // Apply text search filter
@@ -66,7 +69,11 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children, posts 
       );
     }
 
-    setFilteredItems(result);
+    // Simulate async operation for better UX
+    setTimeout(() => {
+      setFilteredItems(result);
+      setIsLoading(false);
+    }, 150);
   }, [filters, posts]);
 
   const value: SearchContextProps = {
@@ -74,6 +81,7 @@ export const SearchProvider: React.FC<SearchProviderProps> = ({ children, posts 
     setFilters,
     filteredItems,
     originalItems: posts,
+    isLoading,
   };
 
   return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>;

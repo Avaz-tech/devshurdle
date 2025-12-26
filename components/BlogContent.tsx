@@ -37,66 +37,58 @@ const BlogContent: React.FC<BlogContentProps> = ({ posts }) => {
               pathname: `/post/${slug?.current}`,
               query: { slug: slug?.current },
             }}
-            className="border border-[#80808042] rounded-2xl"
+            className="group block bg-card rounded-xl border border-border hover:border-mainColor/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden"
           >
-            <div className="h-full flex flex-col justify-between rounded-2xl shadow-custom-dark duration-200">
+            <div className="h-full flex flex-col">
               {/* Card Image part */}
-              <div className="w-full h-[225px] md:w-full group overflow-hidden rounded-2xl relative">
+              <div className="w-full h-[200px] group overflow-hidden relative">
                 <Image
                   src={urlForImage(mainImage).url()}
-                  width={200}
+                  width={400}
                   height={200}
                   alt={title}
-                  className="w-full h-full object-cover group-hover:scale-105 duration-500 rounded-tl-md rounded-bl-md"
+                  className="w-full h-full object-cover group-hover:scale-105 duration-500"
                   priority={true}
                 />
-                <div className="absolute top-0 left-0 bg-black/20 w-full h-full group-hover:hidden duration-200" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               </div>
 
-              <div className="w-full grow flex flex-col gap-3 justify-between p-4">
-                <div className="flex flex-col gap-5">
-                  {/* Categories & Date */}
-                  <div className="flex items-center justify-between gap-2 ">
-                    <div className="flex gap-2 items-center">
-                      <FaTags className="text-mainColor" size={18} />
-                      {categories?.map((category: Category) => (
-                        <p key={category._id} className="text-sm text-muted-foreground cursor-auto">
-                          {category.title}
-                        </p>
-                      ))}
-                    </div>
-
-                    <p className="text-sm flex gap-2 items-center cursor-auto text-muted-foreground">
-                      <FaCalendarDay className="text-mainColor" size={18} />
-                      {new Date(_createdAt).toLocaleDateString("en-US", {
-                        day: "numeric",
-                        month: "short",
-                        year: "2-digit",
-                      })}
-                    </p>
+              <div className="flex flex-col gap-4 p-6 flex-grow">
+                {/* Categories & Date */}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex gap-2 items-center">
+                    <FaTags className="text-mainColor" size={16} />
+                    {categories?.slice(0, 2).map((category: Category) => (
+                      <span key={category._id} className="text-sm text-muted-foreground">
+                        {category.title}
+                      </span>
+                    ))}
                   </div>
 
-                  {/* Title */}
-                  <h2 className="text-xl font-semibold text-foreground hover:text-mainColor duration-200 cursor-pointer">
-                    {title}
-                  </h2>
+                  <p className="text-sm flex gap-2 items-center text-muted-foreground">
+                    <FaCalendarDay className="text-mainColor" size={16} />
+                    {new Date(_createdAt).toLocaleDateString("en-US", {
+                      day: "numeric",
+                      month: "short",
+                      year: "2-digit",
+                    })}
+                  </p>
                 </div>
-              </div>
 
-              {/* Card Bottom part */}
-              <div className="bg-[rgba(163,162,163,0.1)] rounded-b-2xl cursor-auto">
-                <div className="px-4 py-5 flex items-center justify-between">
-                  <div className="flex items-center justify-between gap-2 cursor-pointer hover:text-mainColor text-foreground">
+                {/* Title */}
+                <h2 className="text-xl font-semibold text-foreground group-hover:text-mainColor duration-200 line-clamp-2">
+                  {title}
+                </h2>
+
+                {/* Read More */}
+                <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
+                  <div className="flex items-center gap-2 text-mainColor font-medium">
                     Read More
-                    <HiMiniArrowUpRight size={18} />
+                    <HiMiniArrowUpRight size={16} />
                   </div>
-                  <div className="flex gap-3 text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <FaRegComments size={22} />
-                      <span>12</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <GrView size={18} />
+                  <div className="flex gap-3 text-muted-foreground text-sm">
+                    <div className="flex items-center gap-1">
+                      <GrView size={16} />
                       <span>50</span>
                     </div>
                   </div>

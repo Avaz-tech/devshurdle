@@ -112,4 +112,41 @@
     font-family: var(--code-font);
     font-weight: normal;
   }
+
+  /* Article Content Styling */
+  .article-content {
+    line-height: 1.75;
+  }
+
+  .article-content p {
+    margin-bottom: 1.5rem;
+  }
+
+  .article-content ul,
+  .article-content ol {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .article-content li {
+    margin-bottom: 0.5rem;
+  }
+
+  .article-content a {
+    color: hsl(var(--primary));
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: hsl(var(--primary) / 0.3);
+    transition: all 0.2s;
+  }
+
+  .article-content a:hover {
+    text-decoration-color: hsl(var(--primary) / 0.6);
+  }
+
+  .article-content img {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    border: 1px solid hsl(var(--border));
+  }
 }

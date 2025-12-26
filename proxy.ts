@@ -25,7 +25,7 @@ export async function proxy(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/signIn", request.url));
     }
 
     // Check admin role

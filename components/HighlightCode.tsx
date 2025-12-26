@@ -21,16 +21,16 @@ hljs.registerLanguage("bash", bash);
 hljs.registerLanguage("json", json);
 hljs.registerLanguage("css", css);
 
-// Language color mapping
+// Consistent dark theme for all languages
 const languageColors: { [key: string]: string } = {
-  typescript: "from-blue-500 to-blue-600",
-  javascript: "from-yellow-500 to-yellow-600",
-  python: "from-blue-400 to-blue-500",
-  java: "from-red-500 to-red-600",
-  bash: "from-gray-600 to-gray-700",
-  json: "from-green-500 to-green-600",
-  css: "from-indigo-500 to-indigo-600",
-  html: "from-orange-500 to-orange-600",
+  typescript: "bg-[#2d3748]",
+  javascript: "bg-[#2d3748]",
+  python: "bg-[#2d3748]",
+  java: "bg-[#2d3748]",
+  bash: "bg-[#2d3748]",
+  json: "bg-[#2d3748]",
+  css: "bg-[#2d3748]",
+  html: "bg-[#2d3748]",
 };
 
 const HighlightCode = ({ content, language = "javascript" }: any) => {
@@ -53,29 +53,29 @@ const HighlightCode = ({ content, language = "javascript" }: any) => {
     });
   };
 
-  const gradientColor = languageColors[language?.toLowerCase()] || "from-gray-600 to-gray-700";
+  const gradientColor = languageColors[language?.toLowerCase()] || "bg-[#2d3748]";
 
   return (
-    <div className="w-full rounded-xl overflow-hidden border border-border shadow-lg bg-card">
-      {/* Header */}
-      <div className={`bg-gradient-to-r ${gradientColor} px-6 py-4 flex justify-between items-center`}>
-        <div className="flex items-center gap-3">
-          <span className="text-white font-bold text-sm uppercase tracking-wider">{language || "code"}</span>
+    <div className="w-full rounded-lg overflow-hidden border border-border shadow-sm bg-card">
+      {/* Header - Smaller and consistent */}
+      <div className={`${gradientColor} px-4 py-2 flex justify-between items-center`}>
+        <div className="flex items-center gap-2">
+          <span className="text-white font-medium text-xs uppercase tracking-wide">{language || "code"}</span>
         </div>
         <button
           onClick={handleCopy}
           title={copied ? "Copied!" : "Copy to clipboard"}
-          className="relative flex items-center gap-2 px-3 py-1.5 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 text-sm font-medium group"
+          className="relative flex items-center gap-1.5 px-2.5 py-1 bg-white/20 hover:bg-white/30 text-white rounded-md transition-all duration-200 text-xs font-medium group"
         >
           {copied ? (
             <>
-              <LuCopyCheck className="w-4 h-4" />
-              <span className="text-xs">Copied!</span>
+              <LuCopyCheck className="w-3.5 h-3.5" />
+              <span>Copied!</span>
             </>
           ) : (
             <>
-              <LuCopy className="w-4 h-4" />
-              <span className="text-xs">Copy</span>
+              <LuCopy className="w-3.5 h-3.5" />
+              <span>Copy</span>
             </>
           )}
         </button>

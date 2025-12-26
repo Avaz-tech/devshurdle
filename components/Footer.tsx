@@ -1,124 +1,114 @@
 import React from "react";
 import Container from "./Container";
 import Link from "next/link";
-import { BsYoutube, BsGithub, BsLinkedin } from "react-icons/bs";
-import { BiLogoFacebook } from "react-icons/bi";
-import { FaLinkedinIn } from "react-icons/fa6";
+import { BsGithub, BsLinkedin } from "react-icons/bs";
+import { FaEnvelope } from "react-icons/fa";
 
-// Footer links
+// Footer links - focused on DevsHurdle content
 const links = [
   {
-    title: "Use Cases",
+    title: "Navigation",
     items: [
-      { text: "UX Design", href: "https://maze.co/collections/ux-ui-design/tools/" },
-      { text: "Wireframing", href: "https://careerfoundry.com/en/blog/ux-design/free-wireframing-tools/" },
-      { text: "Diagramming", href: "https://www.lucidchart.com" },
-      { text: "Brainstorming", href: "https://miro.com" },
-      {
-        text: "Team Collaboration",
-        href: "https://designlab.com/blog/top-online-collaboration-tools-for-remote-ux-work",
-      },
+      { text: "Home", href: "/" },
+      { text: "Blog", href: "/blog" },
+      { text: "About", href: "/about" },
+      { text: "Contact", href: "/contact" },
     ],
   },
   {
-    title: "Explore",
+    title: "Categories",
     items: [
-      { text: "Frontend Development", href: "https://www.geeksforgeeks.org/best-front-end-development-courses/" },
-      { text: "Backend Development", href: "https://roadmap.sh/frontend/vs-backend-ai" },
-      {
-        text: "Machine Learning",
-        href: "https://www.reddit.com/r/learnmachinelearning/comments/16kv840/best_resource_to_learn_ml_for_a_backend_developer/",
-      },
-      { text: "Designing", href: "https://detachless.com/blog/design-collaboration-tools-teams" },
-      {
-        text: "AI Development",
-        href: "https://medium.com/design-bootcamp/scope-of-ai-in-front-end-development-a-beginners-guide-to-getting-started-3e44ba90e7bc",
-      },
+      { text: "JavaScript", href: "/blog?category=javascript" },
+      { text: "React", href: "/blog?category=react" },
+      { text: "Node.js", href: "/blog?category=nodejs" },
+      { text: "TypeScript", href: "/blog?category=typescript" },
+      { text: "Python", href: "/blog?category=python" },
     ],
   },
   {
     title: "Resources",
     items: [
-      {
-        text: "Learning Materials",
-        href: "https://www.coursera.org/courses?productDifficultyLevel=Advanced&query=front+end+development",
-      },
-      {
-        text: "Documentations",
-        href: "https://cloudinary.com/guides/front-end-development/front-end-development-the-complete-guide",
-      },
-      { text: "Free Courses", href: "https://www.youtube.com/watch?v=5yBTxOpT4PE" },
-      {
-        text: "Paid Courses",
-        href: "https://www.coursera.org/courses?productDifficultyLevel=Advanced&query=front+end+development",
-      },
-      {
-        text: "Articles",
-        href: "https://medium.com/design-bootcamp/scope-of-ai-in-front-end-development-a-beginners-guide-to-getting-started-3e44ba90e7bc",
-      },
-    ],
-  },
-  // New links section
-  {
-    title: "About",
-    items: [
-      {
-        text: "AI for Development",
-        href: "https://www.forbes.com/sites/forbestechcouncil/2023/05/23/the-impact-of-ai-on-software-development/",
-      },
-      { text: "AI and Machine Learning", href: "https://www.ibm.com/blogs/9-predictions-for-ai-in-2024/" },
-      { text: "AI Research Papers", href: "https://arxiv.org/" },
-      { text: "AI Tools and Frameworks", href: "https://www.aimultiple.com/ai-tools/" },
-      { text: "AI in Web Development", href: "https://www.turing.com/blog/how-ai-is-transforming-web-development/" },
+      { text: "All Solutions", href: "/blog" },
+      { text: "Latest Posts", href: "/blog" },
+      { text: "Search", href: "/#search-section" },
+      { text: "Newsletter", href: "/#newsletter" },
     ],
   },
 ];
+
 // social links
 const socialLinks = [
-  { href: "https://www.youtube.com/@devshurdle", icon: <BsYoutube /> },
-  { href: "https://github.com/Avaz-tech", icon: <BsGithub /> },
-  { href: "https://www.linkedin.com/in/avazbek-uchqunovich/", icon: <FaLinkedinIn /> },
-  { href: "https://www.facebook.com/uchqunovich/", icon: <BiLogoFacebook /> },
+  { href: "https://github.com/Avaz-tech", icon: <BsGithub />, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/avazbek-uchqunovich/", icon: <BsLinkedin />, label: "LinkedIn" },
+  { href: "mailto:contact@devshurdle.com", icon: <FaEnvelope />, label: "Email" },
 ];
 
 const Footer = () => {
   return (
-    <Container className="py-10 flex flex-col gap-20 items-center justify-between max-w-full mx-4 xl:mx-auto border-t ">
-      <div className="w-full grid grid-cols-1 items-center content-between gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {/* other related links */}
-        {links.map((section, sectionIndex) => (
-          <div key={sectionIndex} className="flex flex-col gap-2">
-            <h6 className="font-semibold mb-3 text-foreground">{section.title}</h6>
-            {section.items.map((item, itemIndex) => (
-              <Link key={itemIndex} href={item.href} className="hover:text-mainColor duration-200 text-muted-foreground">
-                {item.text}
-              </Link>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      <div className="flex flex-col md:flex-row  justify-between w-full gap-10 border-t py-5">
-        {/* social links */}
-        <div className="text-foreground inline-flex flex-row items-center gap-7">
-          {socialLinks.map((link, index) => (
-            <Link key={index} href={link.href} className="p-3 bg-secondary rounded-full duration-200 hover:bg-mainColor text-secondary-foreground">
-              {link.icon}
+    <footer className="w-full bg-card border-t border-border mt-20">
+      <Container className="py-12 mx-4 xl:mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          {/* Brand Section */}
+          <div className="lg:col-span-1">
+            <Link href="/" className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 bg-mainColor rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">D</span>
+              </div>
+              <span className="text-xl font-bold text-foreground">DevsHurdle</span>
             </Link>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+              Conquer coding challenges with practical solutions, tutorials, and insights for developers.
+            </p>
+            <div className="flex gap-3">
+              {socialLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className="w-10 h-10 bg-muted hover:bg-mainColor text-muted-foreground hover:text-white rounded-lg flex items-center justify-center transition-all duration-200"
+                  aria-label={link.label}
+                >
+                  {link.icon}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          {links.map((section, sectionIndex) => (
+            <div key={sectionIndex} className="flex flex-col gap-3">
+              <h6 className="font-semibold text-foreground mb-2">{section.title}</h6>
+              {section.items.map((item, itemIndex) => (
+                <Link
+                  key={itemIndex}
+                  href={item.href}
+                  className="text-muted-foreground hover:text-mainColor transition-colors duration-200 text-sm"
+                >
+                  {item.text}
+                </Link>
+              ))}
+            </div>
           ))}
         </div>
 
-        <p className="text-md text-muted-foreground">
-          © All rights reserved
-          <Link
-            href="https://avaz-new-portfolio.vercel.app/"
-            className="hover:text-mainColor font-semibold duration-200"
-          >
-            @devshurdle
-          </Link>
-        </p>
-      </div>
-    </Container>
+        {/* Bottom Section */}
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} DevsHurdle. Built with ❤️ for developers.
+          </p>
+          <div className="flex gap-6 text-sm">
+            <Link href="/privacy" className="text-muted-foreground hover:text-mainColor transition-colors">
+              Privacy
+            </Link>
+            <Link href="/terms" className="text-muted-foreground hover:text-mainColor transition-colors">
+              Terms
+            </Link>
+            <Link href="/contact" className="text-muted-foreground hover:text-mainColor transition-colors">
+              Contact
+            </Link>
+          </div>
+        </div>
+      </Container>
+    </footer>
   );
 };
 
