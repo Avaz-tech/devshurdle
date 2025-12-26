@@ -11,6 +11,9 @@ import { FaCalendarDay, FaClock } from "react-icons/fa";
 import Link from "next/link";
 import Breadcrumb from "@components/Breadcrumb";
 import { FiArrowLeft } from "@node_modules/react-icons/fi";
+import LikeButton from "@components/LikeButton";
+import CommentsSection from "@components/CommentsSection";
+import PostViewTracker from "@components/PostViewTracker";
 
 //================================================================================================================
 
@@ -127,6 +130,7 @@ const SlugPage = async ({ params }: Props) => {
 
   return (
     <>
+      <PostViewTracker slug={slug} />
       {/* Article Container */}
       <article className="w-full pt-24 pb-16">
         <Container className="mx-4 xl:mx-auto">
@@ -207,6 +211,11 @@ const SlugPage = async ({ params }: Props) => {
                     <span className="text-sm text-muted-foreground">{readingTime} min read</span>
                   </div>
                 </div>
+
+                {/* Like Button */}
+                <div className="flex items-center gap-2 pt-2">
+                  <LikeButton postSlug={slug} size="md" />
+                </div>
               </div>
             </header>
 
@@ -228,6 +237,9 @@ const SlugPage = async ({ params }: Props) => {
             <div className="article-content">
               <PortableText value={post?.body} components={RichText} />
             </div>
+
+            {/* Comments Section */}
+            <CommentsSection postSlug={slug} />
 
             {/* Article Footer */}
             <footer className="mt-16 pt-8 border-t border-border space-y-8">
