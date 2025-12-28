@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { login, signinWithGithub, signinWithGoogle, signup } from "./actions";
+import { createClient } from "@/lib/supabase/client";
 import Breadcrumb from "@components/Breadcrumb";
 
 export default function SignInPage() {
@@ -16,6 +17,7 @@ export default function SignInPage() {
     email: "",
     password: "",
     confirmPassword: "",
+    rememberMe: false,
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,12 +27,24 @@ export default function SignInPage() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    isSignUp ? signup(formData) : login(formData);
-    // login(formData)
-    // Handle authentication logic here
+    if (isSignUp) {
+      signup(formData);
+    } else {
+      const supabase = createClient(formData.rememberMe);
+      const { error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+      if (error) {
+        console.error("Sign in error:", error);
+        // You can add error handling here, like showing a message
+      } else {
+        window.location.href = "/account";
+      }
+    }
   };
 
   return (
@@ -186,7 +200,12 @@ export default function SignInPage() {
                 {!isSignUp && (
                   <div className="flex items-center justify-between">
                     <label className="flex items-center">
-                      <input type="checkbox" className="rounded border-border" />
+                      <input
+                        type="checkbox"
+                        checked={formData.rememberMe}
+                        onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
+                        className="rounded border-border"
+                      />
                       <span className="ml-2 text-sm text-muted-foreground">Remember me</span>
                     </label>
                     <Link
