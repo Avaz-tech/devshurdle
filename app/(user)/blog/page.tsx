@@ -60,6 +60,7 @@ export default async function BlogPage(props: BlogPageProps) {
         {/* Hero Section */}
         <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-16 px-4">
           <Container className="mx-auto">
+            
             <div className="text-center">
               <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight">
                 All Solutions & Tutorials

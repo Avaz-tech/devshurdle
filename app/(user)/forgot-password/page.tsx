@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import Breadcrumb from "@components/Breadcrumb";
 import { createClient } from "@/lib/supabase/client";
 
 export default function ForgotPasswordPage() {
@@ -35,10 +34,6 @@ export default function ForgotPasswordPage() {
 
   return (
     <main className="flex justify-center items-center flex-col min-h-screen pt-24">
-      <Container className="mx-auto mb-6 px-4">
-        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Sign In", href: "/signIn" }, { label: "Forgot Password" }]} />
-      </Container>
-
       <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-16 px-4">
         <Container className="mx-auto">
           <div className="text-center">
