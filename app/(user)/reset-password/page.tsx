@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import PageLayout from "@components/PageLayout";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
@@ -42,7 +43,7 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <main className="flex justify-center items-center flex-col min-h-screen pt-24">
+    <PageLayout className="min-h-screen">
       <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-16 px-4">
         <Container className="mx-auto">
           <div className="text-center">
@@ -120,6 +121,6 @@ export default function ResetPasswordPage() {
           </div>
         </Container>
       </section>
-    </main>
+    </PageLayout>
   );
 }

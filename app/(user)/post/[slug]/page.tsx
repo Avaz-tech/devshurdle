@@ -14,6 +14,7 @@ import { FiArrowLeft } from "@node_modules/react-icons/fi";
 import LikeButton from "@components/LikeButton";
 import CommentsSection from "@components/CommentsSection";
 import PostViewTracker from "@components/PostViewTracker";
+import PageLayout from "@components/PageLayout";
 
 //================================================================================================================
 
@@ -131,8 +132,9 @@ const SlugPage = async ({ params }: Props) => {
   return (
     <>
       <PostViewTracker slug={slug} />
-      {/* Article Container */}
-      <article className="w-full pt-24 pb-16">
+      <PageLayout>
+        {/* Article Container */}
+        <article className="w-full pb-16">
         <Container className="mx-4 xl:mx-auto">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb Navigation */}
@@ -342,6 +344,7 @@ const SlugPage = async ({ params }: Props) => {
           </div>
         </Container>
       </article>
+      </PageLayout>
     </>
   );
 };

@@ -9,11 +9,12 @@ interface BreadcrumbItem {
 
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
+  noBorder?: boolean;
 }
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
+const Breadcrumb: React.FC<BreadcrumbProps> = ({ items, noBorder = false }) => {
   return (
-    <nav className="flex items-center gap-2 text-sm mb-6 pb-4 border-b border-border">
+    <nav className={`flex items-center gap-2 text-sm mb-6 pt-4 ${noBorder ? '' : 'pb-4 border-b border-border'}`}>
       {items.map((item, index) => (
         <span key={index} className="flex items-center gap-2">
           {item.href ? (

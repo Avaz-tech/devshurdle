@@ -6,6 +6,7 @@ import { groq } from "next-sanity";
 import { SearchProvider } from "@app/context/SearchContext";
 import Link from "next/link";
 import { Post } from "./../../types";
+import PageLayout from "@components/PageLayout";
 
 // GROQ query for posts
 const postsQuery = groq`*[_type == "post"]{
@@ -35,7 +36,7 @@ export default async function Home() {
 
   return (
     <SearchProvider posts={posts}>
-      <main className="flex justify-center items-center flex-col pt-24">
+      <PageLayout>
         {/* Hero Section */}
         <Hero />
 
@@ -189,7 +190,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
-      </main>
+      </PageLayout>
     </SearchProvider>
   );
 }

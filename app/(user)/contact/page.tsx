@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import Breadcrumb from "@components/Breadcrumb";
+import PageLayout from "@components/PageLayout";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -56,15 +57,13 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="flex justify-center items-center flex-col min-h-screen pt-24">
-      {/* Breadcrumb Navigation */}
-      <Container className="mx-auto mb-6 px-4">
-        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Contact" }]} />
-      </Container>
-
+    <PageLayout className="min-h-screen">
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-16 px-4">
+      <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-8 px-4">
         <Container className="mx-auto">
+          {/* Breadcrumb Navigation */}
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Contact" }]} noBorder={true} />
+
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Get In Touch</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -276,6 +275,6 @@ export default function ContactPage() {
           </div>
         </Container>
       </section>
-    </main>
+    </PageLayout>
   );
 }

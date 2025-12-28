@@ -8,6 +8,7 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 import { login, signinWithGithub, signinWithGoogle, signup } from "./actions";
 import { createClient } from "@/lib/supabase/client";
+import PageLayout from "@components/PageLayout";
 
 export default function SignInPage() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -47,7 +48,7 @@ export default function SignInPage() {
   };
 
   return (
-    <main className="flex justify-center items-center flex-col min-h-screen pt-24">
+    <PageLayout className="min-h-screen">
       {/* Hero Section */}
       <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-16 px-4">
         <Container className="mx-auto">
@@ -274,6 +275,6 @@ export default function SignInPage() {
           </div>
         </Container>
       </section>
-    </main>
+    </PageLayout>
   );
 }
