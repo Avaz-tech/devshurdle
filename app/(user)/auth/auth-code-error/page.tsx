@@ -59,7 +59,7 @@ export default function AuthCodeErrorPage() {
                   <div>
                     <p className="text-sm font-semibold text-foreground mb-1">Quick Fix</p>
                     <p className="text-sm text-muted-foreground">
-                      Simply try signing in again. Most authentication issues resolve themselves on the second attempt.
+                      Simply try signIng in again. Most authentication issues resolve themselves on the second attempt.
                     </p>
                   </div>
                 </div>
@@ -68,7 +68,7 @@ export default function AuthCodeErrorPage() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
-                  href="/signin"
+                  href="/signIn"
                   className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-mainColor hover:bg-mainColor/90 text-white font-semibold rounded-lg transition-all duration-200"
                 >
                   <FaRedo />
@@ -98,7 +98,7 @@ export default function AuthCodeErrorPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               <Link
-                href="/signin"
+                href="/signIn"
                 className="group p-6 bg-background rounded-lg border border-border hover:border-mainColor hover:bg-mainColor/5 transition-all duration-200"
               >
                 <div className="w-12 h-12 bg-mainColor/10 rounded-full flex items-center justify-center mb-4">
@@ -113,7 +113,7 @@ export default function AuthCodeErrorPage() {
               </Link>
 
               <Link
-                href="/signin"
+                href="/signIn"
                 className="group p-6 bg-background rounded-lg border border-border hover:border-mainColor hover:bg-mainColor/5 transition-all duration-200"
               >
                 <div className="w-12 h-12 bg-mainColor/10 rounded-full flex items-center justify-center mb-4">
@@ -128,7 +128,7 @@ export default function AuthCodeErrorPage() {
 
             <div className="text-center mt-8">
               <p className="text-muted-foreground mb-4">Or use email and password</p>
-              <Link href="/signin" className="inline-block text-mainColor hover:text-mainColor/80 font-medium">
+              <Link href="/signIn" className="inline-block text-mainColor hover:text-mainColor/80 font-medium">
                 Sign in with email →
               </Link>
             </div>

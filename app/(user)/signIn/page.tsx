@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FaGithub, FaGoogle, FaExclamationCircle, FaCheckCircle } from "react-icons/fa";
 import Link from "next/link";
-import { login, signinWithGithub, signinWithGoogle, signup } from "./actions";
+import { login, signInWithGithub, signInWithGoogle, signup } from "./actions";
 import { createClient } from "@/lib/supabase/client";
 import PageLayout from "@components/PageLayout";
 
@@ -113,7 +113,7 @@ export default function SignInPage() {
             setAlert({
               type: "error",
               message:
-                "Please verify your email address before signing in. Check your inbox for the verification link.",
+                "Please verify your email address before signIng in. Check your inbox for the verification link.",
             });
           } else {
             setAlert({
@@ -221,7 +221,7 @@ export default function SignInPage() {
               <div className="space-y-3 mb-6">
                 <button
                   className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={signinWithGoogle}
+                  onClick={signInWithGoogle}
                   disabled={isLoading}
                 >
                   <FaGoogle className="text-red-500" />
@@ -229,7 +229,7 @@ export default function SignInPage() {
                 </button>
                 <button
                   className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={signinWithGithub}
+                  onClick={signInWithGithub}
                   disabled={isLoading}
                 >
                   <FaGithub className="text-foreground" />

@@ -52,7 +52,7 @@ export async function signup(formData: FormData) {
   redirect("/account");
 }
 //sign in with Google
-export async function signinWithGoogle() {
+export async function signInWithGoogle() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
@@ -67,8 +67,8 @@ export async function signinWithGoogle() {
   }
 }
 
-// signin with GitHub
-export async function signinWithGithub() {
+// signIn with GitHub
+export async function signInWithGithub() {
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
