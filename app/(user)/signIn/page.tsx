@@ -4,14 +4,21 @@ import Container from "@components/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle, FaExclamationCircle, FaCheckCircle } from "react-icons/fa";
 import Link from "next/link";
 import { login, signinWithGithub, signinWithGoogle, signup } from "./actions";
 import { createClient } from "@/lib/supabase/client";
 import PageLayout from "@components/PageLayout";
 
+type AlertType = "error" | "success" | null;
+
 export default function SignInPage() {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [alert, setAlert] = useState<{ type: AlertType; message: string }>({
+    type: null,
+    message: "",
+  });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,30 +28,126 @@ export default function SignInPage() {
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Clear alert when user starts typing
+    if (alert.type) {
+      setAlert({ type: null, message: "" });
+    }
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
+  const validateForm = (): boolean => {
+    if (!formData.email || !formData.password) {
+      setAlert({ type: "error", message: "Please fill in all required fields" });
+      return false;
+    }
+
     if (isSignUp) {
-      signup(formData);
-    } else {
-      const supabase = createClient(formData.rememberMe);
-      const { error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      });
-      if (error) {
-        console.error("Sign in error:", error);
-        // You can add error handling here, like showing a message
-      } else {
-        window.location.href = "/account";
+      if (!formData.name) {
+        setAlert({ type: "error", message: "Please enter your full name" });
+        return false;
+      }
+      if (formData.password.length < 6) {
+        setAlert({ type: "error", message: "Password must be at least 6 characters long" });
+        return false;
+      }
+      if (formData.password !== formData.confirmPassword) {
+        setAlert({ type: "error", message: "Passwords do not match" });
+        return false;
       }
     }
+
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsLoading(true);
+    setAlert({ type: null, message: "" });
+
+    try {
+      if (isSignUp) {
+        const result = await signup(formData);
+        const res: any = result;
+        if (res?.error) {
+          setAlert({
+            type: "error",
+            message: res.error?.message || "Failed to create account. Please try again.",
+          });
+        } else {
+          setAlert({
+            type: "success",
+            message: "Account created successfully! Please check your email to verify your account.",
+          });
+          // Reset form
+          setFormData({
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            rememberMe: false,
+          });
+        }
+      } else {
+        const supabase = createClient(formData.rememberMe);
+        const { error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (error) {
+          // Handle specific error types
+          if (error.message.includes("Invalid login credentials")) {
+            setAlert({
+              type: "error",
+              message: "Invalid email or password. Please check your credentials and try again.",
+            });
+          } else if (error.message.includes("Email not confirmed")) {
+            setAlert({
+              type: "error",
+              message:
+                "Please verify your email address before signing in. Check your inbox for the verification link.",
+            });
+          } else {
+            setAlert({
+              type: "error",
+              message: error.message || "Failed to sign in. Please try again.",
+            });
+          }
+        } else {
+          setAlert({ type: "success", message: "Sign in successful! Redirecting..." });
+          setTimeout(() => {
+            window.location.href = "/account";
+          }, 1000);
+        }
+      }
+    } catch (error) {
+      setAlert({
+        type: "error",
+        message: "An unexpected error occurred. Please try again.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleToggleMode = () => {
+    setIsSignUp(!isSignUp);
+    setAlert({ type: null, message: "" });
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      rememberMe: false,
+    });
   };
 
   return (
@@ -70,23 +173,45 @@ export default function SignInPage() {
         <Container className="mx-auto">
           <div className="max-w-md mx-auto">
             <div className="bg-card rounded-xl border border-border p-8 shadow-lg">
+              {/* Alert Message */}
+              {alert.type && (
+                <div
+                  className={`mb-6 p-4 rounded-lg border ${
+                    alert.type === "error"
+                      ? "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+                      : "bg-green-500/10 border-green-500/20 text-green-600 dark:text-green-400"
+                  } animate-in fade-in slide-in-from-top-2 duration-300`}
+                >
+                  <div className="flex items-start gap-3">
+                    {alert.type === "error" ? (
+                      <FaExclamationCircle className="text-lg mt-0.5 flex-shrink-0" />
+                    ) : (
+                      <FaCheckCircle className="text-lg mt-0.5 flex-shrink-0" />
+                    )}
+                    <p className="text-sm font-medium">{alert.message}</p>
+                  </div>
+                </div>
+              )}
+
               {/* Toggle Buttons */}
               <div className="flex rounded-lg bg-muted p-1 mb-8">
                 <button
-                  onClick={() => setIsSignUp(false)}
+                  onClick={handleToggleMode}
+                  disabled={isLoading}
                   className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
                     !isSignUp
                       ? "bg-background text-foreground shadow-sm"
                       : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  } disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   Sign In
                 </button>
                 <button
-                  onClick={() => setIsSignUp(true)}
+                  onClick={handleToggleMode}
+                  disabled={isLoading}
                   className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-all ${
                     isSignUp ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  } disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   Sign Up
                 </button>
@@ -95,15 +220,17 @@ export default function SignInPage() {
               {/* Social Auth Buttons */}
               <div className="space-y-3 mb-6">
                 <button
-                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all"
+                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={signinWithGoogle}
+                  disabled={isLoading}
                 >
                   <FaGoogle className="text-red-500" />
                   <span className="text-foreground font-medium">Continue with Google</span>
                 </button>
                 <button
-                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all"
+                  className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={signinWithGithub}
+                  disabled={isLoading}
                 >
                   <FaGithub className="text-foreground" />
                   <span className="text-foreground font-medium">Continue with GitHub</span>
@@ -135,6 +262,7 @@ export default function SignInPage() {
                       value={formData.name}
                       onChange={handleInputChange}
                       className="mt-1"
+                      disabled={isLoading}
                       required
                     />
                   </div>
@@ -152,6 +280,7 @@ export default function SignInPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     className="mt-1"
+                    disabled={isLoading}
                     required
                   />
                 </div>
@@ -168,8 +297,9 @@ export default function SignInPage() {
                     value={formData.password}
                     onChange={handleInputChange}
                     className="mt-1"
+                    disabled={isLoading}
                     required
-                    autoComplete="true"
+                    autoComplete="current-password"
                   />
                 </div>
 
@@ -186,8 +316,9 @@ export default function SignInPage() {
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
                       className="mt-1"
+                      disabled={isLoading}
                       required
-                      autoComplete="true"
+                      autoComplete="new-password"
                     />
                   </div>
                 )}
@@ -200,6 +331,7 @@ export default function SignInPage() {
                         checked={formData.rememberMe}
                         onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
                         className="rounded border-border"
+                        disabled={isLoading}
                       />
                       <span className="ml-2 text-sm text-muted-foreground">Remember me</span>
                     </label>
@@ -215,8 +347,31 @@ export default function SignInPage() {
                 <Button
                   type="submit"
                   className="w-full bg-mainColor hover:bg-mainColor/90 text-white font-semibold py-3"
+                  disabled={isLoading}
                 >
-                  {isSignUp ? "Create Account" : "Sign In"}
+                  {isLoading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      Processing...
+                    </span>
+                  ) : (
+                    <>{isSignUp ? "Create Account" : "Sign In"}</>
+                  )}
                 </Button>
               </form>
 
