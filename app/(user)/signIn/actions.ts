@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
 import { createClient } from "@/lib/supabase/server";
 
 interface FormData {
@@ -15,8 +14,6 @@ interface FormData {
 export async function login(formData: FormData) {
   const supabase = await createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const data = {
     email: formData.email,
     password: formData.password,
@@ -25,7 +22,7 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    redirect("/error");
+    return { error };
   }
 
   revalidatePath("/", "layout");
@@ -35,51 +32,88 @@ export async function login(formData: FormData) {
 export async function signup(formData: FormData) {
   const supabase = await createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
   const data = {
     email: formData.email,
     password: formData.password,
+    options: {
+      data: {
+        full_name: formData.name,
+        name: formData.name,
+      },
+    },
   };
 
-  const { error } = await supabase.auth.signUp(data);
+  const { data: authData, error } = await supabase.auth.signUp(data);
 
   if (error) {
-    redirect("/error");
+    return { error };
+  }
+
+  // If user was created, update their profile
+  if (authData.user) {
+    await supabase.from("profiles").upsert({
+      id: authData.user.id,
+      full_name: formData.name,
+      updated_at: new Date().toISOString(),
+    });
   }
 
   revalidatePath("/", "layout");
-  redirect("/account");
+
+  // Don't redirect immediately for sign up - let them see the verification message
+  return { success: true };
 }
-//sign in with Google
+
+// Sign in with Google
 export async function signInWithGoogle() {
   const supabase = await createClient();
+
+  const isLocalEnv = process.env.NODE_ENV === "development";
+  const redirectUrl = isLocalEnv
+    ? "http://localhost:3000/auth/callback"
+    : "https://devshurdle.vercel.app/auth/callback";
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `https://devshurdle.vercel.app/auth/callback`,
+      redirectTo: redirectUrl,
       skipBrowserRedirect: false,
     },
   });
 
+  if (error) {
+    console.error("Google OAuth error:", error);
+    return { error };
+  }
+
   if (data.url) {
-    redirect(data.url); // use the redirect API for your server framework
+    redirect(data.url);
   }
 }
 
-// signIn with GitHub
+// Sign in with GitHub
 export async function signInWithGithub() {
   const supabase = await createClient();
+
+  const isLocalEnv = process.env.NODE_ENV === "development";
+  const redirectUrl = isLocalEnv
+    ? "http://localhost:3000/auth/callback"
+    : "https://devshurdle.vercel.app/auth/callback";
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
-      redirectTo: `https://devshurdle.vercel.app/auth/callback`,
+      redirectTo: redirectUrl,
       skipBrowserRedirect: false,
     },
   });
 
+  if (error) {
+    console.error("GitHub OAuth error:", error);
+    return { error };
+  }
+
   if (data.url) {
-    redirect(data.url); // use the redirect API for your server framework
+    redirect(data.url);
   }
 }

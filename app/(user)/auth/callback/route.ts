@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-// The client you created from the Server-Side Auth instructions
 import { createClient } from "@/lib/supabase/server";
 
 export async function GET(request: Request) {
@@ -14,19 +13,28 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = await createClient();
-    await supabase.auth.signOut(); // Clear any existing session
+
+    // REMOVED: await supabase.auth.signOut();
+    // Don't sign out before establishing the session!
+
     const { error } = await supabase.auth.exchangeCodeForSession(code);
+
     if (!error) {
-      const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
+      const forwardedHost = request.headers.get("x-forwarded-host");
       const isLocalEnv = process.env.NODE_ENV === "development";
+
+      // Add a small delay to ensure cookies are set
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
       if (isLocalEnv) {
-        // we can be sure that there is no load balancer in between, so no need to watch for X-Forwarded-Host
         return NextResponse.redirect(`${origin}${next}`);
       } else if (forwardedHost) {
         return NextResponse.redirect(`https://${forwardedHost}${next}`);
       } else {
         return NextResponse.redirect(`${origin}${next}`);
       }
+    } else {
+      console.error("OAuth callback error:", error);
     }
   }
 

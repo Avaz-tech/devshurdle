@@ -28,7 +28,6 @@ export default function SignInPage() {
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Clear alert when user starts typing
     if (alert.type) {
       setAlert({ type: null, message: "" });
     }
@@ -75,13 +74,13 @@ export default function SignInPage() {
     try {
       if (isSignUp) {
         const result = await signup(formData);
-        const res: any = result;
-        if (res?.error) {
+
+        if (result?.error) {
           setAlert({
             type: "error",
-            message: res.error?.message || "Failed to create account. Please try again.",
+            message: result.error?.message || "Failed to create account. Please try again.",
           });
-        } else {
+        } else if (result?.success) {
           setAlert({
             type: "success",
             message: "Account created successfully! Please check your email to verify your account.",
@@ -96,14 +95,13 @@ export default function SignInPage() {
           });
         }
       } else {
-        const supabase = createClient(formData.rememberMe);
+        const supabase = createClient();
         const { error } = await supabase.auth.signInWithPassword({
           email: formData.email,
           password: formData.password,
         });
 
         if (error) {
-          // Handle specific error types
           if (error.message.includes("Invalid login credentials")) {
             setAlert({
               type: "error",
@@ -113,7 +111,7 @@ export default function SignInPage() {
             setAlert({
               type: "error",
               message:
-                "Please verify your email address before signIng in. Check your inbox for the verification link.",
+                "Please verify your email address before signing in. Check your inbox for the verification link.",
             });
           } else {
             setAlert({
@@ -134,6 +132,25 @@ export default function SignInPage() {
         message: "An unexpected error occurred. Please try again.",
       });
     } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleOAuthSignIn = async (provider: "google" | "github") => {
+    setIsLoading(true);
+    setAlert({ type: null, message: "" });
+
+    try {
+      if (provider === "google") {
+        await signInWithGoogle();
+      } else {
+        await signInWithGithub();
+      }
+    } catch (error) {
+      setAlert({
+        type: "error",
+        message: "Failed to sign in. Please try again.",
+      });
       setIsLoading(false);
     }
   };
@@ -221,16 +238,18 @@ export default function SignInPage() {
               <div className="space-y-3 mb-6">
                 <button
                   className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={signInWithGoogle}
+                  onClick={() => handleOAuthSignIn("google")}
                   disabled={isLoading}
+                  type="button"
                 >
                   <FaGoogle className="text-red-500" />
                   <span className="text-foreground font-medium">Continue with Google</span>
                 </button>
                 <button
                   className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-card border border-border rounded-lg hover:border-mainColor hover:bg-mainColor/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  onClick={signInWithGithub}
+                  onClick={() => handleOAuthSignIn("github")}
                   disabled={isLoading}
+                  type="button"
                 >
                   <FaGithub className="text-foreground" />
                   <span className="text-foreground font-medium">Continue with GitHub</span>
