@@ -8,26 +8,35 @@ export const RichText = {
 
   types: {
     image: ({ value }: any) => {
+      // Extract dimensions from Sanity image asset reference to maintain aspect ratio
+      const id = value.asset?._ref || value.asset?._id;
+      const dimensions = id?.split("-")[2]?.split("x").map(Number);
+      const width = dimensions?.[0] || 1200;
+      const height = dimensions?.[1] || 800;
+
       return (
-        <figure className="my-10 -mx-4 md:mx-0">
-          <Image
-            src={urlForImage(value).url()}
-            alt={value.alt || "Post image"}
-            width={1200}
-            height={600}
-            priority={false}
-            className="w-full h-auto rounded-xl shadow-lg object-cover border border-border"
-            style={{ width: "auto", height: "auto" }}
-          />
+        <figure className="my-6">
+          <div className="rounded-xl overflow-hidden shadow-md border border-border">
+            <Image
+              src={urlForImage(value).url()}
+              alt={value.alt || "Post image"}
+              width={width}
+              height={height}
+              className="w-full h-auto"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              priority={false}
+            />
+          </div>
           {value.alt && (
-            <figcaption className="mt-3 text-sm text-center text-muted-foreground italic">{value.alt}</figcaption>
+            <figcaption className="mt-2 text-xs text-center text-muted-foreground italic">{value.alt}</figcaption>
           )}
         </figure>
       );
     },
     code: ({ value }: any) => {
       return (
-        <div className="my-6">
+        // CHANGED: Reduced my-6 to my-4 (Tighter spacing around code blocks)
+        <div className="my-4">
           <HighlightCode content={value.code} language={value.language || "javascript"} />
         </div>
       );
@@ -37,26 +46,24 @@ export const RichText = {
 
   list: {
     bullet: ({ children }: any) => (
-      <ul className="ml-6 my-6 space-y-3 text-foreground list-disc marker:text-mainColor">{children}</ul>
+      <ul className="pl-5 my-3 space-y-1 text-foreground list-disc marker:text-mainColor">{children}</ul>
+    ),
+    number: ({ children }: any) => (
+      <ol className="pl-5 my-3 space-y-1 text-foreground list-decimal marker:text-mainColor">{children}</ol>
     ),
   },
   //================================================================================================================
 
   listItem: {
-    bullet: ({ children }: any) => <li className="text-base leading-relaxed">{children}</li>,
-  },
-  //================================================================================================================
-
-  number: {
-    bullet: ({ children }: any) => (
-      <ol className="ml-6 my-6 space-y-3 text-foreground list-decimal marker:text-mainColor">{children}</ol>
-    ),
+    // CHANGED: leading-7 to leading-normal (Slightly tighter line height for lists)
+    bullet: ({ children }: any) => <li className="text-base leading-normal pl-1">{children}</li>,
+    number: ({ children }: any) => <li className="text-base leading-normal pl-1">{children}</li>,
   },
   //================================================================================================================
 
   block: {
     h1: ({ children }: any) => (
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-12 mb-6 leading-tight tracking-tight">
+      <h1 className="text-3xl md:text-4xl font-bold text-foreground mt-10 mb-5 leading-tight tracking-tight">
         {children}
       </h1>
     ),
@@ -71,15 +78,15 @@ export const RichText = {
       </h3>
     ),
     h4: ({ children }: any) => (
-      <h4 className="text-lg md:text-xl font-bold text-foreground mt-6 mb-3 leading-tight">{children}</h4>
+      <h4 className="text-lg md:text-xl font-bold text-foreground mt-4 mb-2 leading-tight">{children}</h4>
     ),
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-l-mainColor bg-mainColor/5 pl-6 py-4 pr-4 my-8 rounded-r-lg italic text-foreground/90 text-lg">
+      <blockquote className="border-l-4 border-l-mainColor bg-mainColor/5 pl-4 py-3 pr-3 my-4 rounded-r-lg italic text-foreground/90 text-base">
         {children}
       </blockquote>
     ),
     normal: ({ children }: any) => (
-      <p className="text-base md:text-lg leading-relaxed text-foreground my-5">{children}</p>
+      <p className="text-base leading-relaxed text-foreground/90 mb-4 last:mb-0">{children}</p>
     ),
   },
   //================================================================================================================
@@ -92,7 +99,7 @@ export const RichText = {
           href={value.href}
           rel={rel}
           target={!value.href?.startsWith("/") ? "_blank" : undefined}
-          className="text-mainColor hover:text-mainColor/80 font-semibold underline decoration-mainColor/30 hover:decoration-mainColor/60 transition-all duration-200"
+          className="text-mainColor hover:text-mainColor/80 font-medium underline decoration-mainColor/30 hover:decoration-mainColor/60 transition-all duration-200"
         >
           {children}
         </Link>
@@ -102,11 +109,10 @@ export const RichText = {
     strong: ({ children }: any) => <strong className="font-bold text-foreground">{children}</strong>,
     code: ({ children }: any) => {
       return (
-        <code className="bg-mainColor/15 text-mainColor font-semibold px-2.5 py-1 rounded-md text-sm font-mono inline-block">
+        <code className="bg-mainColor/10 text-mainColor font-medium px-1.5 py-0.5 rounded text-sm font-mono inline-block border border-mainColor/20">
           {children}
         </code>
       );
     },
   },
-  //================================================================================================================
 };

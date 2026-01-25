@@ -1,4 +1,4 @@
-import Container from "@components/Container";
+import Section from "@components/Section";
 import Link from "next/link";
 import Breadcrumb from "@components/Breadcrumb";
 import PageLayout from "@components/PageLayout";
@@ -179,112 +179,106 @@ export default function PrivacyPage() {
   return (
     <PageLayout>
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-8 px-4">
-        <Container className="mx-auto">
-          <Breadcrumb
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Privacy Policy", href: "/privacy" },
-            ]}
-          />
+      <Section className="bg-gradient-to-b from-mainColor/15 to-transparent pb-8" noPadding={true}>
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Privacy Policy", href: "/privacy" },
+          ]}
+        />
 
-          <div className="text-center py-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-mainColor/10 rounded-full mb-6">
-              <FaShieldAlt className="text-3xl text-mainColor" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Privacy Policy</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Your privacy is important to us. Learn how we collect, use, and protect your information.
-            </p>
-            <p className="text-sm text-muted-foreground mt-4">Last updated: {lastUpdated}</p>
+        <div className="text-center py-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-mainColor/10 rounded-full mb-6">
+            <FaShieldAlt className="text-3xl text-mainColor" />
           </div>
-        </Container>
-      </section>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Privacy Policy</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Your privacy is important to us. Learn how we collect, use, and protect your information.
+          </p>
+          <p className="text-sm text-muted-foreground mt-4">Last updated: {lastUpdated}</p>
+        </div>
+      </Section>
 
       {/* Content Section */}
-      <section className="py-16 px-4">
-        <Container className="mx-auto max-w-4xl">
-          <div className="space-y-8">
-            {sections.map((section, index) => (
-              <div
-                key={index}
-                className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-200"
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 bg-mainColor/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    {section.icon}
-                  </div>
-                  <h2 className="text-2xl font-bold text-foreground mt-2">{section.title}</h2>
-                </div>
-                <div className="ml-16">{section.content}</div>
-              </div>
-            ))}
-
-            {/* Changes to Policy */}
-            <div className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm">
-              <h2 className="text-2xl font-bold text-foreground mb-4">Changes to This Policy</h2>
-              <p className="text-muted-foreground">
-                We may update this privacy policy from time to time. We will notify you of any changes by posting the
-                new policy on this page and updating the "Last updated" date.
-              </p>
-            </div>
-
-            {/* Contact Section */}
-            <div className="bg-gradient-to-br from-mainColor/10 to-mainColor/5 rounded-xl border border-mainColor/20 p-6 md:p-8">
+      <Section containerClassName="max-w-4xl">
+        <div className="space-y-8">
+          {sections.map((section, index) => (
+            <div
+              key={index}
+              className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-mainColor/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <FaEnvelope className="text-mainColor text-2xl" />
+                <div className="w-12 h-12 bg-mainColor/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  {section.icon}
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground mb-2">Questions?</h2>
-                  <p className="text-muted-foreground mb-4">
-                    If you have any questions about this privacy policy, please don't hesitate to contact us.
-                  </p>
-                  <Link
-                    href="mailto:contact@devshurdle.com"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-mainColor hover:bg-mainColor/90 text-white font-semibold rounded-lg transition-all duration-200"
-                  >
-                    <FaEnvelope />
-                    contact@devshurdle.com
-                  </Link>
-                </div>
+                <h2 className="text-2xl font-bold text-foreground mt-2">{section.title}</h2>
+              </div>
+              <div className="ml-16">{section.content}</div>
+            </div>
+          ))}
+
+          {/* Changes to Policy */}
+          <div className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Changes to This Policy</h2>
+            <p className="text-muted-foreground">
+              We may update this privacy policy from time to time. We will notify you of any changes by posting the
+              new policy on this page and updating the "Last updated" date.
+            </p>
+          </div>
+
+          {/* Contact Section */}
+          <div className="bg-gradient-to-br from-mainColor/10 to-mainColor/5 rounded-xl border border-mainColor/20 p-6 md:p-8">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 bg-mainColor/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <FaEnvelope className="text-mainColor text-2xl" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-foreground mb-2">Questions?</h2>
+                <p className="text-muted-foreground mb-4">
+                  If you have any questions about this privacy policy, please don't hesitate to contact us.
+                </p>
+                <Link
+                  href="mailto:contact@devshurdle.com"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-mainColor hover:bg-mainColor/90 text-white font-semibold rounded-lg transition-all duration-200"
+                >
+                  <FaEnvelope />
+                  contact@devshurdle.com
+                </Link>
               </div>
             </div>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* Trust Badges Section */}
-      <section className="w-full py-16 px-4 bg-card/50">
-        <Container className="mx-auto">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-foreground text-center mb-12">Your Data is Protected</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-background rounded-lg border border-border">
-                <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaLock className="text-mainColor text-2xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Secure Storage</h3>
-                <p className="text-sm text-muted-foreground">Your data is encrypted and stored securely</p>
+      <Section className="bg-card/50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-foreground text-center mb-12">Your Data is Protected</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center p-6 bg-background rounded-lg border border-border">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaLock className="text-mainColor text-2xl" />
               </div>
-              <div className="text-center p-6 bg-background rounded-lg border border-border">
-                <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaShieldAlt className="text-mainColor text-2xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">GDPR Compliant</h3>
-                <p className="text-sm text-muted-foreground">We follow international privacy standards</p>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Secure Storage</h3>
+              <p className="text-sm text-muted-foreground">Your data is encrypted and stored securely</p>
+            </div>
+            <div className="text-center p-6 bg-background rounded-lg border border-border">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaShieldAlt className="text-mainColor text-2xl" />
               </div>
-              <div className="text-center p-6 bg-background rounded-lg border border-border">
-                <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaUserCheck className="text-mainColor text-2xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">You're in Control</h3>
-                <p className="text-sm text-muted-foreground">Manage your data preferences anytime</p>
+              <h3 className="text-lg font-semibold text-foreground mb-2">GDPR Compliant</h3>
+              <p className="text-sm text-muted-foreground">We follow international privacy standards</p>
+            </div>
+            <div className="text-center p-6 bg-background rounded-lg border border-border">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaUserCheck className="text-mainColor text-2xl" />
               </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">You're in Control</h3>
+              <p className="text-sm text-muted-foreground">Manage your data preferences anytime</p>
             </div>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
     </PageLayout>
   );
 }

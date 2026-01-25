@@ -1,5 +1,5 @@
 import React from "react";
-import Container from "./Container";
+import Section from "./Section";
 import Link from "next/link";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaEnvelope } from "react-icons/fa";
@@ -45,9 +45,8 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-card border-t border-border mt-20">
-      <Container className="py-12 mx-4 xl:mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+    <Section as="footer" className="bg-card border-t border-border mt-20" size="xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -107,8 +106,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      </Container>
-    </footer>
+      </Section>
   );
 };
 

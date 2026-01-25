@@ -2,8 +2,9 @@ import { Metadata } from "next";
 import { client } from "@sanity/lib/client";
 import { groq } from "next-sanity";
 import { createClient } from "@/lib/supabase/server";
-import Container from "@components/Container";
+import Section from "@components/Section";
 import Breadcrumb from "@components/Breadcrumb";
+import PageLayout from "@components/PageLayout";
 import Link from "next/link";
 import { FaEye, FaHeart, FaComment, FaChartBar } from "react-icons/fa6";
 import { Post } from "@types";
@@ -108,8 +109,8 @@ export default async function StatsPage() {
   const sortedStats = statsWithTitles.sort((a: any, b: any) => b.views - a.views);
 
   return (
-    <main className="flex justify-center items-center flex-col pt-24 pb-16">
-      <Container className="mx-4 xl:mx-auto">
+    <PageLayout className="pt-24 pb-16">
+      <Section>
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb Navigation */}
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Statistics" }]} />
@@ -232,8 +233,8 @@ export default async function StatsPage() {
             )}
           </div>
         </div>
-      </Container>
-    </main>
+      </Section>
+    </PageLayout>
   );
 }
 

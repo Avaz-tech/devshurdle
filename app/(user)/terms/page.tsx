@@ -1,4 +1,4 @@
-import Container from "@components/Container";
+import Section from "@components/Section";
 import Link from "next/link";
 import Breadcrumb from "@components/Breadcrumb";
 import PageLayout from "@components/PageLayout";
@@ -194,113 +194,107 @@ export default function TermsPage() {
   return (
     <PageLayout>
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-b from-mainColor/15 to-transparent pb-8 px-4">
-        <Container className="mx-auto">
-          <Breadcrumb
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Terms of Service", href: "/terms" },
-            ]}
-          />
+      <Section className="bg-gradient-to-b from-mainColor/15 to-transparent pb-8" noPadding={true}>
+        <Breadcrumb
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Terms of Service", href: "/terms" },
+          ]}
+        />
 
-          <div className="text-center py-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-mainColor/10 rounded-full mb-6">
-              <FaFileContract className="text-3xl text-mainColor" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Terms of Service</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Please read these terms carefully before using DevsHurdle.
-            </p>
-            <p className="text-sm text-muted-foreground mt-4">Last updated: {lastUpdated}</p>
+        <div className="text-center py-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-mainColor/10 rounded-full mb-6">
+            <FaFileContract className="text-3xl text-mainColor" />
           </div>
-        </Container>
-      </section>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Terms of Service</h1>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Please read these terms carefully before using DevsHurdle.
+          </p>
+          <p className="text-sm text-muted-foreground mt-4">Last updated: {lastUpdated}</p>
+        </div>
+      </Section>
 
       {/* Content Section */}
-      <section className="py-16 px-4">
-        <Container className="mx-auto max-w-4xl">
-          <div className="space-y-8">
-            {sections.map((section, index) => (
-              <div
-                key={index}
-                className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-200"
-              >
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 bg-mainColor/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    {section.icon}
-                  </div>
-                  <h2 className="text-2xl font-bold text-foreground mt-2">{section.title}</h2>
-                </div>
-                <div className="ml-16">{section.content}</div>
-              </div>
-            ))}
-
-            {/* Revisions */}
-            <div className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm">
-              <h2 className="text-2xl font-bold text-foreground mb-4">Revisions</h2>
-              <p className="text-muted-foreground">
-                The materials appearing on DevsHurdle's website could include technical, typographical, or photographic
-                errors. DevsHurdle does not warrant that any of the materials on its website are accurate, complete, or
-                current.
-              </p>
-            </div>
-
-            {/* Contact Section */}
-            <div className="bg-gradient-to-br from-mainColor/10 to-mainColor/5 rounded-xl border border-mainColor/20 p-6 md:p-8">
+      <Section containerClassName="max-w-4xl">
+        <div className="space-y-8">
+          {sections.map((section, index) => (
+            <div
+              key={index}
+              className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-mainColor/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <FaEnvelope className="text-mainColor text-2xl" />
+                <div className="w-12 h-12 bg-mainColor/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  {section.icon}
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground mb-2">Need Clarification?</h2>
-                  <p className="text-muted-foreground mb-4">
-                    If you have any questions about these Terms of Service, we're here to help.
-                  </p>
-                  <Link
-                    href="mailto:contact@devshurdle.com"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-mainColor hover:bg-mainColor/90 text-white font-semibold rounded-lg transition-all duration-200"
-                  >
-                    <FaEnvelope />
-                    contact@devshurdle.com
-                  </Link>
-                </div>
+                <h2 className="text-2xl font-bold text-foreground mt-2">{section.title}</h2>
+              </div>
+              <div className="ml-16">{section.content}</div>
+            </div>
+          ))}
+
+          {/* Revisions */}
+          <div className="bg-card rounded-xl border border-border p-6 md:p-8 shadow-sm">
+            <h2 className="text-2xl font-bold text-foreground mb-4">Revisions</h2>
+            <p className="text-muted-foreground">
+              The materials appearing on DevsHurdle's website could include technical, typographical, or photographic
+              errors. DevsHurdle does not warrant that any of the materials on its website are accurate, complete, or
+              current.
+            </p>
+          </div>
+
+          {/* Contact Section */}
+          <div className="bg-gradient-to-br from-mainColor/10 to-mainColor/5 rounded-xl border border-mainColor/20 p-6 md:p-8">
+            <div className="flex items-start gap-4 mb-4">
+              <div className="w-12 h-12 bg-mainColor/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <FaEnvelope className="text-mainColor text-2xl" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-foreground mb-2">Need Clarification?</h2>
+                <p className="text-muted-foreground mb-4">
+                  If you have any questions about these Terms of Service, we're here to help.
+                </p>
+                <Link
+                  href="mailto:contact@devshurdle.com"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-mainColor hover:bg-mainColor/90 text-white font-semibold rounded-lg transition-all duration-200"
+                >
+                  <FaEnvelope />
+                  contact@devshurdle.com
+                </Link>
               </div>
             </div>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
 
       {/* Key Points Section */}
-      <section className="w-full py-16 px-4 bg-card/50">
-        <Container className="mx-auto">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-foreground text-center mb-12">Key Points to Remember</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center p-6 bg-background rounded-lg border border-border">
-                <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaUserShield className="text-mainColor text-2xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Be Respectful</h3>
-                <p className="text-sm text-muted-foreground">Treat others and their content with respect</p>
+      <Section className="bg-card/50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-foreground text-center mb-12">Key Points to Remember</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center p-6 bg-background rounded-lg border border-border">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaUserShield className="text-mainColor text-2xl" />
               </div>
-              <div className="text-center p-6 bg-background rounded-lg border border-border">
-                <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaCopyright className="text-mainColor text-2xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Respect IP Rights</h3>
-                <p className="text-sm text-muted-foreground">Don't copy or misuse our content</p>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Be Respectful</h3>
+              <p className="text-sm text-muted-foreground">Treat others and their content with respect</p>
+            </div>
+            <div className="text-center p-6 bg-background rounded-lg border border-border">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaCopyright className="text-mainColor text-2xl" />
               </div>
-              <div className="text-center p-6 bg-background rounded-lg border border-border">
-                <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <FaBan className="text-mainColor text-2xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Stay Legal</h3>
-                <p className="text-sm text-muted-foreground">Use our platform only for lawful purposes</p>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Respect IP Rights</h3>
+              <p className="text-sm text-muted-foreground">Don't copy or misuse our content</p>
+            </div>
+            <div className="text-center p-6 bg-background rounded-lg border border-border">
+              <div className="w-16 h-16 bg-mainColor/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FaBan className="text-mainColor text-2xl" />
               </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Stay Legal</h3>
+              <p className="text-sm text-muted-foreground">Use our platform only for lawful purposes</p>
             </div>
           </div>
-        </Container>
-      </section>
+        </div>
+      </Section>
     </PageLayout>
   );
 }
