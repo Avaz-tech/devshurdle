@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "View statistics for all posts including views, likes, and comments",
 };
 
+export const dynamic = "force-dynamic";
+
 async function getStats() {
   try {
     const supabase = await createClient();
