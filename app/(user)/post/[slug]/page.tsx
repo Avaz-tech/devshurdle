@@ -126,7 +126,7 @@ const SlugPage = async ({ params }: Props) => {
     <>
       <PostViewTracker slug={slug} />
       <PageLayout>
-        <Section as="article" containerClassName="max-w-[900px] mx-auto" className="pb-16 py-1 md:py-2">
+        <Section as="article" containerClassName="!max-w-[900px] mx-auto" className="pb-16 !py-1 !md:py-2">
           {/* Breadcrumb Navigation */}
           <Breadcrumb
             items={[
