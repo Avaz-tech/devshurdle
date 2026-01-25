@@ -170,7 +170,7 @@ export default function SignInPage() {
   return (
     <PageLayout className="min-h-screen">
       {/* Hero Section */}
-      <Section className="bg-gradient-to-b from-mainColor/15 to-transparent pb-16" noPadding={true}>
+      <Section className="bg-gradient-to-b from-mainColor/15 to-transparent pb-16" noPadding={false}>
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             {isSignUp ? "Join DevsHurdle" : "Welcome Back"}

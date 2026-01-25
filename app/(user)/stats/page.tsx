@@ -111,8 +111,8 @@ export default async function StatsPage() {
   const sortedStats = statsWithTitles.sort((a: any, b: any) => b.views - a.views);
 
   return (
-    <PageLayout className="pt-24 pb-16">
-      <Section>
+    <PageLayout className="">
+      <Section noPadding={true}>
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb Navigation */}
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Statistics" }]} />

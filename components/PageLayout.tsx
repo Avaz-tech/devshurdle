@@ -9,7 +9,7 @@ interface PageLayoutProps {
 
 export default function PageLayout({ children, className = "" }: PageLayoutProps) {
   return (
-    <main className={`w-full min-h-screen pt-20 ${className}`}>
+    <main className={`w-full min-h-screen mt-16  md:mt-20 ${className}`}>
       {children}
     </main>
   );
